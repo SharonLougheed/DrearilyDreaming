@@ -44,7 +44,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1114089211810278
 GameObject:
   m_ObjectHideFlags: 0
@@ -338,11 +338,11 @@ GameObject:
   - component: {fileID: 114675640402074536}
   m_Layer: 5
   m_Name: PauseMenu
-  m_TagString: Untagged
+  m_TagString: PauseMenu
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4429460577711606
 Transform:
   m_ObjectHideFlags: 1
@@ -1135,7 +1135,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: WakeUp
+  m_Text: WakeUp(Debug)
 --- !u!114 &114671957857511106
 MonoBehaviour:
   m_ObjectHideFlags: 1
