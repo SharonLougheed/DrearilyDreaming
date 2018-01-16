@@ -9,7 +9,8 @@ public class LoadSceneOnKeyPress : MonoBehaviour {
     {
         if (PressButtonToActivate.playerInRange == true && Input.GetKeyDown(KeyCode.E))
         {
-            SceneManager.LoadScene(2);  //scene with index 2 is the dance party scene            
+            SceneManager.LoadScene(2);  //scene with index 2 is the dance party scene
+            PressButtonToActivate.playerInRange = false;
         }
     }
 }

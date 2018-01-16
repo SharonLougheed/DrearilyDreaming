@@ -6,6 +6,7 @@ using UnityEngine.Audio;
 using UnityEditor;
 #endif
 using UnityStandardAssets.Characters.FirstPerson;
+using UnityStandardAssets.Characters.ThirdPerson;
 
 public class PauseMenuManager : MonoBehaviour {
 
@@ -18,14 +19,25 @@ public class PauseMenuManager : MonoBehaviour {
     [HideInInspector] public bool isPaused;        //boolean available to the entire game to determine if the game is paused or not
 
     private FirstPersonController firstPersonController;
+    private ThirdPersonCharacter thirdPersonCharacter;
+    private ThirdPersonUserControl thirdPersonUserControl;
 
-    private void Awake() {
-        isPaused = false;
+    private void Awake() {       
         if (GameObject.FindGameObjectWithTag("GameController") != null)
         {
-            GameObject tempObj = GameObject.FindGameObjectWithTag("GameController");
-            firstPersonController = tempObj.GetComponent<FirstPersonController>();
+            GameObject tempController = GameObject.FindGameObjectWithTag("GameController");
+            firstPersonController = tempController.GetComponent<FirstPersonController>();
         }
+        if(GameObject.FindGameObjectWithTag("Player") != null && GameObject.FindGameObjectWithTag("Player"))
+        {
+            GameObject tempPlayer = GameObject.FindGameObjectWithTag("Player");
+            thirdPersonCharacter = tempPlayer.GetComponent<ThirdPersonCharacter>();
+            thirdPersonUserControl = tempPlayer.GetComponent<ThirdPersonUserControl>();
+        }
+    }
+    private void Start() {
+        isPaused = false;
+        Cursor.visible = false;
     }
     void Update() {
         if(Input.GetKeyDown(KeyCode.Escape) && isPaused == false)
@@ -52,6 +64,12 @@ public class PauseMenuManager : MonoBehaviour {
         if (firstPersonController != null)
         {
             firstPersonController.enabled = !firstPersonController.isActiveAndEnabled;                                      //turn on/off the controller
+            Cursor.visible = !Cursor.visible;
+        }
+        else if(GameObject.FindGameObjectWithTag("Player") != null && GameObject.FindGameObjectWithTag("Player"))
+        {
+            thirdPersonCharacter.enabled = !thirdPersonCharacter.isActiveAndEnabled;
+            thirdPersonUserControl.enabled = !thirdPersonUserControl.isActiveAndEnabled;
             Cursor.visible = !Cursor.visible;
         }
         isPaused = !isPaused;
