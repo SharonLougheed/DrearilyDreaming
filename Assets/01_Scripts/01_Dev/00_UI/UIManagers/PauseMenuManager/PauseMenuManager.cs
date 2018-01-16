@@ -61,12 +61,22 @@ public class PauseMenuManager : MonoBehaviour {
     public void Pause() {
         pauseMenuBackground.SetActive(!pauseMenuBackground.activeInHierarchy);      //turn on/off menu background
         pauseMenu.SetActive(!pauseMenu.activeInHierarchy);                          //turn on/off menu
-        if (firstPersonController != null)
+
+        if (GameObject.FindGameObjectWithTag("GameController") != null)
         {
             firstPersonController.enabled = !firstPersonController.isActiveAndEnabled;                                      //turn on/off the controller
-            Cursor.visible = !Cursor.visible;
+            if (Cursor.visible != true && Cursor.lockState == CursorLockMode.Locked)
+            {
+                Cursor.lockState = CursorLockMode.Confined;
+                Cursor.visible = !Cursor.visible;
+            }
+            else
+            {
+                Cursor.lockState = CursorLockMode.Locked;
+                Cursor.visible = true;
+            }
         }
-        else if(GameObject.FindGameObjectWithTag("Player") != null && GameObject.FindGameObjectWithTag("Player"))
+        else if(GameObject.FindGameObjectWithTag("Player") != null && GameObject.FindGameObjectWithTag("Player") != null)
         {
             thirdPersonCharacter.enabled = !thirdPersonCharacter.isActiveAndEnabled;
             thirdPersonUserControl.enabled = !thirdPersonUserControl.isActiveAndEnabled;

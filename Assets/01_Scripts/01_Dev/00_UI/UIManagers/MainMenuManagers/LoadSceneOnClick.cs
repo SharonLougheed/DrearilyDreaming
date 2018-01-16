@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class LoadSceneOnClick : MonoBehaviour {
 	public void LoadByIndex(int sceneIndex) {
         Time.timeScale = 1f;
+        Cursor.lockState = CursorLockMode.None;
 		CELL_MAP.cellInstances.Clear ();
         SceneManager.LoadScene(sceneIndex);
     }
