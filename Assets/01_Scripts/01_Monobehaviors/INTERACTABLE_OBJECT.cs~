@@ -1,0 +1,92 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public abstract class INTERACTABLE_OBJECT : MonoBehaviour 
+{
+
+	#region --------------------	Public Fields
+
+	/// <summary>
+	/// Used to eval whether or not the object may be interacted with.
+	/// </summary>
+	public bool isWithinRange = false;
+
+	/// <summary>
+	/// Used to determine whether or not to disable further interactions after the first call.
+	/// </summary>
+	public bool isSingleInteraction = false;
+
+	/// <summary>
+	/// The user's required tag
+	/// </summary>
+	public string requiredTag = "Player";
+
+	#endregion
+
+	#region --------------------	Public Methods
+
+	/// <summary>
+	/// Reset this instance.
+	/// </summary>
+	public void Reset ()
+	{
+		_hasInteracted = false;
+	}
+
+	#endregion
+
+	#region --------------------	Protected Methods
+
+	/// <summary>
+	/// Interact with the object
+	/// </summary>
+	protected virtual void Interact () {}
+
+	#endregion
+
+	#region --------------------	Private Fields
+
+	/// <summary>
+	///	Used to prevent additional interactions if isSingleInteraction is true.
+	/// </summary>
+	private bool _hasInteracted = false;
+
+	#endregion
+
+	#region --------------------	Private Methods
+
+	/// <summary>
+	/// Raises the trigger enter event.
+	/// </summary>
+	/// <param name="other">Other.</param>
+	private void OnTriggerEnter ( Collider other )
+	{
+		isWithinRange = ( other.CompareTag ( requiredTag ) ) ? true : isWithinRange;
+	}
+
+	/// <summary>
+	/// Raises the trigger exit event.
+	/// </summary>
+	/// <param name="other">Other.</param>
+	private void OnTriggerExit ( Collider other )
+	{
+		isWithinRange = ( other.CompareTag ( requiredTag ) ) ? false : isWithinRange;
+	}
+
+	/// <summary>
+	/// Update this instance.
+	/// </summary>
+	private void Update ()
+	{
+		//	Only allow interactions if the input key is down, the user is within range, and the object is not single interaction while having already been interacted with.
+		if ( Input.GetKeyDown ( KeyCode.E ) && isWithinRange && !( isSingleInteraction && _hasInteracted ) )
+		{
+			_hasInteracted = true;
+			Interact ();
+		}
+	}
+
+	#endregion
+
+}

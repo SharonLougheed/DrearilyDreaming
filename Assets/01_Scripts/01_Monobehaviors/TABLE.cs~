@@ -1,0 +1,57 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.AI;
+
+[RequireComponent ( typeof ( NavMeshObstacle ) )]
+public class TABLE : MonoBehaviour 
+{
+
+	#region --------------------	Public Methods
+
+	/// <summary>
+	/// Randomly sets up the table.
+	/// </summary>
+	public void Setup_Table ()
+	{
+		_attachedItems.ForEach ( i => i.gameObject.SetActive ( Random.Range ( 0, 2 ) > 0 ) );
+		_pointsOfInterest.ForEach ( p => p.gameObject.SetActive ( false ) );
+		_pointsOfInterest [ Random.Range ( 0, _pointsOfInterest.Count ) ].gameObject.SetActive ( true );
+	}
+
+	#endregion
+
+	#region --------------------	Private Fields
+
+	/// <summary>
+	/// The list of poi objects attached to the table.
+	/// </summary>
+	private List <POINT_OF_INTEREST> _pointsOfInterest;
+
+	/// <summary>
+	/// The list of all attached items on the table.
+	/// </summary>
+	private List <Collider> _attachedItems;
+
+	#endregion
+
+	#region --------------------	Private Methods
+
+	/// <summary>
+	/// Start this instance.
+	/// </summary>
+	private void Start ()
+	{
+		//	Grab all of the attached points of interest
+		_pointsOfInterest = new List <POINT_OF_INTEREST> ( GetComponentsInChildren <POINT_OF_INTEREST> () );
+
+		//	Grab all of the attached gameobjects with colliders
+		_attachedItems = new List <Collider> ( GetComponentsInChildren <Collider> () );
+
+		//	Setup the table
+		Setup_Table ();
+	}
+	
+	#endregion
+
+}
