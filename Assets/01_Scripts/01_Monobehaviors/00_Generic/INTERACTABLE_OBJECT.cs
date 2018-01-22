@@ -97,40 +97,72 @@ public abstract class INTERACTABLE_OBJECT : MonoBehaviour
 	/// <param name="other">Other.</param>
 	private void OnTriggerEnter ( Collider other )
 	{
-		_isWithinRange = ( other.CompareTag ( requiredTag ) ) ? true : _isWithinRange;
-	}
+		//_isWithinRange = ( other.CompareTag ( requiredTag ) ) ? true : _isWithinRange;
+        //	If there is an interaction prompt, display it
+        if (interactionPrompt != null && other.CompareTag(requiredTag))
+        {
+            interactionPrompt.SetActive(true);
+        }
+    }
 
-	/// <summary>
-	/// Raises the trigger exit event.
-	/// </summary>
-	/// <param name="other">Other.</param>
-	private void OnTriggerExit ( Collider other )
+    private void OnTriggerStay(Collider other) {
+        //	If the user is within range and the object is not single interaction while having already been interacted with.
+        //if (_isWithinRange && !(isSingleInteraction && _hasInteracted))
+        //{
+            
+            //	If the interaction key is pressed, interact with the object
+            if (other.CompareTag(requiredTag) && Input.GetKeyDown(interactionKey) && interactionPrompt != null)
+            {
+                Debug.Log("Interacted with " + name);
+                _hasInteracted = true;
+                //interactionPrompt.SetActive(!interactionPrompt.activeInHierarchy);
+                StartCoroutine(Interact());
+                //	If there is an interaction prompt, deactivate it
+                //if (interactionPrompt != null)
+                //{
+                interactionPrompt.SetActive(false);
+                //}
+            }
+        //}
+    }
+
+    /// <summary>
+    /// Raises the trigger exit event.
+    /// </summary>
+    /// <param name="other">Other.</param>
+    private void OnTriggerExit ( Collider other )
 	{
-		_isWithinRange = ( other.CompareTag ( requiredTag ) ) ? false : _isWithinRange;
-	}
+		//_isWithinRange = ( other.CompareTag ( requiredTag ) ) ? false : _isWithinRange;
+        //	If there is an interaction prompt, deactivate it
+        if (interactionPrompt != null && other.CompareTag(requiredTag))
+        {
+            interactionPrompt.SetActive(false);
+        }
+    }
 
 	/// <summary>
 	/// Update this instance.
 	/// </summary>
-	private void Update ()
-	{
-		//	If the user is within range and the object is not single interaction while having already been interacted with.
-		if ( _isWithinRange && !( isSingleInteraction && _hasInteracted ) )
-		{
-			//	If there is an interaction prompt, display it
-			if ( interactionPrompt != null )
-			{
-				interactionPrompt.SetActive ( true );
-			}
-			//	If the interaction key is pressed, interact with the object
-			if ( Input.GetKeyDown ( interactionKey ) )
-			{
-				Debug.Log ( "Interacted with " + name );
-				_hasInteracted = true;
-				StartCoroutine ( Interact () );
-			}
-		}
-	}
+	//private void Update ()
+	//{
+	//	//	If the user is within range and the object is not single interaction while having already been interacted with.
+	//	if ( _isWithinRange && !( isSingleInteraction && _hasInteracted ) )
+	//	{
+	//		//	If there is an interaction prompt, display it
+	//		if ( interactionPrompt != null )
+	//		{
+	//			interactionPrompt.SetActive(true);
+	//		}
+	//		//	If the interaction key is pressed, interact with the object
+	//		if ( Input.GetKeyDown ( interactionKey ) )
+	//		{
+	//			Debug.Log ( "Interacted with " + name );
+	//			_hasInteracted = true;
+ //               //interactionPrompt.SetActive(!interactionPrompt.activeInHierarchy);
+	//			StartCoroutine ( Interact () );
+	//		}
+	//	}
+	//}
 
 	#endregion
 

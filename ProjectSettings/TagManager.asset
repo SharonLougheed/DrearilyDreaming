@@ -6,6 +6,7 @@ TagManager:
   tags:
   - PauseMenu
   - NPC
+  - PopBalloon
   layers:
   - Default
   - TransparentFX
