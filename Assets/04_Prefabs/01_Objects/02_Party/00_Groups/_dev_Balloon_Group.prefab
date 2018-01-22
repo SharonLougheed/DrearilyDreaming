@@ -611,7 +611,8 @@ MonoBehaviour:
   requiredTag: Player
   interactionKey: 101
   isSingleInteraction: 1
-  interactionPrompt: {fileID: 0}
+  interactionPrompt: {fileID: 1615725929703238, guid: 18da5c49c9a4eb04a82ed3c9e0ce439b,
+    type: 2}
 --- !u!135 &135342488795101046
 SphereCollider:
   m_ObjectHideFlags: 1
@@ -622,7 +623,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 6
+  m_Radius: 8
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!136 &136723694788909610
 CapsuleCollider:
@@ -645,7 +646,7 @@ NavMeshObstacle:
   m_GameObject: {fileID: 1955560303570990}
   m_Enabled: 1
   serializedVersion: 3
-  m_Shape: 1
+  m_Shape: 0
   m_Extents: {x: 0.5, y: 0.5, z: 0.5}
   m_MoveThreshold: 0.1
   m_Carve: 0
