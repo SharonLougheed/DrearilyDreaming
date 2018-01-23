@@ -6,11 +6,11 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/00_Scenes/01_Dev/TestScenes/DavidTestScenes/Level0_MainMenu.unity
+    path: Assets/00_Scenes/00_Testing/Level0_MainMenu.unity
     guid: 1ece22d32403b514f89fcd2e52c15c42
   - enabled: 1
-    path: Assets/00_Scenes/01_Dev/TestScenes/DavidTestScenes/TestBedroom.unity
+    path: Assets/00_Scenes/00_Testing/TestBedroom.unity
     guid: 7599b3a888af03c4c996c94a3460d164
   - enabled: 1
-    path: Assets/00_Scenes/01_Dev/01_Party_Dream.unity
+    path: Assets/00_Scenes/01_Party_Dream.unity
     guid: 08bb843f5bce0344e8488b608da27af5

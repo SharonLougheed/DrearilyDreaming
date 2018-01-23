@@ -17,6 +17,8 @@ public class INTERACTABLE_BALLOON : INTERACTABLE_OBJECT
 		//	Play the balloon popping sound, then set the object to inactive
 		_audio.pitch += Random.Range ( -0.05f, 0.05f );
 		_audio.Play ();
+        gameObject.GetComponent<SphereCollider>().enabled = false;
+        
 		yield return new WaitWhile ( () => _audio.isPlaying );
 		gameObject.SetActive ( false );
 	}
