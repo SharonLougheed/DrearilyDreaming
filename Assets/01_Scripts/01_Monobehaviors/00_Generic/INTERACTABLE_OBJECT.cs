@@ -88,7 +88,8 @@ public abstract class INTERACTABLE_OBJECT : MonoBehaviour
 	/// </summary>
 	private void OnDisable ()
 	{
-		Reset ();
+        GetComponent<SphereCollider>().enabled = true;
+        Reset ();
 	}
 
 	/// <summary>

@@ -42,7 +42,7 @@ GameObject:
   - component: {fileID: 82948588811438324}
   m_Layer: 0
   m_Name: FPS_Controller_Custom
-  m_TagString: Player
+  m_TagString: GameController
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -178,8 +178,8 @@ Camera:
   m_GameObject: {fileID: 1247341912174270}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0.019607844}
+  m_ClearFlags: 2
+  m_BackGroundColor: {r: 0, g: 0, b: 0, a: 1}
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
@@ -353,9 +353,10 @@ AudioSource:
   m_GameObject: {fileID: 1236922951950322}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 243206160476506222, guid: 527c7414e62489d4f8b2e8654324203d,
+    type: 2}
   m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
