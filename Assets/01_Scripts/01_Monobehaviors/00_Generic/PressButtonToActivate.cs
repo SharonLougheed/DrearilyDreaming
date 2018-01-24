@@ -7,11 +7,9 @@ using UnityEngine;
 public class PressButtonToActivate : MonoBehaviour {
 
     [Tooltip("Any PressTo... UI Object")] public GameObject pressToActivateText;
-    [HideInInspector] public static bool playerInRange;
 
     private void Start() {
-        pressToActivateText.SetActive(false);
-        playerInRange = false;
+        pressToActivateText.SetActive(false);       //start with the 
     }
 
     private void OnTriggerEnter(Collider other)
@@ -19,14 +17,20 @@ public class PressButtonToActivate : MonoBehaviour {
         if (other.gameObject.CompareTag("Player"))
         {
             pressToActivateText.SetActive(true);
-            playerInRange = true;
+        }
+    }
+    private void OnTriggerStay(Collider other)
+    {
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            //int randomDreamIndex = Random.RandomRange(2,4);   //this is the line to pick a dream at random
+            UnityEngine.SceneManagement.SceneManager.LoadScene(2);
         }
     }
     private void OnTriggerExit(Collider other) {
         if (other.gameObject.CompareTag("Player"))
         {
             pressToActivateText.SetActive(false);
-            playerInRange = false;
         }
     }
 }
