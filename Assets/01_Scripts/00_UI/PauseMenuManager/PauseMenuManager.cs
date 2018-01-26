@@ -21,6 +21,7 @@ public class PauseMenuManager : MonoBehaviour {
     private FirstPersonController firstPersonController;
     private ThirdPersonCharacter thirdPersonCharacter;
     private ThirdPersonUserControl thirdPersonUserControl;
+	private CUSTOM_THIRD_PERSON_CONTROLLER customThirdPersonController;
 
     private void Awake() {       
         if (GameObject.FindGameObjectWithTag("GameController") != null)
@@ -32,12 +33,13 @@ public class PauseMenuManager : MonoBehaviour {
         {
             GameObject tempPlayer = GameObject.FindGameObjectWithTag("Player");
             thirdPersonCharacter = tempPlayer.GetComponent<ThirdPersonCharacter>();
-            thirdPersonUserControl = tempPlayer.GetComponent<ThirdPersonUserControl>();
+			thirdPersonUserControl = tempPlayer.GetComponent<ThirdPersonUserControl>();
+			customThirdPersonController = tempPlayer.GetComponent <CUSTOM_THIRD_PERSON_CONTROLLER> ();
         }
     }
     private void Start() {
         isPaused = false;
-        Cursor.visible = false;
+		Cursor.visible = false;
     }
     void Update() {
         if(Input.GetKeyDown(KeyCode.Escape) && isPaused == false)
@@ -78,8 +80,10 @@ public class PauseMenuManager : MonoBehaviour {
         }
         else if(GameObject.FindGameObjectWithTag("Player") != null && GameObject.FindGameObjectWithTag("Player") != null)
         {
-            thirdPersonCharacter.enabled = !thirdPersonCharacter.isActiveAndEnabled;
-            thirdPersonUserControl.enabled = !thirdPersonUserControl.isActiveAndEnabled;
+            //thirdPersonCharacter.enabled = !thirdPersonCharacter.isActiveAndEnabled;
+			//thirdPersonUserControl.enabled = !thirdPersonUserControl.isActiveAndEnabled;
+			customThirdPersonController.enabled = !customThirdPersonController.isActiveAndEnabled;
+			Cursor.lockState = ( Cursor.lockState == CursorLockMode.Locked ) ? CursorLockMode.None : CursorLockMode.Locked;
             Cursor.visible = !Cursor.visible;
         }
         isPaused = !isPaused;
