@@ -11,7 +11,7 @@ public class PressButtonToActivate : MonoBehaviour {
     private void Start() {
         pressToActivateText.SetActive(false);       //start with the 
     }
-
+    
     private void OnTriggerEnter(Collider other)
     {    
         if (other.gameObject.CompareTag("Player"))
