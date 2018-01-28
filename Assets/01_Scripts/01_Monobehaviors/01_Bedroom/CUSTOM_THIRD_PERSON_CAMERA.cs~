@@ -8,7 +8,7 @@ public class CUSTOM_THIRD_PERSON_CAMERA : MonoBehaviour
 	#region --------------------	Public Events
 
 	/// <summary>
-	/// Used for tracking when the OnTriggerStay method is called.
+	/// Used for tracking when the trigger methods are called.
 	/// </summary>
 	public delegate void CAMERA_COLLISION_EVENT ();
 	public event CAMERA_COLLISION_EVENT ON_CAMERA_COLLISION_STAY;
