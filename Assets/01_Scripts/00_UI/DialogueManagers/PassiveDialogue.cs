@@ -5,10 +5,12 @@ using UnityEngine;
 
 public class PassiveDialogue : MonoBehaviour {
 
+    //
     public GameObject dialogueUIPrefab;
     public float prefabDelayTime;
 
     private Transform mainCameraTransform;
+
     private void Awake() {
         mainCameraTransform = GameObject.FindGameObjectWithTag("MainCamera").transform;
     }
