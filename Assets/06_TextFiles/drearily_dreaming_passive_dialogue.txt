@@ -1,4 +1,26 @@
-passiveAnswer_Hello my name is What!
-passiveQuestion_I am the real Slim Shady.
-activeAnswer_Ew, go away!
-activeQuestion_Umm... why are you talking to me?
+bad_Ew, it’s her...
+bad_Who Invited her?
+bad_Why did she even show up?
+bad_Why does she have to ruin our night?
+bad_What a weirdo?
+bad_You should just leave.
+bad_Get out of here, no likes you.
+bad_Get lost!
+bad_Stay away!
+bad_I don’t think you realize you’re not supposed to be here
+bad_What kind of fashion sense is that?
+bad_What an ugly little thing
+bad_Looks like the hermit decided to join us today
+bad_She needs to beat it
+bad_Don’t bother me
+bad_Leave me alone
+neutral_This is pretty cool for a school party.
+neutral_Cool music in here.
+neutral_Wow!
+neutral_Oh my god, can’t believe he did that.
+neutral_So last night…
+neutral_Who’s all here tonight?
+neutral_This place is pretty nice actually.
+neutral_Let’s keep this going all night.
+neutral_Let’s get schwifty!
+neutral_I see you’re an intellectual as well *lol*
