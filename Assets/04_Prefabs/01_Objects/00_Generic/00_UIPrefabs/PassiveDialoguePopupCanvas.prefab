@@ -58,7 +58,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d48e3981167410c4795f295fc4a44321, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mainCameraTransform: {fileID: 0}
+  dialogueFile: {fileID: 4900000, guid: 81404d951aef2c34996da88a967afd82, type: 3}
 --- !u!114 &114253348672713888
 MonoBehaviour:
   m_ObjectHideFlags: 1

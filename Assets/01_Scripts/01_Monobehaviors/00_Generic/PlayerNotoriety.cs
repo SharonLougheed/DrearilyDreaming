@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerNotoriety : MonoBehaviour {
 
-    private static int playerNotoriety;
+    private static int playerNotoriety = 0;
 
     public static int GetPlayerNotoriety()
     {

@@ -1,4 +1,4 @@
-Hello my name is What!
-I am the real Slim Shady.
-Ew, go away!
-Umm... why are you talking to me?
+passiveAnswer_Hello my name is What!
+passiveQuestion_I am the real Slim Shady.
+activeAnswer_Ew, go away!
+activeQuestion_Umm... why are you talking to me?
