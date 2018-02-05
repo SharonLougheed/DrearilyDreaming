@@ -3,27 +3,31 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class DialogueTable : MonoBehaviour{
-    
-    //list of all dialogue files for this class
-    public TextAsset passiveTextFile,activeTextFile;
 
-    [HideInInspector] public static List<string> passiveConversations,
-                                                 activeConversations;
+    //list of all dialogue files for this class
+    public TextAsset passiveTextFile;//,activeTextFile;
+
+    [HideInInspector] public static List<string> passiveConversations = new List<string>();//,
+                                                 //activeConversations;
     
     private void Awake()
     {
         LoadTextAssets();
+        Debug.Log("On Awake:" + passiveTextFile.text);
     }
     private void LoadTextAssets() {
         string[] eachPassiveLine;
         string passiveText = passiveTextFile.text;
+        Debug.Log("Before the split: " + passiveText);
+
         eachPassiveLine = passiveText.Split('\n');
+
+        Debug.Log("At the Split(): " + eachPassiveLine.ToString());
 
         foreach(string line in eachPassiveLine)
         {
             passiveConversations.Add(line);
         }
-
         /*
         //string[] eachActiveLine;
         //string activeText = activeTextFile.text;
@@ -64,5 +68,10 @@ public class DialogueTable : MonoBehaviour{
         //    //        break;
         //    //}            
         //}*/
+    }
+    public static string PickRandomPassive() {
+        int random = Random.Range(0, passiveConversations.Count);
+        string temp = passiveConversations[random];
+        return temp;
     }
 }

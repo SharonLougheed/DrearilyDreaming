@@ -9,11 +9,11 @@ public class PassiveDialogue : MonoBehaviour {
     public GameObject dialogueUIPrefab;
     public float prefabDelayTime;
 
-    private Transform mainCameraTransform;
+    //private Transform mainCameraTransform;
     private bool isTalking;
 
     private void Awake() {
-        mainCameraTransform = GameObject.FindGameObjectWithTag("MainCamera").transform;
+        //mainCameraTransform = GameObject.FindGameObjectWithTag("MainCamera").transform;
     }
     private void Start() {
         isTalking = false;
@@ -29,8 +29,8 @@ public class PassiveDialogue : MonoBehaviour {
 
     private IEnumerator PopupDialogue() {
         GameObject newDialouge = Instantiate(dialogueUIPrefab, transform.position + Vector3.up, Quaternion.identity) as GameObject;
+        newDialouge.GetComponent<DialogueUIManager>().SetDialogueText(DialogueTable.PickRandomPassive());
         newDialouge.GetComponent<DialogueUIManager>().SetTransformToFollow(gameObject.transform);
-        newDialouge.GetComponent<DialogueUIManager>().SetDialogueText("");
         yield return new WaitForSeconds(prefabDelayTime);
         isTalking = false;
         Destroy(newDialouge);

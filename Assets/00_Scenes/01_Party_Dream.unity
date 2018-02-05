@@ -1258,7 +1258,7 @@ GameObject:
   - component: {fileID: 380428534}
   - component: {fileID: 380428533}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: PartyConvoPool
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1275,11 +1275,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b113f4176eb5a43489d0f286dd438be6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  passiveAnswerKey: 
-  passiveQuestionKey: 
-  activeAnswerKey: 
-  activeQuestionKey: 
-  dreailyDreamingTextFiles: []
+  passiveTextFile: {fileID: 4900000, guid: 81404d951aef2c34996da88a967afd82, type: 3}
+  activeTextFile: {fileID: 0}
 --- !u!4 &380428534
 Transform:
   m_ObjectHideFlags: 0
