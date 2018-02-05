@@ -13,8 +13,7 @@ public class DialogueTable : MonoBehaviour{
 
     private void Awake()
     {
-        //Debug.Log("On Awake:" + passiveTextFile.text);
-        LoadTextAssets();
+        LoadTextAssets();   //load text from file into Lists
     }
     private void LoadTextAssets() {
         //load file and store to string        
@@ -90,7 +89,8 @@ public class DialogueTable : MonoBehaviour{
         //    //    default:
         //    //        break;
         //    //}            
-        //}*/
+        //}
+        */
     }
     public static string PickRandomPassive() {
         int playerNotoriety = PlayerNotoriety.GetPlayerNotoriety();

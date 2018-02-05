@@ -395,6 +395,9 @@ public class INTERACTABLE : MonoBehaviour
 		//	De-activate the game object
 		gameObject.SetActive ( false );
 
+        //Modify notoriety field
+        PlayerNotoriety.DecreasePlayerNotoriety();
+
 		//	Flush the point of interest and retarget all audience NPCs
 		_cellEntity.Flush_Point_Of_Interest ();
 	}
@@ -412,7 +415,11 @@ public class INTERACTABLE : MonoBehaviour
 		//	**************************
 
 		Debug.Log ( "Music start / stop" );
-		yield return new WaitForSeconds ( 3 );
+        //Modify notoriety field
+        //check which state(start/stop) stereo was changed to
+        //PlayerNotoriety.DecreasePlayerNotoriety();
+        //PlayerNotoriety.IncreasePlayerNotoriety();
+        yield return new WaitForSeconds ( 3 );
 		_isBeingInteractedWith = false;
 	}
 
@@ -429,7 +436,9 @@ public class INTERACTABLE : MonoBehaviour
 		//	**************************
 
 		Debug.Log ( "Drink punch" );
-		yield return null;
+        //Modify notoriety field
+        PlayerNotoriety.IncreasePlayerNotoriety();
+        yield return null;
 		_isBeingInteractedWith = false;
 	}
 
@@ -446,7 +455,9 @@ public class INTERACTABLE : MonoBehaviour
 		//	**************************
 
 		Debug.Log ( "Eat food" );
-		yield return null;
+        //Modify notoriety field
+        PlayerNotoriety.DecreasePlayerNotoriety();
+        yield return null;
 		_isBeingInteractedWith = false;
 	}
 
