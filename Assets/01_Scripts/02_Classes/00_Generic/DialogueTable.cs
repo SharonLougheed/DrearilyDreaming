@@ -94,30 +94,24 @@ public class DialogueTable : MonoBehaviour{
     }
     public static string PickRandomPassive() {
         int playerNotoriety = PlayerNotoriety.GetPlayerNotoriety();
-        int randomIndex;
         string temp;
 
-        if (playerNotoriety > 1)
+        if (playerNotoriety > 2)
         {
-            randomIndex = Random.Range(0, goodPassive.Count - 1);
+            int randomIndex = Random.Range(0, goodPassive.Count - 1);
             temp = neutralPassive[randomIndex];
             return temp;
         }
-        else if (playerNotoriety < -1)
+        else if (playerNotoriety < -2)
         {
-            randomIndex = Random.Range(0, badPassive.Count - 1);
+            int randomIndex = Random.Range(0, badPassive.Count - 1);
             temp = badPassive[randomIndex];
-            return temp;
-        }
-        else if(playerNotoriety >= (-1) && playerNotoriety <= 1)
-        {
-            randomIndex = Random.Range(0, neutralPassive.Count - 1);
-            temp = neutralPassive[randomIndex];
             return temp;
         }
         else
         {
-            temp = "*BUGGED*";
+            int randomIndex = Random.Range(0, neutralPassive.Count - 1);
+            temp = neutralPassive[randomIndex];
             return temp;
         }
     }
