@@ -3,9 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-[ RequireComponent ( typeof ( NavMeshAgent ) ) ]
-[ DisallowMultipleComponent ]
-public class NPC : MonoBehaviour 
+[ RequireComponent ( typeof ( SphereCollider ), typeof ( NavMeshAgent ), typeof ( Animator ) ) ]
+public class NPC : CELL_ENTITY
 {
 
 	#region --------------------	Public Properties
@@ -16,124 +15,131 @@ public class NPC : MonoBehaviour
 	/// <value>The agent.</value>
 	public NavMeshAgent agent { get { return _agent; } }
 
-	/// <summary>
-	/// Gets the target Point of Interest.
-	/// </summary>
-	/// <value>The target Point of Interest.</value>
-	public POINT_OF_INTEREST targetPOI { get { return _targetPOI; } }
-
 	#endregion
 
 	#region --------------------	Public Fields
 
-	[Space]
-	[Header ("Designer Modifications")]
-	[Tooltip ("The maximum amount of time (in seconds) an npc will stay at a point of interest.")]
-	[Range ( 0f, 90.0f )]
-	/// <summary>
-	/// The max npc attention span.
-	/// </summary>
-	public float maxAttentionSpan = 10.0f;
+	[ Space ]
+	[ Header ( "NPC Configurations" ) ]
 
+	[ Tooltip ( "The minimum amount of time (in seconds) the NPC will Idle at a point of interest." ) ]
 	/// <summary>
-	/// The parent cell.
+	/// The minimum idle time.
 	/// </summary>
-	[HideInInspector] public CELL parentCell;
+	public float minimumIdleTime = 10.0f;
+
+	[ Tooltip ( "The maximum amount of time (in seconds) the NPC will Idle at a point of interest." ) ]
+	/// <summary>
+	/// The maximum idle time.
+	/// </summary>
+	public float maximumIdleTime = 20.0f;
+
+	[ Tooltip ( "Can the NPC interact with objects." ) ]
+	/// <summary>
+	/// Can the npc interact with objects.
+	/// </summary>
+	public bool canInteractWithObjects = false;
 
 	#endregion
 
 	#region --------------------	Public Methods
 
 	/// <summary>
-	/// Selects the point of interest from a list of supplied points.
+	/// Changes the point of interest.
 	/// </summary>
-	/// <param name="_pois">Pois.</param>
-	public void Select_Point_Of_Interest ( List <POINT_OF_INTEREST> _pois )
+	/// <param name="_newPointOfInterest">New point of interest.</param>
+	public void Change_Point_Of_Interest ( CELL_ENTITY _newPointOfInterest )
 	{
-		if ( _pois.Count > 0 )
+		//	Set isIdling to false
+		_isIdling = false;
+
+		if ( _targetPointOfInterest != null )
 		{
-			//	Remove the current target point of interest
-			_pois.Remove ( _targetPOI );
+			//	Remove the npc from the target point of interest's audience
+			_targetPointOfInterest.audience.Remove ( this );
+		}
 
-			//	Construct a list of weights for each point of interest
-			List <int> _weights = new List <int> ();
+		//	Set the new point of interest
+		_targetPointOfInterest = _newPointOfInterest;
 
-			//	Populate the list of weights with each appeal from the point of interest
-			int _sum = 0;
-			_pois.ForEach ( p => {
-				_sum += p.appeal;
-				_weights.Add ( _sum );
-			} );
+		//	**************************
+		//	Animate!
+		//	**************************
 
-			//	Select a random value from 0 to the total sum.
-			int _n = _weights.IndexOf ( _weights.Find ( w => w >= Random.Range ( 0, _sum ) ) ); 
+		//	Set the navmesh agent destination & set has registered to false
+		if ( _targetPointOfInterest != null )
+		{
+			_agent.SetDestination ( _targetPointOfInterest.transform.position );
+		}
+		_hasRegisteredWithPointOfInterest = false;
+	}
+		
+	/// <summary>
+	/// Translate the NPC.
+	/// </summary>
+	public IEnumerator Translate ()
+	{
+		//	Stop Idling
+		StopCoroutine ( "Idle" );
 
-			//	Find the first weight that is greater than the random value.
-			if ( _n != -1 )
-			{
-				_targetPOI = _pois [ _n ];
-				_agent.SetDestination ( _targetPOI.transform.position );
-			}
+		//	Disable emulated position of navmesh
+		_agent.updatePosition = false;
 
-			//	No longer idling
-			_isIdling = false;
+		//	Wait until translation complete
+		yield return new WaitUntil ( () => parentCell.hasCompletedTranslation == true );
+
+		//	Warp to new position
+		_agent.Warp ( transform.position );
+
+		//	Enable emulated position
+		_agent.updatePosition = true;
+
+		//	Change Point of Interest
+		if ( _targetPointOfInterest != null )
+		{
+			Change_Point_Of_Interest ( ( _targetPointOfInterest.isActiveAndEnabled ) ? _targetPointOfInterest : 
+				parentCell.pointsOfInterest [ Random.Range ( 0, parentCell.pointsOfInterest.Count ) ] );
 		}
 		else
 		{
-
+			Change_Point_Of_Interest ( parentCell.pointsOfInterest [ Random.Range ( 0, parentCell.pointsOfInterest.Count ) ] );
 		}
 	}
 
-	/// <summary>
-	/// Called when the npc arrives at a point of interest.
-	/// </summary>
-	public IEnumerator Idle ()
-	{
-		//	Set idling to true
-		_isIdling = true;
+	#endregion
 
-		//	Determine how long the npc will stay.
-		_attentionSpan = Random.Range ( 0f, maxAttentionSpan );
+	#region --------------------	Private Properties
 
-		//	Wait until the time is up
-		yield return new WaitForSeconds ( _attentionSpan );
 
-		//	Select a new point of interest and begin travelling there
-		Select_Point_Of_Interest ( parentCell.pointsOfInterest );
-	}
-
-	/// <summary>
-	/// Looks at the supplied focal point.
-	/// </summary>
-	/// <param name="_focalPoint">Focal point.</param>
-	public void Look_At_Focal_Point ( Vector3 _focalPoint )
-	{
-		_agent.transform.LookAt ( _focalPoint, Vector3.up );
-	}
 
 	#endregion
 
 	#region --------------------	Private Fields
 
 	/// <summary>
-	/// The attached navmesh agent.
+	/// The target point of interest.
+	/// </summary>
+	private CELL_ENTITY _targetPointOfInterest;
+
+	/// <summary>
+	/// Has the NPC registered with current point of interest.
+	/// </summary>
+	private bool _hasRegisteredWithPointOfInterest = false;
+
+	/// <summary>
+	/// The navmesh agent.
 	/// </summary>
 	private NavMeshAgent _agent;
 
 	/// <summary>
-	/// How long an NPC will stay at a particular point of interest.
+	/// Is it the first update.
 	/// </summary>
-	private float _attentionSpan;
+	private bool _isFirstUpdate = true;
 
 	/// <summary>
-	/// Used to eval whether or not the npc is idling.
+	/// Is the NPC idling.
 	/// </summary>
 	private bool _isIdling = false;
-
-	/// <summary>
-	/// The target Point of Interest.
-	/// </summary>
-	private POINT_OF_INTEREST _targetPOI;
 
 	#endregion
 
@@ -152,12 +158,98 @@ public class NPC : MonoBehaviour
 	/// </summary>
 	private void Update ()
 	{
-		//	If idling, look at the focal point of the point of interest
+		if ( _isFirstUpdate )
+		{
+			_isFirstUpdate = false;
+
+			//	Register with cell translation
+			parentCell.On_Cell_Translate += delegate { StartCoroutine ( Translate () ); };
+
+			//	Start an Idle
+			StartCoroutine ( Idle () );
+		}
 		if ( _isIdling )
 		{
-			Vector3 _lookPosition = Vector3.Slerp ( transform.position + transform.forward, _targetPOI.focalPoint, Time.deltaTime );
-			_lookPosition.y = transform.position.y;
-			transform.LookAt ( _lookPosition );
+			if ( _targetPointOfInterest != null )
+			{
+				//	**************************
+				//	Animate!
+				//	**************************
+
+				Vector3 _lookPos = Vector3.Slerp ( transform.position + transform.forward, 
+					                   new Vector3 ( _targetPointOfInterest.focalPoint.x, transform.position.y, _targetPointOfInterest.focalPoint.z ), Time.deltaTime );
+				_agent.transform.LookAt ( _lookPos );
+			}
+		}
+		else
+		{
+			//	If the NPC has entered the point of interest zone but is still moving
+			if ( _hasRegisteredWithPointOfInterest )
+			{
+				//	If the NPC is trying to move by others or is walking slowly, have them stop instead
+				if ( _agent.velocity.magnitude < 1.5f && ! _agent.isStopped )
+				{
+					_agent.SetDestination ( transform.position );
+				}
+			}
+		}
+	}
+
+	/// <summary>
+	/// Raises the trigger stay event.
+	/// </summary>
+	/// <param name="_c">C.</param>
+	private void OnTriggerStay ( Collider _c )
+	{
+		//	If the NPC is within a point of interest
+		if ( _c.CompareTag ( "Point_Of_Interest" ) && !_hasRegisteredWithPointOfInterest )
+		{
+			//	Get the attached entity script
+			CELL_ENTITY _entity = _c.GetComponent <CELL_ENTITY> ();
+
+			//	If it is the target point of interest
+			if ( _entity == _targetPointOfInterest )
+			{
+				//	Reset the agent destination for a more spread-out collection of NPCs
+				float _newX = ( Random.Range ( 0, 2 ) > 0 )? Random.Range ( 2.0f, 3.0f ) : Random.Range ( -3.0f, -2.0f );
+				float _newZ = ( Random.Range ( 0, 2 ) > 0 )? Random.Range ( 2.0f, 3.0f ) : Random.Range ( -3.0f, -2.0f );
+				_agent.SetDestination ( _targetPointOfInterest.transform.position + new Vector3 ( _newX , 0, _newZ ) );
+
+				//	Specify that the npc has registered
+				_hasRegisteredWithPointOfInterest = true;
+
+				//	Start Idling
+				StartCoroutine ( Idle () );
+			}
+		}
+	}
+
+	/// <summary>
+	/// Idle this instance.
+	/// </summary>
+	private IEnumerator Idle ()
+	{
+		//	If the npc has a target desitination
+		if ( _targetPointOfInterest != null )
+		{
+			yield return new WaitUntil ( () => _agent.velocity == Vector3.zero );
+
+			//	Add the npc to the point of interest's audience
+			_targetPointOfInterest.audience.Add ( this );
+
+			//	Set idling to true to force look at focal point
+			_isIdling = true;
+		}
+
+		//	Wait for a random amount of time within bounds.  Then, change the target point of interest
+		yield return new WaitForSeconds ( Random.Range ( minimumIdleTime, maximumIdleTime ) );
+		if ( parentCell.pointsOfInterest.Count > 0 )
+		{
+			Change_Point_Of_Interest ( parentCell.pointsOfInterest [ Random.Range ( 0, parentCell.pointsOfInterest.Count ) ] );
+		}
+		else
+		{
+			Idle ();
 		}
 	}
 

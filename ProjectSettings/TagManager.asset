@@ -7,6 +7,9 @@ TagManager:
   - PauseMenu
   - NPC
   - PopBalloon
+  - Ground
+  - UI_Interaction_Prompt
+  - Point_Of_Interest
   layers:
   - Default
   - TransparentFX

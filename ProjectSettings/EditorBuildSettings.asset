@@ -11,9 +11,12 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/00_Scenes/Drearily_Dreaming_Bedroom.unity
     guid: 54d8bf7bfe985044e9386b2333085cc7
-  - enabled: 1
+  - enabled: 0
     path: Assets/00_Scenes/01_Party_Dream.unity
     guid: 08bb843f5bce0344e8488b608da27af5
   - enabled: 0
     path: Assets/00_Scenes/00_Testing/TestBedroom.unity
     guid: 7599b3a888af03c4c996c94a3460d164
+  - enabled: 1
+    path: Assets/00_Scenes/Drearily_Dreaming_Party.unity
+    guid: 1a8f48359b92af14199bed6b0d347be7
