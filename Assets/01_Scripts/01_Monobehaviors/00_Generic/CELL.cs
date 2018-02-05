@@ -1,0 +1,211 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.AI;
+
+[ DisallowMultipleComponent ]
+public class CELL : MonoBehaviour 
+{
+
+	#region --------------------	Public Events
+
+	/// <summary>
+	/// Cell events:
+	/// On Cell Generate is called whenever the cell is told to generate.
+	/// </summary>
+	public delegate void CELL_EVENT ();
+	public event CELL_EVENT On_Cell_Generate;
+
+	/// <summary>
+	/// Cell Translation Events
+	/// On Cell Translate is called whenever the cell is moved.
+	/// </summary>
+	public delegate void CELL_TRANSLATION ( Vector3 _direction );
+	public event CELL_TRANSLATION On_Cell_Translate;
+
+	#endregion
+
+	#region --------------------	Public Properties
+
+	/// <summary>
+	/// Gets the rounded cell position.
+	/// </summary>
+	/// <value>The position.</value>
+	public Vector3 position { 
+		get {
+			return new Vector3 ( Mathf.Round ( transform.position.x / 100.0f ),
+				Mathf.Round ( transform.position.y / 100.0f ),
+				Mathf.Round ( transform.position.z / 100.0f ) );
+		} 
+	}
+
+	/// <summary>
+	/// Gets the points of interest.
+	/// </summary>
+	/// <value>The points of interest.</value>
+	public List <CELL_ENTITY> pointsOfInterest { get { return _pointsOfInterest; } }
+
+	/// <summary>
+	/// Gets a value indicating whether this <see cref="CELL"/> has completed translation.
+	/// </summary>
+	/// <value><c>true</c> if has completed translation; otherwise, <c>false</c>.</value>
+	public bool hasCompletedTranslation { get { return _hasCompletedTranslation; } }
+
+	#endregion
+
+	#region --------------------	Public Fields
+
+	#endregion
+
+	#region --------------------	Public Methods
+
+	#endregion
+
+	#region --------------------	Private Properties
+
+	/// <summary>
+	/// Gets the player postion.
+	/// </summary>
+	/// <value>The player postion.</value>
+	private Vector3 playerPosition
+	{
+		get {
+			return new Vector3 ( Mathf.Round ( _player.position.x / 100.0f ),
+				Mathf.Round ( _player.position.y / 100.0f ),
+				Mathf.Round ( _player.position.z / 100.0f ) );
+		} 
+	}
+
+	#endregion
+
+	#region --------------------	Private Fields
+
+	/// <summary>
+	/// The player.
+	/// </summary>
+	private static Transform _player;
+
+	/// <summary>
+	/// The number of cell updates.
+	/// </summary>
+	private static int _cellUpdates = 0;
+
+	/// <summary>
+	/// Is this the first update loop.
+	/// </summary>
+	private bool _firstUpdate = true;
+
+	/// <summary>
+	/// Has the cell started translation.
+	/// </summary>
+	private bool _hasStartedTranslation = false;
+
+	/// <summary>
+	/// Has the cell completed translation.
+	/// </summary>
+	private bool _hasCompletedTranslation = false;
+
+	/// <summary>
+	/// The points of interest.
+	/// </summary>
+	private List <CELL_ENTITY> _pointsOfInterest;
+
+	#endregion
+
+	#region --------------------	Private Methods
+
+	/// <summary>
+	/// Start this instance.
+	/// </summary>
+	private void Start ()
+	{
+		_player = ( _player == null )? GameObject.FindGameObjectWithTag ( "Player" ).transform : _player;
+		_pointsOfInterest = new List<CELL_ENTITY> ();
+	}
+
+	/// <summary>
+	/// Called at the end of the execution order.
+	/// </summary>
+	private void LateUpdate ()
+	{
+		//	On the first update, generate each cell
+		if ( _firstUpdate )
+		{
+			Generate ();
+			_firstUpdate = false;
+		}
+
+		//	If the difference between the cell distance and player position is large enough, translate and regenerate the cell
+		if ( !_hasStartedTranslation )
+		{
+			if ( playerPosition != Vector3.zero )
+			{
+				_hasCompletedTranslation = false;
+				StartCoroutine ( Translate () );
+				_cellUpdates++;
+				_hasStartedTranslation = true;
+				if ( _cellUpdates == 9 )
+				{
+					_player.parent.position -= playerPosition * 100.0f;
+					_cellUpdates = 0;
+				}
+			}
+		}
+		else
+		{
+			if ( _cellUpdates == 0 )
+			{
+				_hasStartedTranslation = false;
+			}
+		}
+	}
+
+	/// <summary>
+	/// Translate the cell in the specified _direction.
+	/// </summary>
+	/// <param name="_direction">Direction.</param>
+	private IEnumerator Translate ()
+	{
+		//	Get player direction
+		Vector3 _direction = ( playerPosition - position );
+
+		//	Calculate a modified direction
+		Vector3 _modifiedDirection = new Vector3 ( ( Mathf.Abs ( _direction.x ) > 1 )? ( ( _direction.x > 0 )? 200.0f : -200.0f ) : ( playerPosition.x * -100.0f ), 0,
+			( Mathf.Abs ( _direction.z ) > 1 )? ( ( _direction.z > 0 )? 200.0f : -200.0f ) : ( playerPosition.z * -100.0f ) );
+
+		//	Notify subscribers of translation
+		if ( On_Cell_Translate != null )
+		{
+			On_Cell_Translate ( _modifiedDirection );
+		}
+			
+		//	Move the cell & its children to a new position based on the direction.
+		transform.position += _modifiedDirection;
+
+		//	Regenerate the cell with a newly randomized configuration
+		if ( _direction.magnitude >= 2 )
+		{
+			Generate ();
+		}
+
+		//	Show translation complete
+		_hasCompletedTranslation = true;
+
+		//	Return null
+		yield return null;
+	}
+
+	/// <summary>
+	/// Generate this instance.
+	/// </summary>
+	private void Generate ()
+	{
+		if ( On_Cell_Generate != null )
+		{
+			On_Cell_Generate ();
+		}
+	}
+
+	#endregion
+
+}

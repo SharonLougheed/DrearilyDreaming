@@ -3,4 +3,60 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [ DisallowMultipleComponent ]
-public abstract class ENTITY : MonoBehaviour {}
+public class ENTITY : MonoBehaviour 
+{
+
+	#region --------------------	Public Properties
+
+	/// <summary>
+	/// Gets the parent cell.
+	/// </summary>
+	/// <value>The parent cell.</value>
+	public CELL parentCell { get { return _parentCell; } }
+
+	#endregion
+
+	#region --------------------	Public Fields
+
+	[ Space ]
+	[ Header ( "Entity Configurations" ) ]
+	[ Tooltip ( "The chance that this entity will be spawned per cell generation." ) ]
+	[ Range ( 0f, 1.0f ) ]
+	/// <summary>
+	/// The spawn chance.
+	/// </summary>
+	public float spawnChance = 0.5f;
+
+	#endregion
+
+	#region --------------------	Private Fields
+
+	/// <summary>
+	/// The parent cell.
+	/// </summary>
+	private CELL _parentCell;
+
+	#endregion
+
+	#region --------------------	Private Methods
+
+	/// <summary>
+	/// Start this instance.
+	/// </summary>
+	private void Start ()
+	{
+		_parentCell = GetComponentInParent <CELL> ();
+		_parentCell.On_Cell_Generate += Generate; 
+	}
+
+	/// <summary>
+	/// Generate this instance.
+	/// </summary>
+	private void Generate ()
+	{
+		gameObject.SetActive ( ( Random.Range ( 0, 1.0f ) <= spawnChance ) );
+	}
+
+	#endregion
+
+}
