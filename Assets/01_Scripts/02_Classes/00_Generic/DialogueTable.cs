@@ -7,26 +7,49 @@ public class DialogueTable : MonoBehaviour{
     //list of all dialogue files for this class
     public TextAsset passiveTextFile;//,activeTextFile;
 
-    [HideInInspector] public static List<string> passiveConversations = new List<string>();//,
-                                                 //activeConversations;
-    
+    [HideInInspector] public static List<string> badPassive = new List<string>(),
+                                                 neutralPassive = new List<string>(),
+                                                 goodPassive = new List<string>();
+
     private void Awake()
     {
+        //Debug.Log("On Awake:" + passiveTextFile.text);
         LoadTextAssets();
-        Debug.Log("On Awake:" + passiveTextFile.text);
     }
     private void LoadTextAssets() {
-        string[] eachPassiveLine;
+        //load file and store to string        
         string passiveText = passiveTextFile.text;
-        Debug.Log("Before the split: " + passiveText);
 
-        eachPassiveLine = passiveText.Split('\n');
+        //parse string into array of strings
+        string[] eachPassiveLine = passiveText.Split('\n');
 
-        Debug.Log("At the Split(): " + eachPassiveLine.ToString());
-
+        //loop through array and parse each line
         foreach(string line in eachPassiveLine)
         {
-            passiveConversations.Add(line);
+            //split the line
+            string[] splitLine = line.Split('_');
+
+            //switch on the 0 index
+            string notoriety = splitLine[0];
+            string temp;
+            switch(notoriety)
+            {
+                case "bad":
+                    temp = splitLine[1];
+                    badPassive.Add(temp);
+                    break;
+                case "neutral":
+                    temp = splitLine[1];
+                    neutralPassive.Add(temp);
+                    break;
+                case "good":
+                    temp = splitLine[1];
+                    goodPassive.Add(temp);
+                    break;
+                default:
+                    Debug.Log("Loading to data structure failed! *BUGGED*");
+                    break;
+            }
         }
         /*
         //string[] eachActiveLine;
@@ -70,8 +93,32 @@ public class DialogueTable : MonoBehaviour{
         //}*/
     }
     public static string PickRandomPassive() {
-        int random = Random.Range(0, passiveConversations.Count);
-        string temp = passiveConversations[random];
-        return temp;
+        int playerNotoriety = PlayerNotoriety.GetPlayerNotoriety();
+        int randomIndex;
+        string temp;
+
+        if (playerNotoriety > 1)
+        {
+            randomIndex = Random.Range(0, goodPassive.Count - 1);
+            temp = neutralPassive[randomIndex];
+            return temp;
+        }
+        else if (playerNotoriety < -1)
+        {
+            randomIndex = Random.Range(0, badPassive.Count - 1);
+            temp = badPassive[randomIndex];
+            return temp;
+        }
+        else if(playerNotoriety >= (-1) && playerNotoriety <= 1)
+        {
+            randomIndex = Random.Range(0, neutralPassive.Count - 1);
+            temp = neutralPassive[randomIndex];
+            return temp;
+        }
+        else
+        {
+            temp = "*BUGGED*";
+            return temp;
+        }
     }
 }
