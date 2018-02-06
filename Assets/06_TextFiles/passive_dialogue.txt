@@ -14,18 +14,15 @@ bad_Looks like the hermit decided to join us today
 bad_She needs to beat it
 bad_Don’t bother me
 bad_Leave me alone
-neutral_This is pretty cool for a school party.
-neutral_Cool music in here.
 neutral_Wow!
 neutral_Oh my god, can’t believe he did that.
 neutral_So last night…
 neutral_Who’s all here tonight?
-neutral_This place is pretty nice actually.
-neutral_Let’s keep this going all night.
-neutral_Let’s get schwifty!
+neutral_So, what kind of music do you like?
 neutral_I see you’re an intellectual as well *lol*
-good_Hmm, you're actually pretty cool.
-good_Wanna hang out with us for a bit?
-good_So, what kind of music do you like?
-good_Pardon me, but do you know Joe?
-good_Hey! I think Joe was looking for you earlier!
+good_Let’s get schwifty!
+good_This place is pretty nice actually.
+good_Let’s keep this going all night.
+good_This is pretty cool for a school party.
+good_Cool music in here.
+good_Woo! This place is awesome!
