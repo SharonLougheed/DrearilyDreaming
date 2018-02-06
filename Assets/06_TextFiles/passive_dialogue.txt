@@ -24,3 +24,8 @@ neutral_This place is pretty nice actually.
 neutral_Let’s keep this going all night.
 neutral_Let’s get schwifty!
 neutral_I see you’re an intellectual as well *lol*
+good_Hmm, you're actually pretty cool.
+good_Wanna hang out with us for a bit?
+good_So, what kind of music do you like?
+good_Pardon me, but do you know Joe?
+good_Hey! I think Joe was looking for you earlier!

@@ -36,14 +36,17 @@ public class DialogueTable : MonoBehaviour{
                 case "bad":
                     temp = splitLine[1];
                     badPassive.Add(temp);
+                    Debug.Log("badPassive's size is: " + badPassive.Capacity.ToString());
                     break;
                 case "neutral":
                     temp = splitLine[1];
                     neutralPassive.Add(temp);
+                    Debug.Log("neutralPassive's size is: " + neutralPassive.Capacity.ToString());
                     break;
                 case "good":
                     temp = splitLine[1];
                     goodPassive.Add(temp);
+                    Debug.Log("goodPassive's size is: " + goodPassive.Capacity.ToString());
                     break;
                 default:
                     Debug.Log("Loading to data structure failed! *BUGGED*");
@@ -96,22 +99,27 @@ public class DialogueTable : MonoBehaviour{
         int playerNotoriety = PlayerNotoriety.GetPlayerNotoriety();
         string temp;
 
-        if (playerNotoriety > 2)
+        if (playerNotoriety >= 5)
         {
             int randomIndex = Random.Range(0, goodPassive.Count - 1);
-            temp = neutralPassive[randomIndex];
+            temp = goodPassive[randomIndex];
             return temp;
         }
-        else if (playerNotoriety < -2)
+        else if (playerNotoriety <= -5)
         {
             int randomIndex = Random.Range(0, badPassive.Count - 1);
             temp = badPassive[randomIndex];
             return temp;
         }
-        else
+        else if(playerNotoriety > -5 && playerNotoriety < 5)
         {
             int randomIndex = Random.Range(0, neutralPassive.Count - 1);
             temp = neutralPassive[randomIndex];
+            return temp;
+        }
+        else
+        {
+            temp = "*DEBUG ME!!*";
             return temp;
         }
     }

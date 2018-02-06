@@ -13,9 +13,11 @@ public class PlayerNotoriety  {
     public static void IncreasePlayerNotoriety()
     {
         playerNotoriety++;
+        Debug.Log("Notoriety at: " + playerNotoriety);
     }
     public static void DecreasePlayerNotoriety()
     {
         playerNotoriety--;
+        Debug.Log("Notoriety at: " + playerNotoriety);
     }
 }
