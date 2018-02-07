@@ -3,19 +3,32 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class DialogueTable : MonoBehaviour{
-
-    //list of all dialogue files for this class
-    public TextAsset passiveTextFile;//,activeTextFile;
-
+    
+    //Game dialogue text file assets
+    public TextAsset passiveTextFile,activeTextFile;
+    
+    //Passive dialogue lists
     [HideInInspector] public static List<string> badPassive = new List<string>(),
                                                  neutralPassive = new List<string>(),
                                                  goodPassive = new List<string>();
-
-    private void Awake()
-    {
-        LoadTextAssets();   //load text from file into Lists
+    //Active converstation Lists
+    [HideInInspector] public static List<string> greetingsGood = new List<string>(),
+                                                 greetingsNeutral = new List<string>(),
+                                                 greetingsBad = new List<string>(),                                                 
+                                                 choicesGood = new List<string>(),
+                                                 choicesNeutral = new List<string>(),
+                                                 choicesBad = new List<string>(),
+                                                 responsesGood = new List<string>(),
+                                                 responsesNeutral = new List<string>(),
+                                                 responsesBad = new List<string>();
+    private void Awake() {
+        //load text from file into Lists
+        if (LoadPassiveTextAssets() && LoadActiveTextAssets())
+        {            
+            Debug.Log("Asset Loading Complete");
+        }
     }
-    private void LoadTextAssets() {
+    private bool LoadPassiveTextAssets() {
         //load file and store to string        
         string passiveText = passiveTextFile.text;
 
@@ -27,7 +40,6 @@ public class DialogueTable : MonoBehaviour{
         {
             //split the line
             string[] splitLine = line.Split('_');
-
             //switch on the 0 index
             string notoriety = splitLine[0];
             string temp;
@@ -50,50 +62,101 @@ public class DialogueTable : MonoBehaviour{
                     break;
                 default:
                     Debug.Log("Loading to data structure failed! *BUGGED*");
-                    break;
+                    return false;
             }
         }
-        /*
-        //string[] eachActiveLine;
-        //string activeText = activeTextFile.text;
-        //eachActiveLine = activeText.Split('\n');
-        
-        //string[] eachLine;                  //array for storage of each full line of text from the file
-        //string tempString = textFile.text;  //string variable to hold the data from the file
-                        
-        //eachLine = tempString.Split('\n');  //parse data into individual lines
-        //foreach (string section in eachLine)    //parse each line into two sections; index 0: dictionary key. index 1: string for storage
-        //{
-        //    //formatting for the file should be "listkey_dialogue\n" ex. "passive answer_I am the real Slim Shady!"
-        //    string[] splitLine = section.Split('_');    //split the line at the underscore
-        //    string keyWord,dialogue;
-        //    //switch (textFile.name)
-        //    //{
-        //    //    case "passiveAnswer":
-        //    //        keyWord = splitLine[0];
-        //    //        dialogue = splitLine[1];
-        //    //        passiveAnswerList.Add(keyWord,dialogue);
-        //    //        break;
-        //    //    case "passiveQuestion":
-        //    //        keyWord = splitLine[0];
-        //    //        dialogue = splitLine[1];
-        //    //        passiveQuestionList.Add(keyWord, dialogue);
-        //    //        break;
-        //    //    case "activeAnswer":
-        //    //        keyWord = splitLine[0];
-        //    //        dialogue = splitLine[1];
-        //    //        activeAnswerList.Add(keyWord, dialogue);
-        //    //        break;
-        //    //    case "activeQuestion":
-        //    //        keyWord = splitLine[0];
-        //    //        dialogue = splitLine[1];
-        //    //        activeQuestionList.Add(keyWord, dialogue);
-        //    //        break;
-        //    //    default:
-        //    //        break;
-        //    //}            
-        //}
-        */
+        return true;
+    }
+    private bool LoadActiveTextAssets() {
+        //load file and store to string
+        string activeText = activeTextFile.text;
+
+        //parse string into array of strings
+        string[] eachActiveLine = activeText.Split('\n');
+
+        //loop through array and parse each line
+        foreach (string line in eachActiveLine)
+        {
+            //split the line
+            string[] splitLine = line.Split('_');
+
+            //switch on the 0 index
+            string convoLevel = splitLine[0];
+            string temp, morality;
+            switch (convoLevel)
+            {
+                case "greeting":
+                    morality = splitLine[1];
+                    switch(morality)
+                    {
+                        case "good":
+                            temp = splitLine[2];
+                            greetingsGood.Add(temp);
+                            break;
+                        case "neutral":
+                            temp = splitLine[2];
+                            greetingsNeutral.Add(temp);
+                            break;
+                        case "bad":
+                            temp = splitLine[2];
+                            greetingsBad.Add(temp);
+                            break;
+                        default:
+                            Debug.Log("Loading to data structure failed! *BUGGED*");
+                            return false;                            
+                    }
+                    //Debug.Log("badPassive's size is: " + badPassive.Capacity.ToString());
+                    break;
+                case "choice":
+                    morality = splitLine[1];
+                    switch (morality)
+                    {
+                        case "good":
+                            temp = splitLine[2];
+                            choicesGood.Add(temp);
+                            break;
+                        case "neutral":
+                            temp = splitLine[2];
+                            choicesNeutral.Add(temp);
+                            break;
+                        case "bad":
+                            temp = splitLine[2];
+                            choicesBad.Add(temp);
+                            break;
+                        default:
+                            Debug.Log("Loading to data structure failed! *BUGGED*");
+                            return false;
+                    }
+                    //Debug.Log("neutralPassive's size is: " + neutralPassive.Capacity.ToString());
+                    break;
+                case "response":
+                    morality = splitLine[1];
+                    switch (morality)
+                    {
+                        case "good":
+                            temp = splitLine[2];
+                            responsesGood.Add(temp);
+                            break;
+                        case "neutral":
+                            temp = splitLine[2];
+                            responsesNeutral.Add(temp);
+                            break;
+                        case "bad":
+                            temp = splitLine[2];
+                            responsesBad.Add(temp);
+                            break;
+                        default:
+                            Debug.Log("Loading to data structure failed! *BUGGED*");
+                            return false;
+                    }
+                    //Debug.Log("goodPassive's size is: " + goodPassive.Capacity.ToString());
+                    break;
+                default:
+                    Debug.Log("Loading to data structure failed! *BUGGED*");
+                    return false;
+            }
+        }
+        return true;
     }
     public static string PickRandomPassive() {
         int playerNotoriety = PlayerNotoriety.GetPlayerNotoriety();

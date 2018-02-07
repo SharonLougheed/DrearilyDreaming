@@ -19,8 +19,8 @@ public class PauseMenuManager : MonoBehaviour {
     [HideInInspector] public bool isPaused;        //boolean available to the entire game to determine if the game is paused or not
 
     private FirstPersonController firstPersonController;
-    private ThirdPersonCharacter thirdPersonCharacter;
-    private ThirdPersonUserControl thirdPersonUserControl;
+    //private ThirdPersonCharacter thirdPersonCharacter;
+    //private ThirdPersonUserControl thirdPersonUserControl;
 	private CUSTOM_THIRD_PERSON_CONTROLLER customThirdPersonController;
 
     private void Awake() {       
@@ -32,8 +32,8 @@ public class PauseMenuManager : MonoBehaviour {
         if(GameObject.FindGameObjectWithTag("Player") != null && GameObject.FindGameObjectWithTag("Player"))
         {
             GameObject tempPlayer = GameObject.FindGameObjectWithTag("Player");
-            thirdPersonCharacter = tempPlayer.GetComponent<ThirdPersonCharacter>();
-			thirdPersonUserControl = tempPlayer.GetComponent<ThirdPersonUserControl>();
+   //         thirdPersonCharacter = tempPlayer.GetComponent<ThirdPersonCharacter>();
+			//thirdPersonUserControl = tempPlayer.GetComponent<ThirdPersonUserControl>();
 			customThirdPersonController = tempPlayer.GetComponent <CUSTOM_THIRD_PERSON_CONTROLLER> ();
         }
     }
