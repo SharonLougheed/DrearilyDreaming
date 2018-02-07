@@ -46,18 +46,48 @@ public class CELL : MonoBehaviour
 	public List <CELL_ENTITY> pointsOfInterest { get { return _pointsOfInterest; } }
 
 	/// <summary>
+	/// Gets a random point of interest.
+	/// </summary>
+	/// <value>The random point of interest.</value>
+	public CELL_ENTITY randomPointOfInterest { get { return _pointsOfInterest [ Random.Range ( 0, _pointsOfInterest.Count ) ]; } }
+
+	/// <summary>
 	/// Gets a value indicating whether this <see cref="CELL"/> has completed translation.
 	/// </summary>
 	/// <value><c>true</c> if has completed translation; otherwise, <c>false</c>.</value>
 	public bool hasCompletedTranslation { get { return _hasCompletedTranslation; } }
 
+	/// <summary>
+	/// Gets the audio.
+	/// </summary>
+	/// <value>The audio.</value>
+	public AudioSource audio { get { return _audio; } }
+
+	/// <summary>
+	/// Gets a value indicating whether this <see cref="CELL"/> has special.
+	/// </summary>
+	/// <value><c>true</c> if has special; otherwise, <c>false</c>.</value>
+	public bool hasSpecial { get { return _hasSpecial; } }
+
 	#endregion
 
 	#region --------------------	Public Fields
 
+	/// <summary>
+	/// All cells.
+	/// </summary>
+	public static List <CELL> allCells = new List<CELL> ();
+
+	/// <summary>
+	/// Is the music playing.
+	/// </summary>
+	public static bool isMusicPlaying = true;
+
 	#endregion
 
 	#region --------------------	Public Methods
+
+
 
 	#endregion
 
@@ -110,9 +140,28 @@ public class CELL : MonoBehaviour
 	/// </summary>
 	private List <CELL_ENTITY> _pointsOfInterest;
 
+	/// <summary>
+	/// The attached audio source.
+	/// </summary>
+	private AudioSource _audio;
+
+	/// <summary>
+	/// Does the cell have the special npc.
+	/// </summary>
+	private bool _hasSpecial = false;
+
 	#endregion
 
 	#region --------------------	Private Methods
+
+	/// <summary>
+	/// Awake this instance.
+	/// </summary>
+	private void Awake ()
+	{
+		_audio = GetComponent <AudioSource> ();
+		allCells.Add ( this );
+	}
 
 	/// <summary>
 	/// Start this instance.
@@ -121,6 +170,32 @@ public class CELL : MonoBehaviour
 	{
 		_player = ( _player == null )? GameObject.FindGameObjectWithTag ( "Player" ).transform : _player;
 		_pointsOfInterest = new List<CELL_ENTITY> ();
+	}
+
+	/// <summary>
+	/// Raises the trigger stay event.
+	/// </summary>
+	/// <param name="_c">C.</param>
+	private void OnTriggerEnter ( Collider _c )
+	{
+		if ( _c.name.Equals ( "JOE" ) ) 
+		{
+			_hasSpecial = true;
+			_audio.Play ();
+		}
+	}
+
+	/// <summary>
+	/// Raises the trigger exit event.
+	/// </summary>
+	/// <param name="_c">C.</param>
+	private void OnTriggerExit ( Collider _c )
+	{
+		if ( _c.name.Equals ( "JOE" ) ) 
+		{
+			_hasSpecial = false;
+			_audio.Stop ();
+		}
 	}
 
 	/// <summary>

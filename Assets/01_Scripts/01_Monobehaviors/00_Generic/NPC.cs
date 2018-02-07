@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.AI;
 
 [ RequireComponent ( typeof ( SphereCollider ), typeof ( NavMeshAgent ), typeof ( Animator ) ) ]
+[ RequireComponent ( typeof ( INTERACTABLE ) ) ]
 public class NPC : CELL_ENTITY
 {
 
@@ -48,8 +49,14 @@ public class NPC : CELL_ENTITY
 	/// Changes the point of interest.
 	/// </summary>
 	/// <param name="_newPointOfInterest">New point of interest.</param>
-	public void Change_Point_Of_Interest ( CELL_ENTITY _newPointOfInterest )
+	public void Change_Point_Of_Interest ( CELL_ENTITY _newPointOfInterest = null )
 	{
+		//	If the point of interest is not passed in
+		if ( _newPointOfInterest == null ) 
+		{
+			_newPointOfInterest = ( name.Equals ( "JOE" ) )? CELL.allCells [ Random.Range ( 0, CELL.allCells.Count ) ].randomPointOfInterest : parentCell.randomPointOfInterest ;
+		}
+
 		//	Set isIdling to false
 		_isIdling = false;
 
@@ -97,12 +104,11 @@ public class NPC : CELL_ENTITY
 		//	Change Point of Interest
 		if ( _targetPointOfInterest != null )
 		{
-			Change_Point_Of_Interest ( ( _targetPointOfInterest.isActiveAndEnabled ) ? _targetPointOfInterest : 
-				parentCell.pointsOfInterest [ Random.Range ( 0, parentCell.pointsOfInterest.Count ) ] );
+			Change_Point_Of_Interest ( ( _targetPointOfInterest.isActiveAndEnabled ) ? _targetPointOfInterest : null );
 		}
 		else
 		{
-			Change_Point_Of_Interest ( parentCell.pointsOfInterest [ Random.Range ( 0, parentCell.pointsOfInterest.Count ) ] );
+			Change_Point_Of_Interest ();
 		}
 	}
 
@@ -245,7 +251,7 @@ public class NPC : CELL_ENTITY
 		yield return new WaitForSeconds ( Random.Range ( minimumIdleTime, maximumIdleTime ) );
 		if ( parentCell.pointsOfInterest.Count > 0 )
 		{
-			Change_Point_Of_Interest ( parentCell.pointsOfInterest [ Random.Range ( 0, parentCell.pointsOfInterest.Count ) ] );
+			Change_Point_Of_Interest ();
 		}
 		else
 		{

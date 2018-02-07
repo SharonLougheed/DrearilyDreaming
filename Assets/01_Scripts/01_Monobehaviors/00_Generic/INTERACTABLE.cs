@@ -13,7 +13,7 @@ public class INTERACTABLE : MonoBehaviour
 	/// <summary>
 	/// The interactable types
 	/// </summary>
-	public enum TYPE { NONE, BED, PARTY_NPC, PARTY_BALLOON, PARTY_STEREO, PARTY_PUNCH, PARTY_FOOD };
+	public enum TYPE { NONE, BED, PARTY_NPC, PARTY_SPECIAL, PARTY_BALLOON, PARTY_STEREO, PARTY_PUNCH, PARTY_FOOD };
 
 	#endregion
 
@@ -27,12 +27,6 @@ public class INTERACTABLE : MonoBehaviour
 	public delegate void INTERACTABLE_EVENT ( TYPE _interactionType );
 	public event INTERACTABLE_EVENT On_Interaction_Begin;
 	public event INTERACTABLE_EVENT On_Interaction_End;
-
-	#endregion
-
-	#region --------------------	Public Properties
-
-
 
 	#endregion
 
@@ -141,6 +135,7 @@ public class INTERACTABLE : MonoBehaviour
 		{ TYPE.NONE, null },
 		{ TYPE.BED, "Bed_Interaction" },
 		{ TYPE.PARTY_NPC, "Party_NPC_Interaction" },
+		{ TYPE.PARTY_SPECIAL, "Party_Special_Interaction" },
 		{ TYPE.PARTY_BALLOON, "Balloon_Interaction" },
 		{ TYPE.PARTY_STEREO, "Stereo_Interaction" },
 		{ TYPE.PARTY_PUNCH, "Punch_Interaction" },
@@ -358,11 +353,30 @@ public class INTERACTABLE : MonoBehaviour
 	{
 		//	Perform the interaction
 
+
 		//	**************************
 		//	Animate!
 		//	**************************
 
 		Debug.Log ( "Interaction with an npc" );
+		yield return null;
+		_isBeingInteractedWith = false;
+	}
+
+	/// <summary>
+	/// Interaction with the special NPC at the party.
+	/// </summary>
+	/// <returns>The interaction.</returns>
+	private IEnumerator Party_Special_Interaction ()
+	{
+		//	Perform the interaction
+		UnityEngine.SceneManagement.SceneManager.LoadScene ( 1 );
+
+		//	**************************
+		//	Animate!
+		//	**************************
+
+		Debug.Log ( "Interaction with the special NPC" );
 		yield return null;
 		_isBeingInteractedWith = false;
 	}
@@ -409,16 +423,21 @@ public class INTERACTABLE : MonoBehaviour
 	private IEnumerator Stereo_Interaction ()
 	{
 		//	Perform the interaction
+		CELL.isMusicPlaying = !CELL.isMusicPlaying;
+
 
 		//	**************************
 		//	Animate!
 		//	**************************
-
-		Debug.Log ( "Music start / stop" );
-        //Modify notoriety field
-        //check which state(start/stop) stereo was changed to
-        //PlayerNotoriety.DecreasePlayerNotoriety();
-        //PlayerNotoriety.IncreasePlayerNotoriety();
+		//Modify notoriety field
+		if ( CELL.isMusicPlaying )
+		{
+			PlayerNotoriety.IncreasePlayerNotoriety ();
+		} 
+		else 
+		{
+			PlayerNotoriety.DecreasePlayerNotoriety ();
+		}
         yield return new WaitForSeconds ( 3 );
 		_isBeingInteractedWith = false;
 	}

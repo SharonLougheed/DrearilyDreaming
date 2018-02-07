@@ -48,19 +48,20 @@ public class DialogueTable : MonoBehaviour{
                 case "bad":
                     temp = splitLine[1];
                     badPassive.Add(temp);
-                    Debug.Log("badPassive's size is: " + badPassive.Capacity.ToString());
+                    //Debug.Log("badPassive's size is: " + badPassive.Capacity.ToString());
                     break;
                 case "neutral":
                     temp = splitLine[1];
                     neutralPassive.Add(temp);
-                    Debug.Log("neutralPassive's size is: " + neutralPassive.Capacity.ToString());
+                    //Debug.Log("neutralPassive's size is: " + neutralPassive.Capacity.ToString());
                     break;
                 case "good":
                     temp = splitLine[1];
                     goodPassive.Add(temp);
-                    Debug.Log("goodPassive's size is: " + goodPassive.Capacity.ToString());
+                    //Debug.Log("goodPassive's size is: " + goodPassive.Capacity.ToString());
                     break;
                 default:
+<<<<<<< HEAD
                     Debug.Log("Loading to data structure failed! *BUGGED*");
                     return false;
             }
@@ -150,6 +151,9 @@ public class DialogueTable : MonoBehaviour{
                             return false;
                     }
                     //Debug.Log("goodPassive's size is: " + goodPassive.Capacity.ToString());
+=======
+                    //Debug.Log("Loading to data structure failed! *BUGGED*");
+>>>>>>> bb331c2d5650dcb1b6a091edee5c5fbe60a489c9
                     break;
                 default:
                     Debug.Log("Loading to data structure failed! *BUGGED*");
