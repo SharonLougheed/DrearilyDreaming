@@ -61,7 +61,6 @@ public class DialogueTable : MonoBehaviour{
                     //Debug.Log("goodPassive's size is: " + goodPassive.Capacity.ToString());
                     break;
                 default:
-<<<<<<< HEAD
                     Debug.Log("Loading to data structure failed! *BUGGED*");
                     return false;
             }
@@ -151,9 +150,7 @@ public class DialogueTable : MonoBehaviour{
                             return false;
                     }
                     //Debug.Log("goodPassive's size is: " + goodPassive.Capacity.ToString());
-=======
                     //Debug.Log("Loading to data structure failed! *BUGGED*");
->>>>>>> bb331c2d5650dcb1b6a091edee5c5fbe60a489c9
                     break;
                 default:
                     Debug.Log("Loading to data structure failed! *BUGGED*");
