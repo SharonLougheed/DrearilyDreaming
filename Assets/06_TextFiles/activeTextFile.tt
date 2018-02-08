@@ -1,0 +1,61 @@
+﻿<#@ template debug="false" hostspecific="false" language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ output extension=".txt" #>
+greeting_good_Oh, it's you.
+greeting_good_Hey.
+greeting_good_Uh...hi?
+greeting_good_So I told Joe that there’s NO WAY he ate a frog. 
+greeting_neutral_Aren’t you looking for… Anyone else?
+greeting_neutral_Can you not be here right now?
+greeting_neutral_Are you gonna say something, or…?
+greeting_bad_Can’t you see we’re busy?
+greeting_bad_Do you have to breathe my air?
+greeting_bad_Oh look, the school rat.
+choice_good_Anything interesting?
+choice_good_’Hey’ yourself!
+choice_good_I like your dress!
+choice_bad_What’s good?
+choice_bad_Seen any good movies recently?
+choice_bad_Your dress is Smucci, right?
+response_good_Eh. It's a party. 
+response_good_Saw someone kind of odd earlier, though. 
+response_good_I saw him popping balloons a while ago.
+response_good_Hmph. Snarky. Okay.
+response_good_Second snarky person I've seen tonight. 
+response_good_He was around here like, so long ago.
+response_good_Finally, someone who knows true fashion. 
+response_good_Maybe you could go educate poor Joe. 
+response_good_I saw him like, a while back. 
+response_neutral_What are you from, the 90s?
+response_neutral_The only thing good would be you leaving me alone. 
+response_neutral_Eh. It's a party. 
+response_neutral_Maybe you could go talk to the other weirdo here. 
+response_neutral_I saw someone popping balloons a while ago. 
+response_neutral_Look, I’m really not looking for a conversation.
+response_neutral_How about you go bug someone else?
+response_neutral_He was around here like, so long ago.
+response_neutral_Hmph. Snarky. Oaky. 
+response_neutral_Another asshole earlier was snarky too. 	
+response_neutral_Maybe that annoying kid will humor you. 
+response_neutral_Excuse you, this is obviously Perder. 
+response_neutral_Why don't you go talk to the other poor kid?
+response_neutral_I saw him like, a while back.
+response_neutral_Finally, someone who isn't fashion dumb. 
+response_neutral_Not like that idiot, Joe. 
+response_bad_How about you go talk to the other freaks?
+response_bad_Just get lost. 
+response_bad_Christ, you can't even talk right. 
+response_bad_Just get lost.
+response_bad_Hmph. Snarky. Okay. 
+response_bad_How pathetic. 
+response_bad_Why don't you just scurry off, rat.
+response_bad_Look, I'm not really looking for a conversation. 
+response_bad_Especially with trash like you. 
+response_bad_Flattery will get you nowhere. 
+response_bad_I mean who dressed you, your mother?
+response_bad_Go bother someone else.
+response_bad_This is Perder, idiot. 
+response_bad_Are you as dumb as you are poor?

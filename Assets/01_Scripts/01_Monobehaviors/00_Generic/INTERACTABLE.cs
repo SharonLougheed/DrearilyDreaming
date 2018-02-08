@@ -479,7 +479,5 @@ public class INTERACTABLE : MonoBehaviour
         yield return null;
 		_isBeingInteractedWith = false;
 	}
-
 	#endregion
-
 }

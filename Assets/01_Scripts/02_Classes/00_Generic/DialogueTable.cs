@@ -5,7 +5,8 @@ using UnityEngine;
 public class DialogueTable : MonoBehaviour{
     
     //Game dialogue text file assets
-    public TextAsset passiveTextFile,activeTextFile;
+    public TextAsset passiveTextFile,
+                     activeTextFile;
     
     //Passive dialogue lists
     [HideInInspector] public static List<string> badPassive = new List<string>(),
@@ -80,17 +81,17 @@ public class DialogueTable : MonoBehaviour{
             //split the line
             string[] splitLine = line.Split('_');
 
-            //switch on the 0 index
+            //switch on index 0
             string convoLevel = splitLine[0];
             string temp, morality;
             switch (convoLevel)
             {
                 case "greeting":
-                    morality = splitLine[1];
+                    morality = splitLine[1];    //switch on index 1
                     switch(morality)
                     {
                         case "good":
-                            temp = splitLine[2];
+                            temp = splitLine[2];    //add index 2 to list
                             greetingsGood.Add(temp);
                             break;
                         case "neutral":
@@ -102,10 +103,9 @@ public class DialogueTable : MonoBehaviour{
                             greetingsBad.Add(temp);
                             break;
                         default:
-                            Debug.Log("Loading to data structure failed! *BUGGED*");
+                            Debug.Log("Loading to data structure failed!" + convoLevel +" " + morality + " " + splitLine[2] + " *BUGGED*");
                             return false;                            
                     }
-                    //Debug.Log("badPassive's size is: " + badPassive.Capacity.ToString());
                     break;
                 case "choice":
                     morality = splitLine[1];
@@ -127,7 +127,6 @@ public class DialogueTable : MonoBehaviour{
                             Debug.Log("Loading to data structure failed! *BUGGED*");
                             return false;
                     }
-                    //Debug.Log("neutralPassive's size is: " + neutralPassive.Capacity.ToString());
                     break;
                 case "response":
                     morality = splitLine[1];
@@ -149,8 +148,6 @@ public class DialogueTable : MonoBehaviour{
                             Debug.Log("Loading to data structure failed! *BUGGED*");
                             return false;
                     }
-                    //Debug.Log("goodPassive's size is: " + goodPassive.Capacity.ToString());
-                    //Debug.Log("Loading to data structure failed! *BUGGED*");
                     break;
                 default:
                     Debug.Log("Loading to data structure failed! *BUGGED*");
