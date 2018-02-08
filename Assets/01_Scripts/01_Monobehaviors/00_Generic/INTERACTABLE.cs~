@@ -13,7 +13,7 @@ public class INTERACTABLE : MonoBehaviour
 	/// <summary>
 	/// The interactable types
 	/// </summary>
-	public enum TYPE { NONE, BED, PARTY_NPC, PARTY_BALLOON, PARTY_STEREO, PARTY_PUNCH, PARTY_FOOD };
+	public enum TYPE { NONE, BED, PARTY_NPC, PARTY_SPECIAL, PARTY_BALLOON, PARTY_STEREO, PARTY_PUNCH, PARTY_FOOD };
 
 	#endregion
 
@@ -27,12 +27,6 @@ public class INTERACTABLE : MonoBehaviour
 	public delegate void INTERACTABLE_EVENT ( TYPE _interactionType );
 	public event INTERACTABLE_EVENT On_Interaction_Begin;
 	public event INTERACTABLE_EVENT On_Interaction_End;
-
-	#endregion
-
-	#region --------------------	Public Properties
-
-
 
 	#endregion
 
@@ -141,6 +135,7 @@ public class INTERACTABLE : MonoBehaviour
 		{ TYPE.NONE, null },
 		{ TYPE.BED, "Bed_Interaction" },
 		{ TYPE.PARTY_NPC, "Party_NPC_Interaction" },
+		{ TYPE.PARTY_SPECIAL, "Party_Special_Interaction" },
 		{ TYPE.PARTY_BALLOON, "Balloon_Interaction" },
 		{ TYPE.PARTY_STEREO, "Stereo_Interaction" },
 		{ TYPE.PARTY_PUNCH, "Punch_Interaction" },
@@ -340,6 +335,7 @@ public class INTERACTABLE : MonoBehaviour
 	private IEnumerator Bed_Interaction ()
 	{
 		//	Perform the interaction
+		UnityEngine.SceneManagement.SceneManager.LoadScene ( 2 );
 
 		//	**************************
 		//	Animate!
@@ -358,11 +354,31 @@ public class INTERACTABLE : MonoBehaviour
 	{
 		//	Perform the interaction
 
+
 		//	**************************
 		//	Animate!
 		//	**************************
 
 		Debug.Log ( "Interaction with an npc" );
+		yield return null;
+		_isBeingInteractedWith = false;
+	}
+
+	/// <summary>
+	/// Interaction with the special NPC at the party.
+	/// </summary>
+	/// <returns>The interaction.</returns>
+	private IEnumerator Party_Special_Interaction ()
+	{
+		//	Perform the interaction
+		PlayerNotoriety.ResetPlayerNoteriety ();
+		UnityEngine.SceneManagement.SceneManager.LoadScene ( 1 );
+
+		//	**************************
+		//	Animate!
+		//	**************************
+
+		Debug.Log ( "Interaction with the special NPC" );
 		yield return null;
 		_isBeingInteractedWith = false;
 	}
@@ -395,6 +411,9 @@ public class INTERACTABLE : MonoBehaviour
 		//	De-activate the game object
 		gameObject.SetActive ( false );
 
+        //Modify notoriety field
+        PlayerNotoriety.DecreasePlayerNotoriety();
+
 		//	Flush the point of interest and retarget all audience NPCs
 		_cellEntity.Flush_Point_Of_Interest ();
 	}
@@ -406,13 +425,13 @@ public class INTERACTABLE : MonoBehaviour
 	private IEnumerator Stereo_Interaction ()
 	{
 		//	Perform the interaction
+		CELL_STEREO.instance.ToggleMute ();
 
 		//	**************************
 		//	Animate!
 		//	**************************
 
-		Debug.Log ( "Music start / stop" );
-		yield return new WaitForSeconds ( 3 );
+        yield return new WaitForSeconds ( 1 );
 		_isBeingInteractedWith = false;
 	}
 
@@ -429,7 +448,9 @@ public class INTERACTABLE : MonoBehaviour
 		//	**************************
 
 		Debug.Log ( "Drink punch" );
-		yield return null;
+        //Modify notoriety field
+        PlayerNotoriety.IncreasePlayerNotoriety();
+		yield return new WaitForSeconds ( 2 );
 		_isBeingInteractedWith = false;
 	}
 
@@ -446,10 +467,10 @@ public class INTERACTABLE : MonoBehaviour
 		//	**************************
 
 		Debug.Log ( "Eat food" );
-		yield return null;
+        //Modify notoriety field
+		PlayerNotoriety.DecreasePlayerNotoriety();
+		yield return new WaitForSeconds ( 2 );
 		_isBeingInteractedWith = false;
 	}
-
 	#endregion
-
 }

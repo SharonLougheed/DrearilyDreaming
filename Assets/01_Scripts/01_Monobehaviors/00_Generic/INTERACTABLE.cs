@@ -335,6 +335,7 @@ public class INTERACTABLE : MonoBehaviour
 	private IEnumerator Bed_Interaction ()
 	{
 		//	Perform the interaction
+		UnityEngine.SceneManagement.SceneManager.LoadScene ( 2 );
 
 		//	**************************
 		//	Animate!
@@ -370,6 +371,7 @@ public class INTERACTABLE : MonoBehaviour
 	private IEnumerator Party_Special_Interaction ()
 	{
 		//	Perform the interaction
+		PlayerNotoriety.ResetPlayerNoteriety ();
 		UnityEngine.SceneManagement.SceneManager.LoadScene ( 1 );
 
 		//	**************************
@@ -423,22 +425,13 @@ public class INTERACTABLE : MonoBehaviour
 	private IEnumerator Stereo_Interaction ()
 	{
 		//	Perform the interaction
-		CELL.isMusicPlaying = !CELL.isMusicPlaying;
-
+		CELL_STEREO.instance.ToggleMute ();
 
 		//	**************************
 		//	Animate!
 		//	**************************
-		//Modify notoriety field
-		if ( CELL.isMusicPlaying )
-		{
-			PlayerNotoriety.IncreasePlayerNotoriety ();
-		} 
-		else 
-		{
-			PlayerNotoriety.DecreasePlayerNotoriety ();
-		}
-        yield return new WaitForSeconds ( 3 );
+
+        yield return new WaitForSeconds ( 1 );
 		_isBeingInteractedWith = false;
 	}
 
@@ -457,7 +450,7 @@ public class INTERACTABLE : MonoBehaviour
 		Debug.Log ( "Drink punch" );
         //Modify notoriety field
         PlayerNotoriety.IncreasePlayerNotoriety();
-        yield return null;
+		yield return new WaitForSeconds ( 2 );
 		_isBeingInteractedWith = false;
 	}
 
@@ -475,8 +468,8 @@ public class INTERACTABLE : MonoBehaviour
 
 		Debug.Log ( "Eat food" );
         //Modify notoriety field
-        PlayerNotoriety.DecreasePlayerNotoriety();
-        yield return null;
+		PlayerNotoriety.DecreasePlayerNotoriety();
+		yield return new WaitForSeconds ( 2 );
 		_isBeingInteractedWith = false;
 	}
 	#endregion

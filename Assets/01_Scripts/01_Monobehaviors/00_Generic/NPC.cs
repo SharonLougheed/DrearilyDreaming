@@ -16,6 +16,18 @@ public class NPC : CELL_ENTITY
 	/// <value>The agent.</value>
 	public NavMeshAgent agent { get { return _agent; } }
 
+	/// <summary>
+	/// Gets the rounded cell position.
+	/// </summary>
+	/// <value>The position.</value>
+	public Vector3 position { 
+		get {
+			return new Vector3 ( Mathf.Round ( transform.position.x / 100.0f ),
+				Mathf.Round ( transform.position.y / 100.0f ),
+				Mathf.Round ( transform.position.z / 100.0f ) );
+		} 
+	}
+
 	#endregion
 
 	#region --------------------	Public Fields
@@ -112,11 +124,15 @@ public class NPC : CELL_ENTITY
 		}
 	}
 
-	#endregion
-
-	#region --------------------	Private Properties
-
-
+	/// <summary>
+	/// Changes the parent.
+	/// </summary>
+	public void Change_Parent ()
+	{
+		parentCell.On_Cell_Translate -= delegate { StartCoroutine ( Translate () ); };
+		Recollect_Parent_Information ();
+		parentCell.On_Cell_Translate += delegate { StartCoroutine ( Translate () ); };
+	}
 
 	#endregion
 

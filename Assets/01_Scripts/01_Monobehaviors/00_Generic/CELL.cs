@@ -58,12 +58,6 @@ public class CELL : MonoBehaviour
 	public bool hasCompletedTranslation { get { return _hasCompletedTranslation; } }
 
 	/// <summary>
-	/// Gets the audio.
-	/// </summary>
-	/// <value>The audio.</value>
-	public AudioSource audio { get { return _audio; } }
-
-	/// <summary>
 	/// Gets a value indicating whether this <see cref="CELL"/> has special.
 	/// </summary>
 	/// <value><c>true</c> if has special; otherwise, <c>false</c>.</value>
@@ -77,11 +71,6 @@ public class CELL : MonoBehaviour
 	/// All cells.
 	/// </summary>
 	public static List <CELL> allCells = new List<CELL> ();
-
-	/// <summary>
-	/// Is the music playing.
-	/// </summary>
-	public static bool isMusicPlaying = true;
 
 	#endregion
 
@@ -141,11 +130,6 @@ public class CELL : MonoBehaviour
 	private List <CELL_ENTITY> _pointsOfInterest;
 
 	/// <summary>
-	/// The attached audio source.
-	/// </summary>
-	private AudioSource _audio;
-
-	/// <summary>
 	/// Does the cell have the special npc.
 	/// </summary>
 	private bool _hasSpecial = false;
@@ -159,7 +143,6 @@ public class CELL : MonoBehaviour
 	/// </summary>
 	private void Awake ()
 	{
-		_audio = GetComponent <AudioSource> ();
 		allCells.Add ( this );
 	}
 
@@ -170,32 +153,6 @@ public class CELL : MonoBehaviour
 	{
 		_player = ( _player == null )? GameObject.FindGameObjectWithTag ( "Player" ).transform : _player;
 		_pointsOfInterest = new List<CELL_ENTITY> ();
-	}
-
-	/// <summary>
-	/// Raises the trigger stay event.
-	/// </summary>
-	/// <param name="_c">C.</param>
-	private void OnTriggerEnter ( Collider _c )
-	{
-		if ( _c.name.Equals ( "JOE" ) ) 
-		{
-			_hasSpecial = true;
-			_audio.Play ();
-		}
-	}
-
-	/// <summary>
-	/// Raises the trigger exit event.
-	/// </summary>
-	/// <param name="_c">C.</param>
-	private void OnTriggerExit ( Collider _c )
-	{
-		if ( _c.name.Equals ( "JOE" ) ) 
-		{
-			_hasSpecial = false;
-			_audio.Stop ();
-		}
 	}
 
 	/// <summary>
@@ -236,6 +193,20 @@ public class CELL : MonoBehaviour
 	}
 
 	/// <summary>
+	/// Raises the trigger enter event.
+	/// </summary>
+	/// <param name="_c">C.</param>
+	private void OnTriggerEnter ( Collider _c )
+	{
+		//	Become the parent of the special npc
+		if ( _c.name.Equals ( "JOE" ) )
+		{
+			_c.transform.parent = transform;
+			_c.GetComponent <NPC> ().Change_Parent ();
+		}
+	}
+
+	/// <summary>
 	/// Translate the cell in the specified _direction.
 	/// </summary>
 	/// <param name="_direction">Direction.</param>
@@ -265,6 +236,10 @@ public class CELL : MonoBehaviour
 
 		//	Show translation complete
 		_hasCompletedTranslation = true;
+		if ( _cellUpdates == 8 )
+		{
+			CELL_STEREO.instance.Translate ( _modifiedDirection );
+		}
 
 		//	Return null
 		yield return null;

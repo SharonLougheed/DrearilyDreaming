@@ -46,18 +46,37 @@ public class CELL : MonoBehaviour
 	public List <CELL_ENTITY> pointsOfInterest { get { return _pointsOfInterest; } }
 
 	/// <summary>
+	/// Gets a random point of interest.
+	/// </summary>
+	/// <value>The random point of interest.</value>
+	public CELL_ENTITY randomPointOfInterest { get { return _pointsOfInterest [ Random.Range ( 0, _pointsOfInterest.Count ) ]; } }
+
+	/// <summary>
 	/// Gets a value indicating whether this <see cref="CELL"/> has completed translation.
 	/// </summary>
 	/// <value><c>true</c> if has completed translation; otherwise, <c>false</c>.</value>
 	public bool hasCompletedTranslation { get { return _hasCompletedTranslation; } }
 
+	/// <summary>
+	/// Gets a value indicating whether this <see cref="CELL"/> has special.
+	/// </summary>
+	/// <value><c>true</c> if has special; otherwise, <c>false</c>.</value>
+	public bool hasSpecial { get { return _hasSpecial; } }
+
 	#endregion
 
 	#region --------------------	Public Fields
 
+	/// <summary>
+	/// All cells.
+	/// </summary>
+	public static List <CELL> allCells = new List<CELL> ();
+
 	#endregion
 
 	#region --------------------	Public Methods
+
+
 
 	#endregion
 
@@ -110,9 +129,22 @@ public class CELL : MonoBehaviour
 	/// </summary>
 	private List <CELL_ENTITY> _pointsOfInterest;
 
+	/// <summary>
+	/// Does the cell have the special npc.
+	/// </summary>
+	private bool _hasSpecial = false;
+
 	#endregion
 
 	#region --------------------	Private Methods
+
+	/// <summary>
+	/// Awake this instance.
+	/// </summary>
+	private void Awake ()
+	{
+		allCells.Add ( this );
+	}
 
 	/// <summary>
 	/// Start this instance.
@@ -161,6 +193,20 @@ public class CELL : MonoBehaviour
 	}
 
 	/// <summary>
+	/// Raises the trigger enter event.
+	/// </summary>
+	/// <param name="_c">C.</param>
+	private void OnTriggerEnter ( Collider _c )
+	{
+		//	Become the parent of the special npc
+		if ( _c.name.Equals ( "JOE" ) )
+		{
+			_c.transform.parent = transform;
+			_c.GetComponent <NPC> ().Change_Parent ();
+		}
+	}
+
+	/// <summary>
 	/// Translate the cell in the specified _direction.
 	/// </summary>
 	/// <param name="_direction">Direction.</param>
@@ -190,6 +236,10 @@ public class CELL : MonoBehaviour
 
 		//	Show translation complete
 		_hasCompletedTranslation = true;
+		if ( _cellUpdates == 8 )
+		{
+			CELL_STEREO.instance.Translate ( _modifiedDirection );
+		}
 
 		//	Return null
 		yield return null;

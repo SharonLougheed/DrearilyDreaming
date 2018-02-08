@@ -88,6 +88,39 @@ public class CELL_ENTITY : MonoBehaviour
 
 	#endregion
 
+	#region --------------------	Protected Methods
+
+	/// <summary>
+	/// Recollects the parent information.
+	/// </summary>
+	protected void Recollect_Parent_Information ()
+	{
+		if ( _parentEntity != null )
+		{
+			_parentEntity.On_Cell_Entity_Generate -= Generate;
+		}
+		else
+		{
+			_parentCell.On_Cell_Generate -= Generate;
+		}
+
+		//	Gather potential sub-entity information and existing cell information
+		_parentEntity = transform.parent.GetComponentInParent <CELL_ENTITY> ();
+		_parentCell = transform.parent.GetComponentInParent <CELL> ();
+		if ( _parentEntity != null )
+		{
+			//	If the entity is a sub-entity, register with the parent entity
+			_parentEntity.On_Cell_Entity_Generate += Generate;
+		}
+		else
+		{
+			//	If the entity is not a sub-entity, register with the cell
+			_parentCell.On_Cell_Generate += Generate;
+		}
+	}
+
+	#endregion
+
 	#region --------------------	Private Fields
 
 	/// <summary>

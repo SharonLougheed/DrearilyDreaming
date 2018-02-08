@@ -12,12 +12,16 @@ public class PlayerNotoriety  {
     }
     public static void IncreasePlayerNotoriety()
     {
-        playerNotoriety++;
+		playerNotoriety = Mathf.Clamp ( playerNotoriety + 1, -5, 5 );
         Debug.Log("Notoriety at: " + playerNotoriety);
     }
     public static void DecreasePlayerNotoriety()
-    {
-        playerNotoriety--;
+	{
+		playerNotoriety = Mathf.Clamp ( playerNotoriety - 1, -5, 5 );
         Debug.Log("Notoriety at: " + playerNotoriety);
     }
+	public static void ResetPlayerNoteriety()
+	{
+		playerNotoriety = 0;
+	}
 }
