@@ -26,32 +26,40 @@ public class ActiveDialogueTrigger : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        Ray ray = Camera.main.ScreenPointToRay(retical.transform.position);
-        RaycastHit hit;
-
-        //Debug.DrawRay(gameObject.transform.position,Vector3.forward,Color.blue);
-        if(Physics.Raycast(ray,out hit, talkingRange))
+        if (isInteracting == false)
         {
-            Debug.DrawLine(ray.origin, hit.point);
-            if (hit.collider.CompareTag("NPC"))
-            {
+            Ray ray = Camera.main.ScreenPointToRay(retical.transform.position);
+            RaycastHit hit;
 
-                talkText.SetActive(true);
-                Debug.Log("ray is hitting NPC");
-                if (Input.GetKeyDown(KeyCode.E))
+            //Debug.DrawRay(gameObject.transform.position,Vector3.forward,Color.blue);
+            if (Physics.Raycast(ray, out hit, talkingRange))
+            {
+                Debug.DrawLine(ray.origin, hit.point, Color.cyan);
+                if (hit.collider.CompareTag("NPC"))
                 {
-                    StartCoroutine(InitiateDialogue());
+
+                    talkText.SetActive(true);
+                    Debug.Log("ray is hitting NPC");
+                    if (Input.GetKeyDown(KeyCode.E))
+                    {
+                        StartCoroutine(InitiateDialogue());
+                    }
                 }
             }
-        }
-        else
-        {
-            talkText.SetActive(false);
-        }
-	}
+            else
+            {
+                talkText.SetActive(false);
+            }
+        }      
+    }
+    private void FireRayCast()
+    {
+        
+    }
     private IEnumerator InitiateDialogue() {
         isInteracting = true;
         Debug.Log("BeginDialogue() is being called");
+        talkText.SetActive(false);
         playerDialoguePanel.SetActive(true);
         npcDialoguePanel.SetActive(true);
         dialogueManager.StartDialogue();
@@ -64,6 +72,7 @@ public class ActiveDialogueTrigger : MonoBehaviour {
     {
         yield return new WaitForSeconds(3f);
         //dialogueManager.UnFreezeScene();
+        isInteracting = false;
         playerDialoguePanel.SetActive(false);
         npcDialoguePanel.SetActive(false);
     }
