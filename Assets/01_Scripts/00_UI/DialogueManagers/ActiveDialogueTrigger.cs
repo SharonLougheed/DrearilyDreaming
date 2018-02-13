@@ -32,7 +32,7 @@ public class ActiveDialogueTrigger : MonoBehaviour {
             RaycastHit hit;
 
             //Debug.DrawRay(gameObject.transform.position,Vector3.forward,Color.blue);
-            if (Physics.Raycast(ray, out hit, talkingRange))
+            if (Physics.Raycast(ray, out hit, talkingRange))//,2,QueryTriggerInteraction.UseGlobal))
             {
                 Debug.DrawLine(ray.origin, hit.point, Color.cyan);
                 if (hit.collider.CompareTag("NPC"))
@@ -50,7 +50,7 @@ public class ActiveDialogueTrigger : MonoBehaviour {
             {
                 talkText.SetActive(false);
             }
-        }      
+        }
     }
     private void FireRayCast()
     {
