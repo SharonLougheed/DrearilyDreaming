@@ -93,14 +93,17 @@ public class DialogueTable : MonoBehaviour{
                         case "good":
                             temp = splitLine[2];    //add index 2 to list
                             greetingsGood.Add(temp);
+                            //Debug.Log(temp + " (Was added)");
                             break;
                         case "neutral":
                             temp = splitLine[2];
                             greetingsNeutral.Add(temp);
+                            //Debug.Log(temp + " (Was added)");
                             break;
                         case "bad":
                             temp = splitLine[2];
                             greetingsBad.Add(temp);
+                            //Debug.Log(temp + " (Was added)");
                             break;
                         default:
                             Debug.Log("Loading to data structure failed!" + convoLevel +" " + morality + " " + splitLine[2] + " *BUGGED*");
@@ -114,14 +117,17 @@ public class DialogueTable : MonoBehaviour{
                         case "good":
                             temp = splitLine[2];
                             choicesGood.Add(temp);
+                            //Debug.Log(temp + " (Was added)");
                             break;
                         case "neutral":
                             temp = splitLine[2];
                             choicesNeutral.Add(temp);
+                            //Debug.Log(temp + " (Was added)");
                             break;
                         case "bad":
                             temp = splitLine[2];
                             choicesBad.Add(temp);
+                            //Debug.Log(temp + " (Was added)");
                             break;
                         default:
                             Debug.Log("Loading to data structure failed! *BUGGED*");
@@ -135,17 +141,20 @@ public class DialogueTable : MonoBehaviour{
                         case "good":
                             temp = splitLine[2];
                             responsesGood.Add(temp);
+                            //Debug.Log(temp + " (Was added)");
                             break;
                         case "neutral":
                             temp = splitLine[2];
                             responsesNeutral.Add(temp);
+                            //Debug.Log(temp + " (Was added)");
                             break;
                         case "bad":
                             temp = splitLine[2];
                             responsesBad.Add(temp);
+                            //Debug.Log(temp + " (Was added)");
                             break;
                         default:
-                            Debug.Log("Loading to data structure failed! *BUGGED*");
+                            //Debug.Log("Loading to data structure failed! *BUGGED*");
                             return false;
                     }
                     break;
@@ -162,20 +171,76 @@ public class DialogueTable : MonoBehaviour{
 
         if (playerNotoriety >= 5)
         {
-            int randomIndex = Random.Range(0, goodPassive.Count - 1);
+            int randomIndex = Random.Range(0, goodPassive.Count);
             temp = goodPassive[randomIndex];
             return temp;
         }
         else if (playerNotoriety <= -5)
         {
-            int randomIndex = Random.Range(0, badPassive.Count - 1);
+            int randomIndex = Random.Range(0, badPassive.Count);
             temp = badPassive[randomIndex];
             return temp;
         }
         else if(playerNotoriety > -5 && playerNotoriety < 5)
         {
-            int randomIndex = Random.Range(0, neutralPassive.Count - 1);
+            int randomIndex = Random.Range(0, neutralPassive.Count);
             temp = neutralPassive[randomIndex];
+            return temp;
+        }
+        else
+        {
+            temp = "*DEBUG ME!!*";
+            return temp;
+        }
+    }
+    public static string PickRandomGreeting() {
+        int playerNotoriety = PlayerNotoriety.GetPlayerNotoriety();
+        string temp;
+
+        if (playerNotoriety >= 5)
+        {
+            int randomIndex = Random.Range(0, greetingsGood.Count-1);
+            temp = greetingsGood[randomIndex];
+            return temp;
+        }
+        else if (playerNotoriety <= -5)
+        {
+            int randomIndex = Random.Range(0, greetingsBad.Count-1);
+            temp = greetingsBad[randomIndex];
+            return temp;
+        }
+        else if (playerNotoriety > -5 && playerNotoriety < 5)
+        {
+            int randomIndex = Random.Range(0, greetingsNeutral.Count-1);
+            temp = greetingsNeutral[randomIndex];
+            return temp;
+        }
+        else
+        {
+            temp = "*DEBUG ME!!*";
+            return temp;
+        }
+    }
+    public static string PickRandomResponse() {
+        int playerNotoriety = PlayerNotoriety.GetPlayerNotoriety();
+        string temp;
+
+        if (playerNotoriety >= 5)
+        {
+            int randomIndex = Random.Range(0, responsesGood.Count);
+            temp = responsesGood[randomIndex];
+            return temp;
+        }
+        else if (playerNotoriety <= -5)
+        {
+            int randomIndex = Random.Range(0, responsesBad.Count);
+            temp = responsesBad[randomIndex];
+            return temp;
+        }
+        else if (playerNotoriety > -5 && playerNotoriety < 5)
+        {
+            int randomIndex = Random.Range(0, responsesNeutral.Count);
+            temp = responsesNeutral[randomIndex];
             return temp;
         }
         else

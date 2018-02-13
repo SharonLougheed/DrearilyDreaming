@@ -10,6 +10,7 @@ TagManager:
   - Ground
   - UI_Interaction_Prompt
   - Point_Of_Interest
+  - Retical
   layers:
   - Default
   - TransparentFX

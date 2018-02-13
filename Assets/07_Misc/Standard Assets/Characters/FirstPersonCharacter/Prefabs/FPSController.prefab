@@ -27,6 +27,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 400002}
+  - component: {fileID: 114227584697618506}
   - component: {fileID: 2000000}
   - component: {fileID: 8100000}
   - component: {fileID: 12474086}
@@ -44,7 +45,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.5, z: 0}
+  m_LocalPosition: {x: 0, y: 0.5, z: 15.21}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 400002}
@@ -349,10 +350,10 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4340666573143100}
+  - component: {fileID: 114262643403441652}
   - component: {fileID: 33799593573083864}
   - component: {fileID: 136981236706580056}
   - component: {fileID: 23025280589676658}
-  - component: {fileID: 114262643403441652}
   m_Layer: 0
   m_Name: Capsule
   m_TagString: Player
@@ -412,6 +413,22 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1859628651779242}
   m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &114227584697618506
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100002}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 77ac271a330461d40988d8abdd3199a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialogueManager: {fileID: 0}
+  talkText: {fileID: 0}
+  playerDialoguePanel: {fileID: 0}
+  npcDialoguePanel: {fileID: 0}
+  talkingRange: 3
 --- !u!114 &114262643403441652
 MonoBehaviour:
   m_ObjectHideFlags: 1
