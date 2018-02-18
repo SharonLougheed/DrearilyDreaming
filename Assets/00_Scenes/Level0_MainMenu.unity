@@ -165,7 +165,7 @@ Prefab:
     - target: {fileID: 224727817850501236, guid: de6bf585ecc342044a3140ae1140a833,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: -87.47826
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224815190030398686, guid: de6bf585ecc342044a3140ae1140a833,
         type: 2}
@@ -185,7 +185,27 @@ Prefab:
     - target: {fileID: 224815190030398686, guid: de6bf585ecc342044a3140ae1140a833,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: -182.43477
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 82233028976218640, guid: de6bf585ecc342044a3140ae1140a833,
+        type: 2}
+      propertyPath: spreadCustomCurve.m_RotationOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 82233028976218640, guid: de6bf585ecc342044a3140ae1140a833,
+        type: 2}
+      propertyPath: m_Volume
+      value: 0.354
+      objectReference: {fileID: 0}
+    - target: {fileID: 82922338736578554, guid: de6bf585ecc342044a3140ae1140a833,
+        type: 2}
+      propertyPath: spreadCustomCurve.m_RotationOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 82922338736578554, guid: de6bf585ecc342044a3140ae1140a833,
+        type: 2}
+      propertyPath: m_Volume
+      value: 0.315
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: de6bf585ecc342044a3140ae1140a833, type: 2}
