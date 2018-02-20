@@ -427,11 +427,11 @@ public class INTERACTABLE : MonoBehaviour
 		//	Perform the interaction
 		CELL_STEREO.instance.ToggleMute ();
 
-		//	**************************
-		//	Animate!
-		//	**************************
-
-        yield return new WaitForSeconds ( 1 );
+        //	**************************
+        //	Animate!
+        //	**************************
+        _audioSource.Play();
+        yield return new WaitForSeconds (_audioSource.clip.length);
 		_isBeingInteractedWith = false;
 	}
 

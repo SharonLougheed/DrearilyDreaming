@@ -23,6 +23,11 @@ public class CELL_STEREO : MonoBehaviour
 	/// </summary>
 	public NPC target;
 
+    ///<summary>
+    /// Array of clips to randomly choose from
+    /// </summary>
+    public AudioClip[] backgroundPartyMusicClips;
+
 	#endregion
 
 	#region --------------------	Public Methods
@@ -32,22 +37,39 @@ public class CELL_STEREO : MonoBehaviour
 	/// </summary>
 	public void ToggleMute ()
 	{
-		_audio.volume = ( _audio.volume > 0 ) ? 0 : 1.0f;
-		if ( _audio.volume > 0 )
-		{
-			PlayerNotoriety.IncreasePlayerNotoriety ();
-		}
-		else
-		{
-			PlayerNotoriety.DecreasePlayerNotoriety ();
-		}
-	}
+        //_audio.volume = ( _audio.volume > 0 ) ? 0 : 1.0f;
+        if (_audio.isPlaying == true)
+        {
+            _audio.Stop();
+            PlayerNotoriety.DecreasePlayerNotoriety();
+        }
+        else
+        {
+            int i = Random.Range(0, 9);
+            i = (i > 4) ? 1 : 0;
+            //Debug.Log("Random Index of Clips is: " + i);
+            _audio.clip = backgroundPartyMusicClips[i];
+            _audio.Play();
+            PlayerNotoriety.IncreasePlayerNotoriety();
+        }
+        //if (_audio.volume > 0)
+        //{
+        //    int i = Random.Range(0, 1);
+        //    _audio.clip = backgroundMusicClips[i];
+        //    _audio.Play();
+        //    PlayerNotoriety.IncreasePlayerNotoriety();
+        //}
+        //else
+        //{
+        //    PlayerNotoriety.DecreasePlayerNotoriety();
+        //}
+    }
 
-	/// <summary>
-	/// Translate by the specified _direction.
-	/// </summary>
-	/// <param name="_direction">Direction.</param>
-	public void Translate ( Vector3 _direction )
+    /// <summary>
+    /// Translate by the specified _direction.
+    /// </summary>
+    /// <param name="_direction">Direction.</param>
+    public void Translate ( Vector3 _direction )
 	{
 		transform.position += _direction;
 	}
@@ -86,8 +108,14 @@ public class CELL_STEREO : MonoBehaviour
 		}
 	}
 
-	// Update is called once per frame
-	private void LateUpdate () 
+    private void Start()
+    {
+        _audio.clip = backgroundPartyMusicClips[0];
+        _audio.loop = true;
+        _audio.Play();
+    }
+    // Update is called once per frame
+    private void LateUpdate () 
 	{
 //		if ( ( target.transform.position - transform.position ).magnitude >= 50.0f )
 //		{
