@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
+  m_IndirectSpecularColor: {r: 0.1498394, g: 0.15962353, b: 0.22666487, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -2382,13 +2382,18 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!81 &936377757
-AudioListener:
+--- !u!114 &936377757
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 936377756}
   m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e0e4b892685c7f42ad4fd0865d68685, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cam: {fileID: 936377760}
 --- !u!92 &936377758
 Behaviour:
   m_ObjectHideFlags: 0
@@ -2411,15 +2416,15 @@ Camera:
   m_GameObject: {fileID: 936377756}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_ClearFlags: 2
+  m_BackGroundColor: {r: 0, g: 0, b: 0, a: 0}
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.3
+  near clip plane: 2.04
   far clip plane: 1000
   field of view: 60
   orthographic: 0
@@ -2445,13 +2450,13 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 936377756}
-  m_LocalRotation: {x: 0.41275623, y: 0.62776095, z: -0.6017526, w: -0.2710026}
-  m_LocalPosition: {x: -0.43, y: -0.37, z: 0.51}
-  m_LocalScale: {x: 0.94999766, y: 0.94999874, z: 0.94999784}
+  m_LocalRotation: {x: 0.46774808, y: 0.5298909, z: -0.5301972, w: -0.46831435}
+  m_LocalPosition: {x: 1.46, y: -0.09, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1776962958}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 32.127003, y: 261.245, z: 94.398}
+  m_LocalEulerAnglesHint: {x: 7.1110005, y: 270.049, z: 89.98801}
 --- !u!1001 &998624895
 Prefab:
   m_ObjectHideFlags: 0
@@ -2724,6 +2729,22 @@ Prefab:
         type: 2}
       propertyPath: m_ReceiveShadows
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4876833757459538, guid: d0aef36e382e2d7448deb90c4f6416d0, type: 2}
+      propertyPath: m_LocalScale.y
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4876833757459538, guid: d0aef36e382e2d7448deb90c4f6416d0, type: 2}
+      propertyPath: m_LocalScale.x
+      value: 2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4876833757459538, guid: d0aef36e382e2d7448deb90c4f6416d0, type: 2}
+      propertyPath: m_LocalScale.z
+      value: 2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4876833757459538, guid: d0aef36e382e2d7448deb90c4f6416d0, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 1.25
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d0aef36e382e2d7448deb90c4f6416d0, type: 2}
@@ -3274,21 +3295,6 @@ Prefab:
 Transform:
   m_PrefabParentObject: {fileID: 400004, guid: afe8332af3f0ca24bb19b47843e5df4f, type: 3}
   m_PrefabInternal: {fileID: 1203876782}
---- !u!1 &1226128230 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 100002, guid: 8ba6810caa32a264a9763be0330a664b, type: 3}
-  m_PrefabInternal: {fileID: 1776962957}
---- !u!114 &1226128232
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1226128230}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7362a0ff9640ea14da263e94f7757523, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1285572537
 GameObject:
   m_ObjectHideFlags: 0
@@ -3656,7 +3662,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: 1837738895
+  randomSeed: 139438449
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -7527,6 +7533,16 @@ Prefab:
     - target: {fileID: 1747178823663844, guid: 90d86ca23a191b344adc47563a5aa6a9, type: 2}
       propertyPath: m_StaticEditorFlags
       value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 82501081371829784, guid: 90d86ca23a191b344adc47563a5aa6a9,
+        type: 2}
+      propertyPath: m_Volume
+      value: 0.178
+      objectReference: {fileID: 0}
+    - target: {fileID: 82855650556026680, guid: 90d86ca23a191b344adc47563a5aa6a9,
+        type: 2}
+      propertyPath: m_Volume
+      value: 0.174
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 90d86ca23a191b344adc47563a5aa6a9, type: 2}
