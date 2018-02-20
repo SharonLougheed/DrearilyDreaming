@@ -20,7 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 224873442284717502}
   - component: {fileID: 114385774909053356}
-  - component: {fileID: 114470806326950218}
+  - component: {fileID: 114398951809929160}
   m_Layer: 5
   m_Name: DanceSceneLevelManager
   m_TagString: Untagged
@@ -39,7 +39,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3116fef28a9040140a871daa2f812fd4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &114470806326950218
+--- !u!114 &114398951809929160
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -47,9 +47,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1165749201109096}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 10305cc8af8093045bc0b13c91985233, type: 3}
+  m_Script: {fileID: 11500000, guid: 237de8f87e7ac3449bb91c9e471d9e49, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  frequencyOfNotorietyIncrease: 15
 --- !u!224 &224873442284717502
 RectTransform:
   m_ObjectHideFlags: 1

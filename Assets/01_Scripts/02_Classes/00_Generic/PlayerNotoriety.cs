@@ -4,21 +4,21 @@ using UnityEngine;
 
 public class PlayerNotoriety  {
 
-    private static int playerNotoriety = 0;
+    private static float playerNotoriety = 0f;
 
-    public static int GetPlayerNotoriety()
+    public static float GetPlayerNotoriety()
     {
         return playerNotoriety;
     }
     public static void IncreasePlayerNotoriety()
     {
-		playerNotoriety = Mathf.Clamp ( playerNotoriety + 1, -5, 5 );
-        Debug.Log("Notoriety at: " + playerNotoriety);
+		playerNotoriety = Mathf.Clamp ( playerNotoriety + 0.1f, -5f, 5f);
+        //Debug.Log("Notoriety at: " + playerNotoriety);
     }
     public static void DecreasePlayerNotoriety()
 	{
-		playerNotoriety = Mathf.Clamp ( playerNotoriety - 1, -5, 5 );
-        Debug.Log("Notoriety at: " + playerNotoriety);
+		playerNotoriety = Mathf.Clamp ( playerNotoriety - 0.1f, -5f, 5f);
+        //Debug.Log("Notoriety at: " + playerNotoriety);
     }
 	public static void ResetPlayerNoteriety()
 	{

@@ -26,7 +26,7 @@ public class DialogueTable : MonoBehaviour{
         //load text from file into Lists
         if (LoadPassiveTextAssets() && LoadActiveTextAssets())
         {            
-            Debug.Log("Asset Loading Complete");
+            //Debug.Log("Asset Loading Complete");
         }
     }
     private bool LoadPassiveTextAssets() {
@@ -166,22 +166,22 @@ public class DialogueTable : MonoBehaviour{
         return true;
     }
     public static string PickRandomPassive() {
-        int playerNotoriety = PlayerNotoriety.GetPlayerNotoriety();
+        float playerNotoriety = PlayerNotoriety.GetPlayerNotoriety();
         string temp;
 
-        if (playerNotoriety >= 5)
+        if (playerNotoriety >= 5f)
         {
             int randomIndex = Random.Range(0, goodPassive.Count);
             temp = goodPassive[randomIndex];
             return temp;
         }
-        else if (playerNotoriety <= -5)
+        else if (playerNotoriety <= -5f)
         {
             int randomIndex = Random.Range(0, badPassive.Count);
             temp = badPassive[randomIndex];
             return temp;
         }
-        else if(playerNotoriety > -5 && playerNotoriety < 5)
+        else if(playerNotoriety > -5f && playerNotoriety < 5f)
         {
             int randomIndex = Random.Range(0, neutralPassive.Count);
             temp = neutralPassive[randomIndex];
@@ -194,22 +194,22 @@ public class DialogueTable : MonoBehaviour{
         }
     }
     public static string PickRandomGreeting() {
-        int playerNotoriety = PlayerNotoriety.GetPlayerNotoriety();
+        float playerNotoriety = PlayerNotoriety.GetPlayerNotoriety();
         string temp;
 
-        if (playerNotoriety >= 5)
+        if (playerNotoriety >= 5f)
         {
             int randomIndex = Random.Range(0, greetingsGood.Count-1);
             temp = greetingsGood[randomIndex];
             return temp;
         }
-        else if (playerNotoriety <= -5)
+        else if (playerNotoriety <= -5f)
         {
             int randomIndex = Random.Range(0, greetingsBad.Count-1);
             temp = greetingsBad[randomIndex];
             return temp;
         }
-        else if (playerNotoriety > -5 && playerNotoriety < 5)
+        else if (playerNotoriety > -5f && playerNotoriety < 5f)
         {
             int randomIndex = Random.Range(0, greetingsNeutral.Count-1);
             temp = greetingsNeutral[randomIndex];
@@ -222,22 +222,22 @@ public class DialogueTable : MonoBehaviour{
         }
     }
     public static string PickRandomResponse() {
-        int playerNotoriety = PlayerNotoriety.GetPlayerNotoriety();
+        float playerNotoriety = PlayerNotoriety.GetPlayerNotoriety();
         string temp;
 
-        if (playerNotoriety >= 5)
+        if (playerNotoriety >= 5f)
         {
             int randomIndex = Random.Range(0, responsesGood.Count);
             temp = responsesGood[randomIndex];
             return temp;
         }
-        else if (playerNotoriety <= -5)
+        else if (playerNotoriety <= -5f)
         {
             int randomIndex = Random.Range(0, responsesBad.Count);
             temp = responsesBad[randomIndex];
             return temp;
         }
-        else if (playerNotoriety > -5 && playerNotoriety < 5)
+        else if (playerNotoriety > -5f && playerNotoriety < 5f)
         {
             int randomIndex = Random.Range(0, responsesNeutral.Count);
             temp = responsesNeutral[randomIndex];
