@@ -3,6 +3,6 @@
 /// <summary>
 /// The type of point of interest for a table in the party scene.
 /// </summary>
-public enum POI_TYPE { EMPTY, FOOD, PUNCH, LIGHTS, MUSIC };
+public enum POI_TYPE { EMPTY, FOOD, PUNCH, LIGHTS, MUSIC, DOOR };
 
 #endregion

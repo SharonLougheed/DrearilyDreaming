@@ -13,7 +13,7 @@ public class INTERACTABLE : MonoBehaviour
 	/// <summary>
 	/// The interactable types
 	/// </summary>
-	public enum TYPE { NONE, BED, PARTY_NPC, PARTY_SPECIAL, PARTY_BALLOON, PARTY_STEREO, PARTY_PUNCH, PARTY_FOOD };
+	public enum TYPE { NONE, BED, PARTY_NPC, PARTY_SPECIAL, PARTY_BALLOON, PARTY_STEREO, PARTY_PUNCH, PARTY_FOOD, PARTY_DOOR };
 
 	#endregion
 
@@ -52,6 +52,11 @@ public class INTERACTABLE : MonoBehaviour
 	/// The interaction key.
 	/// </summary>
 	public KeyCode interactionKey = KeyCode.E;
+
+	/// <summary>
+	/// Is the player required to look at the item to interact
+	/// </summary>
+	public bool requireLookAt = true;
 
 	[ Tooltip ( "Determines if the object may be interacted with multiple times" ) ]
 	/// <summary>
@@ -129,6 +134,11 @@ public class INTERACTABLE : MonoBehaviour
 	private bool _npcInteractionAttempt = false;
 
 	/// <summary>
+	/// Has the prompt been modified.
+	/// </summary>
+	private bool _promptModified = false;
+
+	/// <summary>
 	/// The various interactions.
 	/// </summary>
 	private Dictionary <TYPE, string> _interaction = new Dictionary < TYPE, string> {
@@ -139,7 +149,8 @@ public class INTERACTABLE : MonoBehaviour
 		{ TYPE.PARTY_BALLOON, "Balloon_Interaction" },
 		{ TYPE.PARTY_STEREO, "Stereo_Interaction" },
 		{ TYPE.PARTY_PUNCH, "Punch_Interaction" },
-		{ TYPE.PARTY_FOOD, "Food_Interaction" }
+		{ TYPE.PARTY_FOOD, "Food_Interaction" },
+		{ TYPE.PARTY_DOOR, "Door_Interaction" }
 	};
 
 	#endregion
@@ -179,72 +190,152 @@ public class INTERACTABLE : MonoBehaviour
 				//	If the object raising the trigger is not an npc, enable player interaction
 				if ( !_c.tag.Contains ( "NPC" ) )
 				{
-					//	Display the prompt
-					if ( usesDefaultPromptObject )
+					Vector3 _cForward = Camera.main.transform.position + ( Camera.main.transform.forward.normalized * 2.0f );
+					Debug.DrawLine ( transform.position, _cForward, Color.green );
+					if ( requireLookAt )
 					{
-						//	Enable the default prompt if it is available
-						if ( _defaultInteractionPrompt != null )
+						if ( ( _cForward - transform.position ).magnitude <= 1.0f )
 						{
-							//	Add the prompt text to the prompt object
-							if ( _defaultInteractionPrompt.text.Length > 0 )
+							//	Display the prompt
+							if ( usesDefaultPromptObject )
 							{
-								bool _isPromptAdded = new List <string> ( _defaultInteractionPrompt.text.Split ( new string[] { "\n" }, System.StringSplitOptions.RemoveEmptyEntries ) ).Contains ( interactionPrompt );
-								_defaultInteractionPrompt.text += ( !_isPromptAdded ) ? interactionPrompt + "\n" : "";
+								//	Enable the default prompt if it is available
+								if ( _defaultInteractionPrompt != null && !_promptModified )
+								{
+									_defaultInteractionPrompt.text += interactionPrompt + "\n";
+									_promptModified = true;
+
+									//	Show the prompt object
+									_defaultInteractionPrompt.gameObject.SetActive ( true );
+								}
 							}
 							else
 							{
-								_defaultInteractionPrompt.text += interactionPrompt + "\n";
+								//	Enable the custom prompt if it is supplied
+								if ( customPrompt != null && !_promptModified )
+								{
+									customPrompt.text += interactionPrompt + "\n";
+									_promptModified = true;
+
+									//	Show the prompt object
+									customPrompt.gameObject.SetActive ( true );
+								}
 							}
 
-							//	Show the prompt object
-							_defaultInteractionPrompt.gameObject.SetActive ( true );
+							//	Check to see if the input is pressed & the object is not currently being interacted with
+							if ( Input.GetKeyDown ( interactionKey ) && !_isBeingInteractedWith )
+							{
+								//	If the object can be interacted with
+								bool _i = false;
+								_i = ( isSingleInteraction ) ? !_hasBeenInteractedWith : true;
+								if ( _i )
+								{
+									//	Interaction Startup
+									if ( On_Interaction_Begin != null )
+									{
+										On_Interaction_Begin ( interactionType );
+									}
+									_isBeingInteractedWith = true;
+
+									//	Perform the interaction
+									StartCoroutine ( _interaction [ interactionType ] );
+
+									//	Interaction Completion
+									_hasBeenInteractedWith = true;
+									if ( On_Interaction_End != null )
+									{
+										On_Interaction_End ( interactionType );
+									} 
+								}
+							}
+						}
+						else
+						{
+							if ( _promptModified )
+							{
+								_promptModified = false;
+								//	Hide the prompt
+								if ( usesDefaultPromptObject )
+								{
+									//	Disable the default prompt if it is available
+									if ( _defaultInteractionPrompt != null )
+									{
+										//	Remove the interaction prompt from the prompt text
+										List <string> _modifiedPrompt = new List <string> ( _defaultInteractionPrompt.text.Split ( new string[] { "\n" }, 
+											                                System.StringSplitOptions.RemoveEmptyEntries ) );
+										_modifiedPrompt.Remove ( interactionPrompt );
+										_defaultInteractionPrompt.text = "";
+										_modifiedPrompt.ForEach ( p => _defaultInteractionPrompt.text += p + "\n" );
+									}
+								}
+								else
+								{
+									//	Disable the custom prompt if it is supplied
+									if ( customPrompt != null )
+									{
+										//	Remove the interaction prompt from the prompt text
+										List <string> _modifiedPrompt = new List <string> ( customPrompt.text.Split ( new string[] { "\n" }, 
+											                                System.StringSplitOptions.RemoveEmptyEntries ) );
+										_modifiedPrompt.Remove ( interactionPrompt );
+										customPrompt.text = "";
+										_modifiedPrompt.ForEach ( p => customPrompt.text += p + "\n" );
+									}
+								}
+							}
 						}
 					}
 					else
-					{
-						//	Enable the custom prompt if it is supplied
-						if ( customPrompt != null )
+					{//	Display the prompt
+						if ( usesDefaultPromptObject )
 						{
-							//	Add the prompt text to the prompt object
-							if ( customPrompt.text.Length > 0 )
+							//	Enable the default prompt if it is available
+							if ( _defaultInteractionPrompt != null && !_promptModified )
 							{
-								bool _isPromptAdded = new List <string> ( customPrompt.text.Split ( new string[] { "\n" }, System.StringSplitOptions.RemoveEmptyEntries ) ).Contains ( interactionPrompt );
-								customPrompt.text += ( !_isPromptAdded ) ? interactionPrompt + "\n" : "";
+								_defaultInteractionPrompt.text += interactionPrompt + "\n";
+								_promptModified = true;
+
+								//	Show the prompt object
+								_defaultInteractionPrompt.gameObject.SetActive ( true );
 							}
-							else
+						}
+						else
+						{
+							//	Enable the custom prompt if it is supplied
+							if ( customPrompt != null && !_promptModified )
 							{
 								customPrompt.text += interactionPrompt + "\n";
-							}
+								_promptModified = true;
 
-							//	Show the prompt object
-							customPrompt.gameObject.SetActive ( true );
+								//	Show the prompt object
+								customPrompt.gameObject.SetActive ( true );
+							}
 						}
-					}
 
-					//	Check to see if the input is pressed & the object is not currently being interacted with
-					if ( Input.GetKeyDown ( interactionKey ) && !_isBeingInteractedWith )
-					{
-						//	If the object can be interacted with
-						bool _i = false;
-						_i = ( isSingleInteraction ) ? !_hasBeenInteractedWith : true;
-						if ( _i )
+						//	Check to see if the input is pressed & the object is not currently being interacted with
+						if ( Input.GetKeyDown ( interactionKey ) && !_isBeingInteractedWith )
 						{
-							//	Interaction Startup
-							if ( On_Interaction_Begin != null )
+							//	If the object can be interacted with
+							bool _i = false;
+							_i = ( isSingleInteraction ) ? !_hasBeenInteractedWith : true;
+							if ( _i )
 							{
-								On_Interaction_Begin ( interactionType );
+								//	Interaction Startup
+								if ( On_Interaction_Begin != null )
+								{
+									On_Interaction_Begin ( interactionType );
+								}
+								_isBeingInteractedWith = true;
+
+								//	Perform the interaction
+								StartCoroutine ( _interaction [ interactionType ] );
+
+								//	Interaction Completion
+								_hasBeenInteractedWith = true;
+								if ( On_Interaction_End != null )
+								{
+									On_Interaction_End ( interactionType );
+								} 
 							}
-							_isBeingInteractedWith = true;
-
-							//	Perform the interaction
-							StartCoroutine ( _interaction [ interactionType ] );
-
-							//	Interaction Completion
-							_hasBeenInteractedWith = true;
-							if ( On_Interaction_End != null )
-							{
-								On_Interaction_End ( interactionType );
-							} 
 						}
 					}
 				}
@@ -292,37 +383,41 @@ public class INTERACTABLE : MonoBehaviour
 		//	If the two objects are allowed to interact with one another.
 		if ( _c == null || interactableTags.Contains ( _c.tag ) )
 		{
-			//	Hide the prompt
-			if ( usesDefaultPromptObject )
+			if ( _promptModified )
 			{
-				//	Disable the default prompt if it is available
-				if ( _defaultInteractionPrompt != null )
+				_promptModified = false;
+				//	Hide the prompt
+				if ( usesDefaultPromptObject )
 				{
-					//	Remove the interaction prompt from the prompt text
-					List <string> _modifiedPrompt = new List <string> ( _defaultInteractionPrompt.text.Split ( new string[] { "\n" }, 
-						                                System.StringSplitOptions.RemoveEmptyEntries ) );
-					_modifiedPrompt.Remove ( interactionPrompt );
-					_defaultInteractionPrompt.text = "";
-					_modifiedPrompt.ForEach ( p => _defaultInteractionPrompt.text += p + "\n" );
+					//	Disable the default prompt if it is available
+					if ( _defaultInteractionPrompt != null )
+					{
+						//	Remove the interaction prompt from the prompt text
+						List <string> _modifiedPrompt = new List <string> ( _defaultInteractionPrompt.text.Split ( new string[] { "\n" }, 
+							System.StringSplitOptions.RemoveEmptyEntries ) );
+						_modifiedPrompt.Remove ( interactionPrompt );
+						_defaultInteractionPrompt.text = "";
+						_modifiedPrompt.ForEach ( p => _defaultInteractionPrompt.text += p + "\n" );
 
-					//	Hide the prompt object
-					_defaultInteractionPrompt.gameObject.SetActive ( false );
+						//	Hide the prompt object
+						_defaultInteractionPrompt.gameObject.SetActive ( false );
+					}
 				}
-			}
-			else
-			{
-				//	Disable the custom prompt if it is supplied
-				if ( customPrompt != null )
+				else
 				{
-					//	Remove the interaction prompt from the prompt text
-					List <string> _modifiedPrompt = new List <string> ( customPrompt.text.Split ( new string[] { "\n" }, 
-						                                System.StringSplitOptions.RemoveEmptyEntries ) );
-					_modifiedPrompt.Remove ( interactionPrompt );
-					customPrompt.text = "";
-					_modifiedPrompt.ForEach ( p => customPrompt.text += p + "\n" );
+					//	Disable the custom prompt if it is supplied
+					if ( customPrompt != null )
+					{
+						//	Remove the interaction prompt from the prompt text
+						List <string> _modifiedPrompt = new List <string> ( customPrompt.text.Split ( new string[] { "\n" }, 
+							System.StringSplitOptions.RemoveEmptyEntries ) );
+						_modifiedPrompt.Remove ( interactionPrompt );
+						customPrompt.text = "";
+						_modifiedPrompt.ForEach ( p => customPrompt.text += p + "\n" );
 
-					//	Hide the prompt object
-					customPrompt.gameObject.SetActive ( false );
+						//	Hide the prompt object
+						customPrompt.gameObject.SetActive ( false );
+					}
 				}
 			}
 		}
@@ -341,7 +436,6 @@ public class INTERACTABLE : MonoBehaviour
 		//	Animate!
 		//	**************************
 
-		Debug.Log ( "Go to bed" );
 		yield return null;
 		_isBeingInteractedWith = false;
 	}
@@ -359,7 +453,6 @@ public class INTERACTABLE : MonoBehaviour
 		//	Animate!
 		//	**************************
 
-		Debug.Log ( "Interaction with an npc" );
 		yield return null;
 		_isBeingInteractedWith = false;
 	}
@@ -372,13 +465,12 @@ public class INTERACTABLE : MonoBehaviour
 	{
 		//	Perform the interaction
 		PlayerNotoriety.ResetPlayerNoteriety ();
-		UnityEngine.SceneManagement.SceneManager.LoadScene ( 1 );
+		UnityEngine.SceneManagement.SceneManager.LoadScene ( 3 );
 
 		//	**************************
 		//	Animate!
 		//	**************************
 
-		Debug.Log ( "Interaction with the special NPC" );
 		yield return null;
 		_isBeingInteractedWith = false;
 	}
@@ -427,11 +519,11 @@ public class INTERACTABLE : MonoBehaviour
 		//	Perform the interaction
 		CELL_STEREO.instance.ToggleMute ();
 
-		//	**************************
-		//	Animate!
-		//	**************************
-
-        yield return new WaitForSeconds ( 1 );
+        //	**************************
+        //	Animate!
+        //	**************************
+        _audioSource.Play();
+        yield return new WaitForSeconds (_audioSource.clip.length);
 		_isBeingInteractedWith = false;
 	}
 
@@ -447,7 +539,6 @@ public class INTERACTABLE : MonoBehaviour
 		//	Animate!
 		//	**************************
 
-		Debug.Log ( "Drink punch" );
         //Modify notoriety field
         PlayerNotoriety.IncreasePlayerNotoriety();
 		yield return new WaitForSeconds ( 2 );
@@ -466,11 +557,29 @@ public class INTERACTABLE : MonoBehaviour
 		//	Animate!
 		//	**************************
 
-		Debug.Log ( "Eat food" );
         //Modify notoriety field
 		PlayerNotoriety.DecreasePlayerNotoriety();
 		yield return new WaitForSeconds ( 2 );
 		_isBeingInteractedWith = false;
 	}
+
+	/// <summary>
+	/// Interaction with the door to lose the game
+	/// </summary>
+	/// <returns>The interaction.</returns>
+	private IEnumerator Door_Interaction ()
+	{
+		//	Perform the interaction
+		PlayerNotoriety.ResetPlayerNoteriety ();
+		UnityEngine.SceneManagement.SceneManager.LoadScene ( 4 );
+
+		//	**************************
+		//	Animate!
+		//	**************************
+
+		yield return null;
+		_isBeingInteractedWith = false;
+	}
+
 	#endregion
 }

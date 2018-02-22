@@ -20,3 +20,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/00_Scenes/Drearily_Dreaming_Party.unity
     guid: 1a8f48359b92af14199bed6b0d347be7
+  - enabled: 1
+    path: Assets/00_Scenes/Drearily_Dreaming_Win.unity
+    guid: c1bd0105a9ae8e64381470a3bd19f738
+  - enabled: 1
+    path: Assets/00_Scenes/Drearily_Dreaming_Lose.unity
+    guid: aeff3251a9ebc8c4bb51c2d40e038a15

@@ -72,6 +72,11 @@ public class CELL : MonoBehaviour
 	/// </summary>
 	public static List <CELL> allCells = new List<CELL> ();
 
+	/// <summary>
+	/// The exit door.
+	/// </summary>
+	public GameObject exitDoor = null;
+
 	#endregion
 
 	#region --------------------	Public Methods
@@ -189,6 +194,15 @@ public class CELL : MonoBehaviour
 			{
 				_hasStartedTranslation = false;
 			}
+		}
+
+		if ( PlayerNotoriety.GetPlayerNotoriety () <= -3.0f )
+		{
+			exitDoor.SetActive ( true );
+		}
+		else
+		{
+			exitDoor.SetActive ( false );
 		}
 	}
 
