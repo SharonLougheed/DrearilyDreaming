@@ -1,0 +1,83 @@
+﻿bad_far_Ew, it’s her...
+bad_far_Who Invited her?
+bad_far_Why did she even show up?
+bad_far_Why does she have to ruin our night?
+bad_far_What a weirdo?
+bad_far_You should just leave.
+bad_far_Get out of here, no likes you.
+bad_far_Get lost!
+bad_far_Stay away!
+bad_far_I don’t think you realize you’re not supposed to be here.
+bad_far_What kind of fashion sense is that?
+bad_far_What an ugly little thing.
+bad_far_Looks like the hermit decided to join us today.
+bad_far_She needs to beat it.
+bad_far_Don’t bother me.
+bad_far_Leave me alone.
+bad_mid_Ew, it’s her...
+bad_mid_Who Invited her?
+bad_mid_Why did she even show up?
+bad_mid_Why does she have to ruin our night?
+bad_mid_What a weirdo?
+bad_mid_You should just leave.
+bad_mid_Get out of here, no likes you.
+bad_mid_Get lost!
+bad_mid_Stay away!
+bad_mid_I don’t think you realize you’re not supposed to be here.
+bad_mid_What kind of fashion sense is that?
+bad_mid_What an ugly little thing.
+bad_mid_Looks like the hermit decided to join us today.
+bad_mid_She needs to beat it.
+bad_mid_Don’t bother me.
+bad_mid_Leave me alone.
+bad_mid_She's as much of a creep as Joe.
+bad_mid_Joe and her are so alike...
+bad_near_Ew, it’s her...
+bad_near_Who Invited her?
+bad_near_Why did she even show up?
+bad_near_Why does she have to ruin our night?
+bad_near_What a weirdo?
+bad_near_You should just leave.
+bad_near_Get out of here, no likes you.
+bad_near_Get lost!
+bad_near_Stay away!
+bad_near_I don’t think you realize you’re not supposed to be here.
+bad_near_Get lost!
+bad_near_Oh, not Joe *and* her.
+bad_near_Can you and Joe both get lost?
+neutral_far_Wow!
+neutral_far_So last night…
+neutral_far_Who’s all here tonight?
+neutral_far_So, what kind of music do you like?
+neutral_far_I see you’re an intellectual as well *lol*
+neutral_far_We need more drinks.
+neutral_mid_So, what kind of music do you like?
+neutral_mid_Wow!
+neutral_mid_We need more drinks.
+neutral_mid_Oh my god, I can’t believe Joe did that.
+neutral_mid_You can hear Joe from a mile away.
+neutral_mid_So I heard Joe came here. Ew.
+neutral_near_So last night…
+neutral_near_Wow!
+neutral_near_We need more drinks.
+neutral_near_I wish Joe would leave us alone.
+neutral_near_Not a fan of Joe.
+neutral_near_Ugh. Joe is so annoying.
+good_far_Let’s get schwifty!
+good_far_This place is pretty nice actually.
+good_far_Let’s keep this going all night.
+good_far_This is pretty cool for a school party.
+good_far_Cool music in here.
+good_far_Woo! This place is awesome!
+good_mid_This place is pretty nice actually.
+good_mid_Let’s keep this going all night.
+good_mid_This is pretty cool for a school party.
+good_mid_Oh my god, I can’t believe Joe did that.
+good_mid_You can hear Joe from a mile away.
+good_mid_So I heard Joe came here. Ew.
+good_near_Let’s keep this going all night.
+good_near_This is pretty cool for a school party.
+good_near_Cool music in here.
+good_near_So did you see Joe ?
+good_near_You see Joe over there?
+good_near_Oh, Joe is here.

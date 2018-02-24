@@ -9,9 +9,15 @@ public class DialogueTable : MonoBehaviour{
                      activeTextFile;
     
     //Passive dialogue lists
-    [HideInInspector] public static List<string> badPassive = new List<string>(),
-                                                 neutralPassive = new List<string>(),
-                                                 goodPassive = new List<string>();
+    [HideInInspector] public static List<string> badNearPassive = new List<string>(),
+                                                 badMidPassive = new List<string>(),
+                                                 badFarPassive = new List<string>(),
+                                                 neutralNearPassive = new List<string>(),
+                                                 neutralMidPassive = new List<string>(),
+                                                 neutralFarPassive = new List<string>(),
+                                                 goodNearPassive = new List<string>(),
+                                                 goodMidPassive = new List<string>(),
+                                                 goodFarPassive = new List<string>();
     //Active converstation Lists
     [HideInInspector] public static List<string> greetingsGood = new List<string>(),
                                                  greetingsNeutral = new List<string>(),
@@ -22,6 +28,14 @@ public class DialogueTable : MonoBehaviour{
                                                  responsesGood = new List<string>(),
                                                  responsesNeutral = new List<string>(),
                                                  responsesBad = new List<string>();
+
+    [Tooltip("Adjusts what the NPCs pop up based on the distance to the target NPC")]
+    public float nearDistance, midDistance;        //adjusts what the NPCs pop up based on the distance to the target NPC
+    [Tooltip("Adjust what the NPCs pop up based on Player Notoriety")]
+    public float goodRange, badRange;    //adjust what the NPCs pop up based on Player Notoriety
+
+    private static float near, mid, good, bad;
+
     private void Awake() {
         //load text from file into Lists
         if (LoadPassiveTextAssets() && LoadActiveTextAssets())
@@ -29,6 +43,14 @@ public class DialogueTable : MonoBehaviour{
             //Debug.Log("Asset Loading Complete");
         }
     }
+
+    private void Start() {
+        near = nearDistance;
+        mid = midDistance;
+        good = goodRange;
+        bad = badRange;
+    }
+
     private bool LoadPassiveTextAssets() {
         //load file and store to string        
         string passiveText = passiveTextFile.text;
@@ -42,23 +64,74 @@ public class DialogueTable : MonoBehaviour{
             //split the line
             string[] splitLine = line.Split('_');
             //switch on the 0 index
-            string notoriety = splitLine[0];
-            string temp;
+            string notoriety = splitLine[0];    //morality
+            string temp,distance;
             switch(notoriety)
             {
                 case "bad":
-                    temp = splitLine[1];
-                    badPassive.Add(temp);
+                    distance = splitLine[1];        //distance to target npc
+                    switch(distance)
+                    {
+                        case "near":
+                            temp = splitLine[2];
+                            badNearPassive.Add(temp);
+                            break;
+                        case "mid":
+                            temp = splitLine[2];
+                            badMidPassive.Add(temp);
+                            break;
+                        case "far":
+                            temp = splitLine[2];
+                            badFarPassive.Add(temp);
+                            break;
+                        default:
+                            Debug.Log("Loading to data structure failed! *BUGGED*");
+                            return false;
+                    }
                     //Debug.Log("badPassive's size is: " + badPassive.Capacity.ToString());
                     break;
                 case "neutral":
-                    temp = splitLine[1];
-                    neutralPassive.Add(temp);
+                    distance = splitLine[1];
+                    switch (distance)
+                    {
+                        case "near":
+                            temp = splitLine[2];
+                            neutralNearPassive.Add(temp);
+                            break;
+                        case "mid":
+                            temp = splitLine[2];
+                            neutralMidPassive.Add(temp);
+                            break;
+                        case "far":
+                            temp = splitLine[2];
+                            neutralFarPassive.Add(temp);
+                            break;
+                        default:
+                            Debug.Log("Loading to data structure failed! *BUGGED*");
+                            return false;
+                    }           //distance to target npc
                     //Debug.Log("neutralPassive's size is: " + neutralPassive.Capacity.ToString());
                     break;
                 case "good":
-                    temp = splitLine[1];
-                    goodPassive.Add(temp);
+                    distance = splitLine[1];
+                    switch (distance)
+                    {
+                        case "near":
+                            temp = splitLine[2];
+                            goodNearPassive.Add(temp);
+                            break;
+                        case "mid":
+                            temp = splitLine[2];
+                            goodMidPassive.Add(temp);
+                            break;
+                        case "far":
+                            temp = splitLine[2];
+                            goodFarPassive.Add(temp);
+                            break;
+                        default:
+                            Debug.Log("Loading to data structure failed! *BUGGED*");
+                            return false;
+                    }           //distance to target npc
                     //Debug.Log("goodPassive's size is: " + goodPassive.Capacity.ToString());
                     break;
                 default:
@@ -167,25 +240,91 @@ public class DialogueTable : MonoBehaviour{
     }
     public static string PickRandomPassive() {
         float playerNotoriety = PlayerNotoriety.GetPlayerNotoriety();
-        string temp;
+        string temp = "*REALLY BUGGED*";
 
-        if (playerNotoriety >= 5f)
+        if (playerNotoriety >= good)      //good
         {
-            int randomIndex = Random.Range(0, goodPassive.Count);
-            temp = goodPassive[randomIndex];
-            return temp;
+            int randomIndex;
+            if(DistanceToTarget.distanceToTarget <= near)        //near
+            {
+                randomIndex = Random.Range(0, goodNearPassive.Count);
+                temp = goodNearPassive[randomIndex];
+                return temp;
+            }
+            else if(DistanceToTarget.distanceToTarget <= mid)   //mid
+            {
+                randomIndex = Random.Range(0, goodMidPassive.Count);
+                temp = goodMidPassive[randomIndex];
+                return temp;
+            }
+            else if(DistanceToTarget.distanceToTarget > mid)    //far
+            {
+                randomIndex = Random.Range(0, goodFarPassive.Count);
+                temp = goodFarPassive[randomIndex];
+                return temp;
+            }
+            else
+            {
+                Debug.Log("Why is this happening?");
+                temp = "*DEBUG ME!!*";
+                return temp;
+            }
         }
-        else if (playerNotoriety <= -5f)
+        else if (playerNotoriety <= bad)    //bad
         {
-            int randomIndex = Random.Range(0, badPassive.Count);
-            temp = badPassive[randomIndex];
-            return temp;
+            int randomIndex;
+            if (DistanceToTarget.distanceToTarget <= near)        //near
+            {
+                randomIndex = Random.Range(0,badNearPassive.Count);
+                temp = badNearPassive[randomIndex];
+                return temp;
+            }
+            else if (DistanceToTarget.distanceToTarget <= mid)   //mid
+            {
+                randomIndex = Random.Range(0, badMidPassive.Count);
+                temp = badMidPassive[randomIndex];
+                return temp;
+            }
+            else if (DistanceToTarget.distanceToTarget > mid)    //far
+            {
+                randomIndex = Random.Range(0, badFarPassive.Count);
+                temp = badFarPassive[randomIndex];
+                return temp;
+            }
+            else
+            {
+                Debug.Log("Why is this happening?");
+                temp = "*DEBUG ME!!*";
+                return temp;
+            }
         }
-        else if(playerNotoriety > -5f && playerNotoriety < 5f)
+        else if(playerNotoriety > bad && playerNotoriety < good)  //neutral
         {
-            int randomIndex = Random.Range(0, neutralPassive.Count);
-            temp = neutralPassive[randomIndex];
-            return temp;
+            int randomIndex;
+            if (DistanceToTarget.distanceToTarget <= near)        //near
+            {
+                randomIndex = Random.Range(0, goodNearPassive.Count);
+                temp = goodNearPassive[randomIndex];
+                return temp;
+            }
+            else if (DistanceToTarget.distanceToTarget <= mid)   //mid
+            {
+                randomIndex = Random.Range(0, goodMidPassive.Count);
+                temp = goodMidPassive[randomIndex];
+                return temp;
+            }
+            else if (DistanceToTarget.distanceToTarget > mid)    //far
+            {
+                randomIndex = Random.Range(0, goodFarPassive.Count);
+                temp = goodFarPassive[randomIndex];
+                return temp;
+            }
+            else
+            {
+                Debug.Log("Why is this happening?");
+                temp = "*DEBUG ME!!*";
+                return temp;
+            }
         }
         else
         {
