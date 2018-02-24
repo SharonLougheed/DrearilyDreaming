@@ -21,16 +21,23 @@ public class PassiveDialogue : MonoBehaviour {
     private void Start() {
         isTalking = false;
     }
-    private void OnTriggerEnter(Collider other)
-    {
+
+    private void OnTriggerEnter(Collider other) {
         if (other.gameObject.CompareTag("Player") && isTalking == false)
         {
             StartCoroutine(PopupDialogue());
-            isTalking = true;
+        }
+    }
+    private void OnTriggerStay(Collider other) {
+        if(other.gameObject.CompareTag("Player") && isTalking == false)
+        {
+            StartCoroutine(PopupDialogue());
         }
     }
 
+
     private IEnumerator PopupDialogue() {
+        isTalking = true;
         GameObject newDialouge = Instantiate(dialogueUIPrefab, transform.position + (Vector3.up * distanceAboveHead), Quaternion.identity) as GameObject;
 
         newDialouge.GetComponent<DialogueUIManager>().SetDialogueText(DialogueTable.PickRandomPassive());
