@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 [ RequireComponent ( typeof ( AudioSource ) ) ]
 public class CELL_STEREO : MonoBehaviour 
@@ -114,17 +115,19 @@ public class CELL_STEREO : MonoBehaviour
         _audio.loop = true;
         _audio.Play();
     }
+
     // Update is called once per frame
     private void LateUpdate () 
 	{
-//		if ( ( target.transform.position - transform.position ).magnitude >= 50.0f )
-//		{
-//			transform.position = target.position * 100.0f;
-//		}
-//		else
-//		{
+		_audio.volume += ( _audio.volume < 1.0f )? Time.deltaTime : 0 ;
+		if ( ( target.transform.position - transform.position ).magnitude >= 50.0f )
+		{
+			transform.position = target.position * 100.0f;
+		}
+		else
+		{
 			transform.position = Vector3.Slerp ( transform.position, target.position * 100.0f, Time.deltaTime * 0.1f );
-//		}
+		}
 	}
 		
 	#endregion

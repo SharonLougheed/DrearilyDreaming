@@ -194,7 +194,7 @@ public class INTERACTABLE : MonoBehaviour
 					Debug.DrawLine ( transform.position, _cForward, Color.green );
 					if ( requireLookAt )
 					{
-						if ( ( _cForward - transform.position ).magnitude <= 1.0f )
+						if ( ( _cForward - transform.position ).magnitude <= 1.5f )
 						{
 							//	Display the prompt
 							if ( usesDefaultPromptObject )
@@ -430,13 +430,22 @@ public class INTERACTABLE : MonoBehaviour
 	private IEnumerator Bed_Interaction ()
 	{
 		//	Perform the interaction
-		UnityEngine.SceneManagement.SceneManager.LoadScene ( 2 );
+		GameObject.Find ( "LoadScreen" ).GetComponent <CanvasGroup> ().alpha = 1.0f;
+		AsyncOperation _load = UnityEngine.SceneManagement.SceneManager.LoadSceneAsync ( 2, UnityEngine.SceneManagement.LoadSceneMode.Single );
 
 		//	**************************
 		//	Animate!
 		//	**************************
 
-		yield return null;
+		Image _foreground = GameObject.Find ( "LoadScreenImage" ).GetComponent <Image> ();
+		while ( !_load.isDone )
+		{
+			_foreground.color = new Color ( 1, 1, 1, 1 - ( _load.progress / 1.0f ) );
+			yield return null;
+		}
+		if ( _load.isDone )
+		{
+		}
 		_isBeingInteractedWith = false;
 	}
 

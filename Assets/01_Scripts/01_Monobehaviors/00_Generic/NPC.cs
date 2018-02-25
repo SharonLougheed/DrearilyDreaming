@@ -4,7 +4,6 @@ using UnityEngine;
 using UnityEngine.AI;
 
 [ RequireComponent ( typeof ( SphereCollider ), typeof ( NavMeshAgent ), typeof ( Animator ) ) ]
-[ RequireComponent ( typeof ( INTERACTABLE ) ) ]
 public class NPC : CELL_ENTITY
 {
 

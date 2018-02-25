@@ -6,6 +6,12 @@ using UnityEngine.SceneManagement;
 public class RESTART : MonoBehaviour 
 {
 
+	void Start ()
+	{
+		Cursor.lockState = CursorLockMode.None;
+		Cursor.visible = true;
+	}
+
 	// Update is called once per frame
 	void Update () 
 	{

@@ -25,18 +25,18 @@ public class NotorietyTimer : MonoBehaviour {
             {
                 PlayerNotoriety.IncreasePlayerNotoriety();
                 //timer = 0f;
-                Debug.Log("Notoriety is going up.");
+                //Debug.Log("Notoriety is going up.");
             }
             if(n > 0f)
             {
                 PlayerNotoriety.DecreasePlayerNotoriety();
                 //timer = 0f;
-                Debug.Log("Notoriety is going down.");
+                //Debug.Log("Notoriety is going down.");
             }
         }
         else
         {
-            Debug.Log("notoriety is 0");
+           // Debug.Log("notoriety is 0");
         }
         //timer += Time.deltaTime;
         

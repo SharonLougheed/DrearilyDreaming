@@ -14,6 +14,6 @@ public class DistanceToTarget : MonoBehaviour {
 
     private void Update() {
         distanceToTarget = Vector3.Distance(gameObject.transform.position, targetNPC.position);
-        Debug.Log("Distance to Target NPC: " + distanceToTarget);
+        //Debug.Log("Distance to Target NPC: " + distanceToTarget);
     }
 }
