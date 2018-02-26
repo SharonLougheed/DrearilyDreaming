@@ -451,7 +451,7 @@ MonoBehaviour:
     m_LineSpacing: 1
   m_Text: '<b>You Lose!</b>
 
-    <color=#888888FF>Press escape to retrurn to menu</color>'
+    <color=#888888FF>Press escape to return to menu</color>'
 --- !u!222 &1663428048
 CanvasRenderer:
   m_ObjectHideFlags: 0
