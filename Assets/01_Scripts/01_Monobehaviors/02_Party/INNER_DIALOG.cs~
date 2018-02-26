@@ -37,7 +37,7 @@ public class INNER_DIALOG : MonoBehaviour
 
 	private void Update ()
 	{
-		_blackScreen.color = ( _blackScreen.color.a > 0 && _fps.enabled )? new Color ( 0, 0, 0, ( _blackScreen.color.a - Time.deltaTime ) ) : _blackScreen.color;
+		_blackScreen.color = ( _blackScreen.color.a > 0 && _fps.enabled )? new Color ( 0, 0, 0, ( _blackScreen.color.a - ( Time.deltaTime / 3.0f ) ) ) : _blackScreen.color;
 		if ( PlayerNotoriety.GetPlayerNotoriety () <= -5f && _fps.enabled )
 		{
 			_fps.enabled = false;

@@ -163,7 +163,7 @@ public class CELL : MonoBehaviour
 	/// <summary>
 	/// Called at the end of the execution order.
 	/// </summary>
-	private void LateUpdate ()
+	private void Update ()
 	{
 		//	On the first update, generate each cell
 		if ( _firstUpdate )

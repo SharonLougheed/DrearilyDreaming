@@ -19,7 +19,8 @@ public class NPC : CELL_ENTITY
 	/// Gets the rounded cell position.
 	/// </summary>
 	/// <value>The position.</value>
-	public Vector3 position { 
+	public Vector3 position 
+	{ 
 		get {
 			return new Vector3 ( Mathf.Round ( transform.position.x / 100.0f ),
 				Mathf.Round ( transform.position.y / 100.0f ),
@@ -85,7 +86,7 @@ public class NPC : CELL_ENTITY
 		//	**************************
 
 		//	Set the navmesh agent destination & set has registered to false
-		if ( _targetPointOfInterest != null )
+		if ( _targetPointOfInterest != null ) // && _agent.isOnNavMesh == true)  //would this help?
 		{
 			_agent.SetDestination ( _targetPointOfInterest.transform.position );
 		}
@@ -111,6 +112,9 @@ public class NPC : CELL_ENTITY
 
 		//	Enable emulated position
 		_agent.updatePosition = true;
+
+		//	Wait an arbitrary amount of time
+		yield return new WaitForSeconds ( 1.0f );
 
 		//	Change Point of Interest
 		if ( _targetPointOfInterest != null )
@@ -181,13 +185,13 @@ public class NPC : CELL_ENTITY
 	{
 		if ( _isFirstUpdate )
 		{
-			_isFirstUpdate = false;
-
 			//	Register with cell translation
 			parentCell.On_Cell_Translate += delegate { StartCoroutine ( Translate () ); };
 
 			//	Start an Idle
 			StartCoroutine ( Idle () );
+
+			_isFirstUpdate = false;
 		}
 		if ( _isIdling )
 		{
@@ -200,18 +204,6 @@ public class NPC : CELL_ENTITY
 				Vector3 _lookPos = Vector3.Slerp ( transform.position + transform.forward, 
 					                   new Vector3 ( _targetPointOfInterest.focalPoint.x, transform.position.y, _targetPointOfInterest.focalPoint.z ), Time.deltaTime );
 				_agent.transform.LookAt ( _lookPos );
-			}
-		}
-		else
-		{
-			//	If the NPC has entered the point of interest zone but is still moving
-			if ( _hasRegisteredWithPointOfInterest )
-			{
-				//	If the NPC is trying to move by others or is walking slowly, have them stop instead
-				if ( _agent.velocity.magnitude < 1.5f && ! _agent.isStopped )
-				{
-					_agent.SetDestination ( transform.position );
-				}
 			}
 		}
 	}
@@ -229,7 +221,7 @@ public class NPC : CELL_ENTITY
 			CELL_ENTITY _entity = _c.GetComponent <CELL_ENTITY> ();
 
 			//	If it is the target point of interest
-			if ( _entity == _targetPointOfInterest )
+			if ( _targetPointOfInterest != null && _entity == _targetPointOfInterest )
 			{
 				//	Reset the agent destination for a more spread-out collection of NPCs
 				float _newX = ( Random.Range ( 0, 2 ) > 0 )? Random.Range ( 2.0f, 3.0f ) : Random.Range ( -3.0f, -2.0f );
@@ -253,7 +245,10 @@ public class NPC : CELL_ENTITY
 		//	If the npc has a target desitination
 		if ( _targetPointOfInterest != null )
 		{
-			yield return new WaitUntil ( () => _agent.velocity == Vector3.zero );
+			yield return new WaitUntil ( () => _agent.velocity.magnitude < 0.2f);
+
+			//	If the NPC is trying to move by others or is walking slowly, have them stop instead
+			_agent.SetDestination ( transform.position );
 
 			//	Add the npc to the point of interest's audience
 			_targetPointOfInterest.audience.Add ( this );
@@ -263,7 +258,7 @@ public class NPC : CELL_ENTITY
 		}
 
 		//	Wait for a random amount of time within bounds.  Then, change the target point of interest
-		yield return new WaitForSeconds ( Random.Range ( minimumIdleTime, maximumIdleTime ) );
+		yield return new WaitForSeconds ( Random.Range ( (_isFirstUpdate)? 0.0f : minimumIdleTime, (_isFirstUpdate)? 1.0f : maximumIdleTime ) );
 		if ( parentCell.pointsOfInterest.Count > 0 )
 		{
 			Change_Point_Of_Interest ();
