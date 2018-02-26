@@ -1,12 +1,12 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿//using System.Collections;
+//using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
-#if UNITY_EDITOR
-using UnityEditor;
-#endif
+//#if UNITY_EDITOR
+//using UnityEditor;
+//#endif
 using UnityStandardAssets.Characters.FirstPerson;
-using UnityStandardAssets.Characters.ThirdPerson;
+//using UnityStandardAssets.Characters.ThirdPerson;
 
 public class PauseMenuManager : MonoBehaviour {
 
@@ -29,7 +29,7 @@ public class PauseMenuManager : MonoBehaviour {
             GameObject tempController = GameObject.FindGameObjectWithTag("GameController");
             firstPersonController = tempController.GetComponent<FirstPersonController>();
         }
-        if(GameObject.FindGameObjectWithTag("Player") != null && GameObject.FindGameObjectWithTag("Player"))
+        if(GameObject.FindGameObjectWithTag("Player") != null)// && GameObject.FindGameObjectWithTag("Player"))
         {
             GameObject tempPlayer = GameObject.FindGameObjectWithTag("Player");
    //         thirdPersonCharacter = tempPlayer.GetComponent<ThirdPersonCharacter>();
@@ -78,7 +78,7 @@ public class PauseMenuManager : MonoBehaviour {
                 Cursor.visible = true;
             }
         }
-        else if(GameObject.FindGameObjectWithTag("Player") != null && GameObject.FindGameObjectWithTag("Player") != null)
+        else if(GameObject.FindGameObjectWithTag("Player") != null)// && GameObject.FindGameObjectWithTag("Player") != null)
         {
             //thirdPersonCharacter.enabled = !thirdPersonCharacter.isActiveAndEnabled;
 			//thirdPersonUserControl.enabled = !thirdPersonUserControl.isActiveAndEnabled;
@@ -86,6 +86,7 @@ public class PauseMenuManager : MonoBehaviour {
 			Cursor.lockState = ( Cursor.lockState == CursorLockMode.Locked ) ? CursorLockMode.None : CursorLockMode.Locked;
             Cursor.visible = !Cursor.visible;
         }
+
         isPaused = !isPaused;
         Time.timeScale = Time.timeScale == 0 ? 1 : 0;
         LowPass();
