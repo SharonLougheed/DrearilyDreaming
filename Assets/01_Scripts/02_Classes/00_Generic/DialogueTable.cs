@@ -249,23 +249,26 @@ public class DialogueTable : MonoBehaviour{
             {
                 randomIndex = Random.Range(0, goodNearPassive.Count);
                 temp = goodNearPassive[randomIndex];
+                //Debug.Log("A Good thing was said");
                 return temp;
             }
             else if(DistanceToTarget.distanceToTarget <= mid)   //mid
             {
                 randomIndex = Random.Range(0, goodMidPassive.Count);
                 temp = goodMidPassive[randomIndex];
+                //Debug.Log("A Good thing was said");
                 return temp;
             }
             else if(DistanceToTarget.distanceToTarget > mid)    //far
             {
                 randomIndex = Random.Range(0, goodFarPassive.Count);
                 temp = goodFarPassive[randomIndex];
+                //Debug.Log("A Good thing was said");
                 return temp;
             }
             else
             {
-                Debug.Log("Why is this happening?");
+                //Debug.Log("Why is this happening?");
                 temp = "*DEBUG ME!!*";
                 return temp;
             }
@@ -277,23 +280,26 @@ public class DialogueTable : MonoBehaviour{
             {
                 randomIndex = Random.Range(0,badNearPassive.Count);
                 temp = badNearPassive[randomIndex];
+                //Debug.Log("A Bad thing was said");
                 return temp;
             }
             else if (DistanceToTarget.distanceToTarget <= mid)   //mid
             {
                 randomIndex = Random.Range(0, badMidPassive.Count);
                 temp = badMidPassive[randomIndex];
+                //Debug.Log("A Bad thing was said");
                 return temp;
             }
             else if (DistanceToTarget.distanceToTarget > mid)    //far
             {
                 randomIndex = Random.Range(0, badFarPassive.Count);
                 temp = badFarPassive[randomIndex];
+                //Debug.Log("A Bad thing was said");
                 return temp;
             }
             else
             {
-                Debug.Log("Why is this happening?");
+                //Debug.Log("Why is this happening?");
                 temp = "*DEBUG ME!!*";
                 return temp;
             }
@@ -305,23 +311,26 @@ public class DialogueTable : MonoBehaviour{
             {
                 randomIndex = Random.Range(0, goodNearPassive.Count);
                 temp = goodNearPassive[randomIndex];
+                //Debug.Log("A Neutral thing was said");
                 return temp;
             }
             else if (DistanceToTarget.distanceToTarget <= mid)   //mid
             {
                 randomIndex = Random.Range(0, goodMidPassive.Count);
                 temp = goodMidPassive[randomIndex];
+                //Debug.Log("A Neutral thing was said");
                 return temp;
             }
             else if (DistanceToTarget.distanceToTarget > mid)    //far
             {
                 randomIndex = Random.Range(0, goodFarPassive.Count);
                 temp = goodFarPassive[randomIndex];
+                //Debug.Log("A Neutral thing was said");
                 return temp;
             }
             else
             {
-                Debug.Log("Why is this happening?");
+                //Debug.Log("Why is this happening?");
                 temp = "*DEBUG ME!!*";
                 return temp;
             }

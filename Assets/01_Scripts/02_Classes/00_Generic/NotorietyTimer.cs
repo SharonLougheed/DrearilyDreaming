@@ -6,39 +6,42 @@ public class NotorietyTimer : MonoBehaviour {
 
     public float frequencyOfNotorietyIncrease;
 
-    //private float timer;
+    private float timer;
 
-    //// Use this for initialization
-    //void Start()
-    //{
-    //    timer = 0f;
-    //}
+    // Use this for initialization
+    void Start()
+    {
+        timer = frequencyOfNotorietyIncrease;
+    }
 
     // Update is called once per frame
     void Update()
     {
-        float n = Mathf.Lerp(PlayerNotoriety.GetPlayerNotoriety(), 0f, frequencyOfNotorietyIncrease);
+        float n = PlayerNotoriety.GetPlayerNotoriety(); //Mathf.Lerp(PlayerNotoriety.GetPlayerNotoriety(), 0f, frequencyOfNotorietyIncrease);
 
         if (n != 0f && Time.timeScale != 0f) //timer > frequencyOfNotorietyIncrease && Time.timeScale != 0f)
         {
-            if (n < 0f)
+            timer -= Time.deltaTime;
+            if (n < 0f && timer <= 0f)
             {
                 PlayerNotoriety.IncreasePlayerNotoriety();
-                //timer = 0f;
-                //Debug.Log("Notoriety is going up.");
+                timer = frequencyOfNotorietyIncrease;
+                //Debug.Log("Notoriety is going up." + n.ToString());
             }
-            if(n > 0f)
+            else if(n > 0f && timer <= 0f)
             {
                 PlayerNotoriety.DecreasePlayerNotoriety();
-                //timer = 0f;
-                //Debug.Log("Notoriety is going down.");
+                timer = frequencyOfNotorietyIncrease;
+                //Debug.Log("Notoriety is going down." + n.ToString());
+            }
+            else
+            {
+                //Debug.Log("Notoriety is 0");
             }
         }
-        else
-        {
-           // Debug.Log("notoriety is 0");
-        }
-        //timer += Time.deltaTime;
-        
+        //else
+        //{
+        //}
+            //Debug.Log("Notoriety:\t" + n.ToString());
     }
 }

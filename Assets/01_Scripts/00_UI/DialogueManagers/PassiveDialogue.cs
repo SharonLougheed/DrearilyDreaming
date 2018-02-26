@@ -23,18 +23,39 @@ public class PassiveDialogue : MonoBehaviour {
     }
 
     private void OnTriggerEnter(Collider other) {
-        if (other.gameObject.CompareTag("Player") && isTalking == false)
+        if (other.gameObject.CompareTag("Player") && isTalking == false && gameObject.name != "JOE")
         {
             StartCoroutine(PopupDialogue());
+        }
+        if (other.gameObject.CompareTag("Player") && isTalking == false && gameObject.name == "JOE")
+        {
+            StartCoroutine(JoePopup());
         }
     }
     private void OnTriggerStay(Collider other) {
-        if(other.gameObject.CompareTag("Player") && isTalking == false)
+        if(other.gameObject.CompareTag("Player") && isTalking == false && gameObject.name != "JOE")
         {
             StartCoroutine(PopupDialogue());
         }
+        if (other.gameObject.CompareTag("Player") && isTalking == false && gameObject.name == "JOE")
+        {
+            StartCoroutine(JoePopup());
+        }
     }
 
+    private IEnumerator JoePopup() {
+        isTalking = true;
+        GameObject newDialouge = Instantiate(dialogueUIPrefab, transform.position + (Vector3.up * distanceAboveHead), Quaternion.identity) as GameObject;
+
+        newDialouge.GetComponent<DialogueUIManager>().SetDialogueText("Where have you been?\nI've been looking for you everywhere!");
+        newDialouge.GetComponent<DialogueUIManager>().SetTransformToFollow(transform);
+        newDialouge.GetComponent<DialogueUIManager>().SetDistanceAbovehead(distanceAboveHead);
+
+        yield return new WaitForSeconds(prefabDelayTime);
+
+        isTalking = false;
+        Destroy(newDialouge);
+    }
 
     private IEnumerator PopupDialogue() {
         isTalking = true;
@@ -43,6 +64,7 @@ public class PassiveDialogue : MonoBehaviour {
         newDialouge.GetComponent<DialogueUIManager>().SetDialogueText(DialogueTable.PickRandomPassive());
         newDialouge.GetComponent<DialogueUIManager>().SetTransformToFollow(transform);
         newDialouge.GetComponent<DialogueUIManager>().SetDistanceAbovehead(distanceAboveHead);
+
         yield return new WaitForSeconds(prefabDelayTime);
 
         isTalking = false;

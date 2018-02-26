@@ -50,7 +50,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 237de8f87e7ac3449bb91c9e471d9e49, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  frequencyOfNotorietyIncrease: 15
+  frequencyOfNotorietyIncrease: 20
 --- !u!224 &224873442284717502
 RectTransform:
   m_ObjectHideFlags: 1
