@@ -85,7 +85,7 @@ public class NPC : CELL_ENTITY
 		//	**************************
 
 		//	Set the navmesh agent destination & set has registered to false
-		if ( _targetPointOfInterest != null )
+		if ( _targetPointOfInterest != null) // && _agent.isOnNavMesh == true)  //would this help?
 		{
 			_agent.SetDestination ( _targetPointOfInterest.transform.position );
 		}
