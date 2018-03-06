@@ -3,20 +3,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(MeshFilter))]
+
 public class PassiveDialogue : MonoBehaviour {
 
     
     public GameObject dialogueUIPrefab;
     public float prefabDelayTime;
-    public float distanceAboveHead;
+    private float distanceAboveHead;
 
     //private Transform mainCameraTransform;
     private bool isTalking;
     private float thingy;
+   
 
     private void Awake() {
         //mainCameraTransform = GameObject.FindGameObjectWithTag("MainCamera").transform;
-        
+        distanceAboveHead = GetComponent<Mesh>().bounds.extents.y + 2f;
     }
     private void Start() {
         isTalking = false;
