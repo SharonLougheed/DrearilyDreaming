@@ -6,17 +6,23 @@ using UnityEngine;
 public class CELL_LIGHTING : MonoBehaviour 
 {
     #region --------------------    Public Fields
-    /// <summary
-    /// upper and lower bounds
-    /// </summary>
-    public float goodRange, badRange;
+
+
     #endregion  
+
     #region --------------------	Private Fields
 
     /// <summary>
     /// The light.
     /// </summary>
     private Light _light;
+
+
+	[ Range ( 0f, 1f ) ]
+	/// <summary>
+	/// The impact that the noteriety has on the color of the lighting.
+	/// </summary>
+	[ SerializeField ] private float _noterietyImpact = 0.7f;
 
 	#endregion
 
@@ -35,9 +41,9 @@ public class CELL_LIGHTING : MonoBehaviour
 	/// </summary>
 	private void Update ()
 	{
-		_light.color = Color.Lerp ( _light.color, new Color ( 1.0f - Mathf.Clamp ( PlayerNotoriety.GetPlayerNotoriety () / 5.0f, 0, 1.0f ),
-			Mathf.Clamp ( 1.0f - Mathf.Abs ( PlayerNotoriety.GetPlayerNotoriety () / goodRange), 0, 1.0f ),
-			1.0f - Mathf.Clamp ( PlayerNotoriety.GetPlayerNotoriety () / badRange, 0, 1.0f ) ), Time.deltaTime );
+		_light.color = Color.Lerp ( _light.color, new Color ( 1f - Mathf.Clamp ( PlayerNotoriety.GetPlayerNotoriety () / ( ( 1.001f - _noterietyImpact ) * 5f ), 0, 1f ),
+			Mathf.Clamp ( 1.0f - Mathf.Abs ( PlayerNotoriety.GetPlayerNotoriety () / ( ( 1.001f - _noterietyImpact ) * 5f ) ), 0, 1f ),
+			1f - Mathf.Clamp ( PlayerNotoriety.GetPlayerNotoriety () / ( ( 1.001f - _noterietyImpact ) * -5f ), 0, 1f ) ), Time.deltaTime );
 	}
 
 	#endregion

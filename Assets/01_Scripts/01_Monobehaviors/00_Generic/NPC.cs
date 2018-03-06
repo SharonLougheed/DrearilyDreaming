@@ -176,6 +176,7 @@ public class NPC : CELL_ENTITY
 	private void Awake ()
 	{
 		_agent = GetComponent <NavMeshAgent> ();
+
 	}
 
 	/// <summary>

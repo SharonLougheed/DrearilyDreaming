@@ -223,7 +223,7 @@ public class INTERACTABLE : MonoBehaviour
 							}
 
 							//	Check to see if the input is pressed & the object is not currently being interacted with
-							if ( Input.GetKeyDown ( interactionKey ) && !_isBeingInteractedWith )
+							if ( Input.GetKey ( interactionKey ) && !_isBeingInteractedWith )
 							{
 								//	If the object can be interacted with
 								bool _i = false;
@@ -312,7 +312,7 @@ public class INTERACTABLE : MonoBehaviour
 						}
 
 						//	Check to see if the input is pressed & the object is not currently being interacted with
-						if ( Input.GetKeyDown ( interactionKey ) && !_isBeingInteractedWith )
+						if ( Input.GetKey ( interactionKey ) && !_isBeingInteractedWith )
 						{
 							//	If the object can be interacted with
 							bool _i = false;
@@ -551,8 +551,9 @@ public class INTERACTABLE : MonoBehaviour
 		//	Animate!
 		//	**************************
 
-        //Modify notoriety field
-        PlayerNotoriety.IncreasePlayerNotoriety();
+		//Modify notoriety field
+		PlayerNotoriety.IncreasePlayerNotoriety();
+		PlayerNotoriety.IncreasePlayerNotoriety();
 		yield return new WaitForSeconds ( 2 );
 		_isBeingInteractedWith = false;
 	}
@@ -569,8 +570,8 @@ public class INTERACTABLE : MonoBehaviour
 		//	Animate!
 		//	**************************
 
-        //Modify notoriety field
-		PlayerNotoriety.DecreasePlayerNotoriety();
+		//Modify notoriety field
+		PlayerNotoriety.IncreasePlayerNotoriety();
 		yield return new WaitForSeconds ( 2 );
 		_isBeingInteractedWith = false;
 	}
