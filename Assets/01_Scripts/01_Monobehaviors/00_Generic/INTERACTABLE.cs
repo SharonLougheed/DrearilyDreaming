@@ -429,7 +429,10 @@ public class INTERACTABLE : MonoBehaviour
 	/// <returns>The interaction.</returns>
 	private IEnumerator Bed_Interaction ()
 	{
-		//	Perform the interaction
+        //	Perform the interaction
+        var thing = GameObject.FindObjectOfType<PauseMenuManager>();
+        thing.enabled = false;
+        
 		GameObject.Find ( "LoadScreen" ).GetComponent <CanvasGroup> ().alpha = 1.0f;
 		AsyncOperation _load = UnityEngine.SceneManagement.SceneManager.LoadSceneAsync ( 2, UnityEngine.SceneManagement.LoadSceneMode.Single );
 
