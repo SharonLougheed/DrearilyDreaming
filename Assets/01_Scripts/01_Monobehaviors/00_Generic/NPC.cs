@@ -177,6 +177,7 @@ public class NPC : CELL_ENTITY
 	{
 		_agent = GetComponent <NavMeshAgent> ();
 
+
 	}
 
 	/// <summary>
