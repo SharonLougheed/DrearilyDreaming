@@ -19,7 +19,7 @@ public class PassiveDialogue : MonoBehaviour {
 
     private void Awake() {
         //mainCameraTransform = GameObject.FindGameObjectWithTag("MainCamera").transform;
-        distanceAboveHead = GetComponent<Mesh>().bounds.extents.y + 2f;
+        distanceAboveHead = (GetComponent<MeshFilter>().mesh.bounds.extents.y  * gameObject.transform.localScale.y) + 2.5f;
     }
     private void Start() {
         isTalking = false;
