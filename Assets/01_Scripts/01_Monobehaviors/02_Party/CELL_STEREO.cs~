@@ -120,14 +120,14 @@ public class CELL_STEREO : MonoBehaviour
     private void LateUpdate () 
 	{
 		_audio.volume += ( _audio.volume < 1.0f )? Time.deltaTime : 0 ;
-		if ( ( target.transform.position - transform.position ).magnitude >= 50.0f )
-		{
-			transform.position = target.position * 100.0f;
-		}
-		else
-		{
-			transform.position = Vector3.Slerp ( transform.position, target.position * 100.0f, Time.deltaTime * 0.1f );
-		}
+//		if ( ( target.transform.position - transform.position ).magnitude >= 50.0f )
+//		{
+//			transform.position = target.position * 100.0f;
+//		}
+//		else
+//		{
+//			transform.position = Vector3.Slerp ( transform.position, target.position * 100.0f, Time.deltaTime * 0.1f );
+//		}
 	}
 		
 	#endregion
