@@ -475,9 +475,13 @@ public class INTERACTABLE : MonoBehaviour
 	/// <returns>The interaction.</returns>
 	private IEnumerator Party_Special_Interaction ()
 	{
-		//	Perform the interaction
+        //Perform the interaction
+        //ChangeInState.SetRoomState(END_PARTY_STATE.WIN);
+        GameManager.instance.data.endPartyState = END_PARTY_STATE.WIN;
+
 		PlayerNotoriety.ResetPlayerNoteriety ();
-		UnityEngine.SceneManagement.SceneManager.LoadScene ( 3 );
+        
+		UnityEngine.SceneManagement.SceneManager.LoadScene ( 1 );
 
 		//	**************************
 		//	Animate!
@@ -582,9 +586,12 @@ public class INTERACTABLE : MonoBehaviour
 	/// <returns>The interaction.</returns>
 	private IEnumerator Door_Interaction ()
 	{
-		//	Perform the interaction
+        //	Perform the interaction
+        //ChangeInState.SetRoomState(END_PARTY_STATE.LOSE);
+        GameManager.instance.data.endPartyState = END_PARTY_STATE.LOSE;
+
 		PlayerNotoriety.ResetPlayerNoteriety ();
-		UnityEngine.SceneManagement.SceneManager.LoadScene ( 4 );
+		UnityEngine.SceneManagement.SceneManager.LoadScene ( 1 );
 
 		//	**************************
 		//	Animate!
