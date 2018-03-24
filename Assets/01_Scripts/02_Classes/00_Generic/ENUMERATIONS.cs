@@ -5,6 +5,6 @@
 /// </summary>
 
 public enum POI_TYPE { EMPTY, FOOD, PUNCH, LIGHTS, MUSIC, DOOR };
-public enum END_PARTY_STATE { WIN, LOSE};
+public enum END_PARTY_STATE { WIN, LOSE, DEFAULT};
 
 #endregion
