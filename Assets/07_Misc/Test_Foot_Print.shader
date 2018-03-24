@@ -1,25 +1,32 @@
 // Shader created with Shader Forge v1.38 
 // Shader Forge (c) Neat Corporation / Joachim Holmer - http://www.acegikmo.com/shaderforge/
 // Note: Manually altering this data may prevent you from opening it in Shader Forge
-/*SF_DATA;ver:1.38;sub:START;pass:START;ps:flbk:,iptp:0,cusa:False,bamd:0,cgin:,lico:1,lgpr:1,limd:3,spmd:1,trmd:0,grmd:0,uamb:True,mssp:True,bkdf:True,hqlp:False,rprd:True,enco:False,rmgx:True,imps:True,rpth:0,vtps:0,hqsc:True,nrmq:1,nrsp:0,vomd:0,spxs:False,tesm:0,olmd:1,culm:0,bsrc:0,bdst:1,dpts:2,wrdp:True,dith:0,atcv:False,rfrpo:True,rfrpn:Refraction,coma:15,ufog:True,aust:True,igpj:False,qofs:0,qpre:1,rntp:1,fgom:False,fgoc:False,fgod:False,fgor:False,fgmd:0,fgcr:0.5,fgcg:0.5,fgcb:0.5,fgca:1,fgde:0.01,fgrn:0,fgrf:300,stcl:False,atwp:False,stva:128,stmr:255,stmw:255,stcp:6,stps:0,stfa:0,stfz:0,ofsf:0,ofsu:0,f2p0:False,fnsp:False,fnfb:False,fsmp:False;n:type:ShaderForge.SFN_Final,id:2865,x:32719,y:32712,varname:node_2865,prsc:2|diff-6937-OUT,spec-358-OUT;n:type:ShaderForge.SFN_Multiply,id:6343,x:32114,y:32712,varname:node_6343,prsc:2|A-7736-RGB,B-6665-RGB;n:type:ShaderForge.SFN_Color,id:6665,x:31921,y:32805,ptovrint:False,ptlb:Color,ptin:_Color,varname:_Color,prsc:2,glob:False,taghide:False,taghdr:False,tagprd:False,tagnsco:False,tagnrm:False,c1:0.5019608,c2:0.5019608,c3:0.5019608,c4:1;n:type:ShaderForge.SFN_Tex2d,id:7736,x:31921,y:32620,ptovrint:True,ptlb:Base Color,ptin:_MainTex,varname:_MainTex,prsc:2,glob:False,taghide:False,taghdr:False,tagprd:False,tagnsco:False,tagnrm:False,ntxv:0,isnm:False;n:type:ShaderForge.SFN_Slider,id:358,x:32252,y:33012,ptovrint:False,ptlb:Metallic,ptin:_Metallic,varname:node_358,prsc:2,glob:False,taghide:False,taghdr:False,tagprd:False,tagnsco:False,tagnrm:False,min:0,cur:0,max:1;n:type:ShaderForge.SFN_ValueProperty,id:2419,x:32060,y:32959,ptovrint:False,ptlb:Intensity,ptin:_Intensity,varname:node_2419,prsc:2,glob:False,taghide:False,taghdr:False,tagprd:False,tagnsco:False,tagnrm:False,v1:0;n:type:ShaderForge.SFN_Multiply,id:6937,x:32258,y:32816,varname:node_6937,prsc:2|A-6343-OUT,B-2419-OUT;proporder:6665-7736-358-2419;pass:END;sub:END;*/
+/*SF_DATA;ver:1.38;sub:START;pass:START;ps:flbk:,iptp:0,cusa:False,bamd:0,cgin:,lico:1,lgpr:1,limd:3,spmd:1,trmd:0,grmd:0,uamb:True,mssp:True,bkdf:True,hqlp:False,rprd:True,enco:False,rmgx:True,imps:True,rpth:0,vtps:0,hqsc:True,nrmq:1,nrsp:0,vomd:0,spxs:False,tesm:0,olmd:1,culm:0,bsrc:3,bdst:7,dpts:2,wrdp:False,dith:0,atcv:False,rfrpo:True,rfrpn:Refraction,coma:15,ufog:True,aust:True,igpj:True,qofs:0,qpre:3,rntp:2,fgom:False,fgoc:False,fgod:False,fgor:False,fgmd:0,fgcr:0,fgcg:0,fgcb:0,fgca:0,fgde:0.03,fgrn:0,fgrf:300,stcl:False,atwp:False,stva:128,stmr:255,stmw:255,stcp:6,stps:0,stfa:0,stfz:0,ofsf:0,ofsu:0,f2p0:False,fnsp:False,fnfb:False,fsmp:False;n:type:ShaderForge.SFN_Final,id:2865,x:32719,y:32712,varname:node_2865,prsc:2|diff-6546-OUT,spec-358-OUT,emission-6665-RGB,alpha-6665-A,clip-3760-OUT;n:type:ShaderForge.SFN_Color,id:6665,x:32193,y:32869,ptovrint:False,ptlb:Color,ptin:_Color,varname:_Color,prsc:2,glob:False,taghide:False,taghdr:False,tagprd:False,tagnsco:False,tagnrm:False,c1:1,c2:1,c3:1,c4:1;n:type:ShaderForge.SFN_Slider,id:358,x:32386,y:32758,ptovrint:False,ptlb:Metallic,ptin:_Metallic,varname:node_358,prsc:2,glob:False,taghide:False,taghdr:False,tagprd:False,tagnsco:False,tagnrm:False,min:0,cur:1,max:1;n:type:ShaderForge.SFN_TexCoord,id:8568,x:31511,y:33281,varname:node_8568,prsc:2,uv:0,uaff:False;n:type:ShaderForge.SFN_ValueProperty,id:2918,x:31501,y:33109,ptovrint:False,ptlb:u,ptin:_u,varname:node_2918,prsc:2,glob:False,taghide:False,taghdr:False,tagprd:False,tagnsco:False,tagnrm:False,v1:1;n:type:ShaderForge.SFN_ValueProperty,id:7530,x:31501,y:33195,ptovrint:False,ptlb:v,ptin:_v,varname:_u_copy,prsc:2,glob:False,taghide:False,taghdr:False,tagprd:False,tagnsco:False,tagnrm:False,v1:0.5;n:type:ShaderForge.SFN_Time,id:3996,x:31501,y:32931,varname:node_3996,prsc:2;n:type:ShaderForge.SFN_Multiply,id:3484,x:31717,y:32975,varname:node_3484,prsc:2|A-3996-TSL,B-6663-OUT;n:type:ShaderForge.SFN_Append,id:6663,x:31685,y:33137,varname:node_6663,prsc:2|A-2918-OUT,B-7530-OUT;n:type:ShaderForge.SFN_Add,id:8910,x:31922,y:33234,varname:node_8910,prsc:2|A-3484-OUT,B-8568-UVOUT;n:type:ShaderForge.SFN_Tex2d,id:6685,x:32107,y:33234,ptovrint:False,ptlb:node_6685,ptin:_node_6685,varname:node_6685,prsc:2,glob:False,taghide:False,taghdr:False,tagprd:False,tagnsco:False,tagnrm:False,tex:4857e40821e4ffa4e83545100b8273f6,ntxv:0,isnm:False|UVIN-8910-OUT;n:type:ShaderForge.SFN_Tex2d,id:372,x:31872,y:32810,ptovrint:False,ptlb:node_372,ptin:_node_372,varname:node_372,prsc:2,glob:False,taghide:False,taghdr:False,tagprd:False,tagnsco:False,tagnrm:False,ntxv:0,isnm:False;n:type:ShaderForge.SFN_Multiply,id:3760,x:32366,y:33103,varname:node_3760,prsc:2|A-372-A,B-5155-OUT;n:type:ShaderForge.SFN_Posterize,id:5155,x:32284,y:33351,varname:node_5155,prsc:2|IN-6685-G,STPS-579-OUT;n:type:ShaderForge.SFN_ValueProperty,id:579,x:32107,y:33419,ptovrint:False,ptlb:node_579,ptin:_node_579,varname:node_579,prsc:2,glob:False,taghide:False,taghdr:False,tagprd:False,tagnsco:False,tagnrm:False,v1:6;n:type:ShaderForge.SFN_Multiply,id:6546,x:32269,y:32620,varname:node_6546,prsc:2|A-372-RGB,B-6665-RGB;proporder:6665-358-2918-7530-6685-372-579;pass:END;sub:END;*/
 
 Shader "Shader Forge/Test_Foot_Print" {
     Properties {
-        _Color ("Color", Color) = (0.5019608,0.5019608,0.5019608,1)
-        _MainTex ("Base Color", 2D) = "white" {}
-        _Metallic ("Metallic", Range(0, 1)) = 0
-        _Intensity ("Intensity", Float ) = 0
+        _Color ("Color", Color) = (1,1,1,1)
+        _Metallic ("Metallic", Range(0, 1)) = 1
+        _u ("u", Float ) = 1
+        _v ("v", Float ) = 0.5
+        _node_6685 ("node_6685", 2D) = "white" {}
+        _node_372 ("node_372", 2D) = "white" {}
+        _node_579 ("node_579", Float ) = 6
+        [HideInInspector]_Cutoff ("Alpha cutoff", Range(0,1)) = 0.5
     }
     SubShader {
         Tags {
-            "RenderType"="Opaque"
+            "IgnoreProjector"="True"
+            "Queue"="Transparent"
+            "RenderType"="Transparent"
         }
         Pass {
             Name "FORWARD"
             Tags {
                 "LightMode"="ForwardBase"
             }
-            
+            Blend SrcAlpha OneMinusSrcAlpha
+            ZWrite Off
             
             CGPROGRAM
             #pragma vertex vert
@@ -28,11 +35,10 @@ Shader "Shader Forge/Test_Foot_Print" {
             #define SHOULD_SAMPLE_SH ( defined (LIGHTMAP_OFF) && defined(DYNAMICLIGHTMAP_OFF) )
             #define _GLOSSYENV 1
             #include "UnityCG.cginc"
-            #include "AutoLight.cginc"
             #include "Lighting.cginc"
             #include "UnityPBSLighting.cginc"
             #include "UnityStandardBRDF.cginc"
-            #pragma multi_compile_fwdbase_fullshadows
+            #pragma multi_compile_fwdbase
             #pragma multi_compile LIGHTMAP_OFF LIGHTMAP_ON
             #pragma multi_compile DIRLIGHTMAP_OFF DIRLIGHTMAP_COMBINED DIRLIGHTMAP_SEPARATE
             #pragma multi_compile DYNAMICLIGHTMAP_OFF DYNAMICLIGHTMAP_ON
@@ -40,9 +46,12 @@ Shader "Shader Forge/Test_Foot_Print" {
             #pragma only_renderers d3d9 d3d11 glcore gles 
             #pragma target 3.0
             uniform float4 _Color;
-            uniform sampler2D _MainTex; uniform float4 _MainTex_ST;
             uniform float _Metallic;
-            uniform float _Intensity;
+            uniform float _u;
+            uniform float _v;
+            uniform sampler2D _node_6685; uniform float4 _node_6685_ST;
+            uniform sampler2D _node_372; uniform float4 _node_372_ST;
+            uniform float _node_579;
             struct VertexInput {
                 float4 vertex : POSITION;
                 float3 normal : NORMAL;
@@ -60,10 +69,9 @@ Shader "Shader Forge/Test_Foot_Print" {
                 float3 normalDir : TEXCOORD4;
                 float3 tangentDir : TEXCOORD5;
                 float3 bitangentDir : TEXCOORD6;
-                LIGHTING_COORDS(7,8)
-                UNITY_FOG_COORDS(9)
+                UNITY_FOG_COORDS(7)
                 #if defined(LIGHTMAP_ON) || defined(UNITY_SHOULD_SAMPLE_SH)
-                    float4 ambientOrLightmapUV : TEXCOORD10;
+                    float4 ambientOrLightmapUV : TEXCOORD8;
                 #endif
             };
             VertexOutput vert (VertexInput v) {
@@ -86,7 +94,6 @@ Shader "Shader Forge/Test_Foot_Print" {
                 float3 lightColor = _LightColor0.rgb;
                 o.pos = UnityObjectToClipPos( v.vertex );
                 UNITY_TRANSFER_FOG(o,o.pos);
-                TRANSFER_VERTEX_TO_FRAGMENT(o)
                 return o;
             }
             float4 frag(VertexOutput i) : COLOR {
@@ -95,11 +102,16 @@ Shader "Shader Forge/Test_Foot_Print" {
                 float3 viewDirection = normalize(_WorldSpaceCameraPos.xyz - i.posWorld.xyz);
                 float3 normalDirection = i.normalDir;
                 float3 viewReflectDirection = reflect( -viewDirection, normalDirection );
+                float4 _node_372_var = tex2D(_node_372,TRANSFORM_TEX(i.uv0, _node_372));
+                float4 node_3996 = _Time;
+                float2 node_8910 = ((node_3996.r*float2(_u,_v))+i.uv0);
+                float4 _node_6685_var = tex2D(_node_6685,TRANSFORM_TEX(node_8910, _node_6685));
+                clip((_node_372_var.a*floor(_node_6685_var.g * _node_579) / (_node_579 - 1)) - 0.5);
                 float3 lightDirection = normalize(_WorldSpaceLightPos0.xyz);
                 float3 lightColor = _LightColor0.rgb;
                 float3 halfDirection = normalize(viewDirection+lightDirection);
 ////// Lighting:
-                float attenuation = LIGHT_ATTENUATION(i);
+                float attenuation = 1;
                 float3 attenColor = attenuation * _LightColor0.xyz;
                 float Pi = 3.141592654;
                 float InvPi = 0.31830988618;
@@ -153,8 +165,7 @@ Shader "Shader Forge/Test_Foot_Print" {
                 float LdotH = saturate(dot(lightDirection, halfDirection));
                 float3 specularColor = _Metallic;
                 float specularMonochrome;
-                float4 _MainTex_var = tex2D(_MainTex,TRANSFORM_TEX(i.uv0, _MainTex));
-                float3 diffuseColor = ((_MainTex_var.rgb*_Color.rgb)*_Intensity); // Need this for specular when using metallic
+                float3 diffuseColor = (_node_372_var.rgb*_Color.rgb); // Need this for specular when using metallic
                 diffuseColor = DiffuseAndSpecularFromMetallic( diffuseColor, specularColor, specularColor, specularMonochrome );
                 specularMonochrome = 1.0-specularMonochrome;
                 float NdotV = abs(dot( normalDirection, viewDirection ));
@@ -192,9 +203,11 @@ Shader "Shader Forge/Test_Foot_Print" {
                 float3 indirectDiffuse = float3(0,0,0);
                 indirectDiffuse += gi.indirect.diffuse;
                 float3 diffuse = (directDiffuse + indirectDiffuse) * diffuseColor;
+////// Emissive:
+                float3 emissive = _Color.rgb;
 /// Final Color:
-                float3 finalColor = diffuse + specular;
-                fixed4 finalRGBA = fixed4(finalColor,1);
+                float3 finalColor = diffuse + specular + emissive;
+                fixed4 finalRGBA = fixed4(finalColor,_Color.a);
                 UNITY_APPLY_FOG(i.fogCoord, finalRGBA);
                 return finalRGBA;
             }
@@ -206,7 +219,7 @@ Shader "Shader Forge/Test_Foot_Print" {
                 "LightMode"="ForwardAdd"
             }
             Blend One One
-            
+            ZWrite Off
             
             CGPROGRAM
             #pragma vertex vert
@@ -219,7 +232,7 @@ Shader "Shader Forge/Test_Foot_Print" {
             #include "Lighting.cginc"
             #include "UnityPBSLighting.cginc"
             #include "UnityStandardBRDF.cginc"
-            #pragma multi_compile_fwdadd_fullshadows
+            #pragma multi_compile_fwdadd
             #pragma multi_compile LIGHTMAP_OFF LIGHTMAP_ON
             #pragma multi_compile DIRLIGHTMAP_OFF DIRLIGHTMAP_COMBINED DIRLIGHTMAP_SEPARATE
             #pragma multi_compile DYNAMICLIGHTMAP_OFF DYNAMICLIGHTMAP_ON
@@ -227,9 +240,12 @@ Shader "Shader Forge/Test_Foot_Print" {
             #pragma only_renderers d3d9 d3d11 glcore gles 
             #pragma target 3.0
             uniform float4 _Color;
-            uniform sampler2D _MainTex; uniform float4 _MainTex_ST;
             uniform float _Metallic;
-            uniform float _Intensity;
+            uniform float _u;
+            uniform float _v;
+            uniform sampler2D _node_6685; uniform float4 _node_6685_ST;
+            uniform sampler2D _node_372; uniform float4 _node_372_ST;
+            uniform float _node_579;
             struct VertexInput {
                 float4 vertex : POSITION;
                 float3 normal : NORMAL;
@@ -270,6 +286,11 @@ Shader "Shader Forge/Test_Foot_Print" {
                 float3x3 tangentTransform = float3x3( i.tangentDir, i.bitangentDir, i.normalDir);
                 float3 viewDirection = normalize(_WorldSpaceCameraPos.xyz - i.posWorld.xyz);
                 float3 normalDirection = i.normalDir;
+                float4 _node_372_var = tex2D(_node_372,TRANSFORM_TEX(i.uv0, _node_372));
+                float4 node_3996 = _Time;
+                float2 node_8910 = ((node_3996.r*float2(_u,_v))+i.uv0);
+                float4 _node_6685_var = tex2D(_node_6685,TRANSFORM_TEX(node_8910, _node_6685));
+                clip((_node_372_var.a*floor(_node_6685_var.g * _node_579) / (_node_579 - 1)) - 0.5);
                 float3 lightDirection = normalize(lerp(_WorldSpaceLightPos0.xyz, _WorldSpaceLightPos0.xyz - i.posWorld.xyz,_WorldSpaceLightPos0.w));
                 float3 lightColor = _LightColor0.rgb;
                 float3 halfDirection = normalize(viewDirection+lightDirection);
@@ -288,8 +309,7 @@ Shader "Shader Forge/Test_Foot_Print" {
                 float LdotH = saturate(dot(lightDirection, halfDirection));
                 float3 specularColor = _Metallic;
                 float specularMonochrome;
-                float4 _MainTex_var = tex2D(_MainTex,TRANSFORM_TEX(i.uv0, _MainTex));
-                float3 diffuseColor = ((_MainTex_var.rgb*_Color.rgb)*_Intensity); // Need this for specular when using metallic
+                float3 diffuseColor = (_node_372_var.rgb*_Color.rgb); // Need this for specular when using metallic
                 diffuseColor = DiffuseAndSpecularFromMetallic( diffuseColor, specularColor, specularColor, specularMonochrome );
                 specularMonochrome = 1.0-specularMonochrome;
                 float NdotV = abs(dot( normalDirection, viewDirection ));
@@ -317,9 +337,74 @@ Shader "Shader Forge/Test_Foot_Print" {
                 float3 diffuse = directDiffuse * diffuseColor;
 /// Final Color:
                 float3 finalColor = diffuse + specular;
-                fixed4 finalRGBA = fixed4(finalColor * 1,0);
+                fixed4 finalRGBA = fixed4(finalColor * _Color.a,0);
                 UNITY_APPLY_FOG(i.fogCoord, finalRGBA);
                 return finalRGBA;
+            }
+            ENDCG
+        }
+        Pass {
+            Name "ShadowCaster"
+            Tags {
+                "LightMode"="ShadowCaster"
+            }
+            Offset 1, 1
+            Cull Back
+            
+            CGPROGRAM
+            #pragma vertex vert
+            #pragma fragment frag
+            #define UNITY_PASS_SHADOWCASTER
+            #define SHOULD_SAMPLE_SH ( defined (LIGHTMAP_OFF) && defined(DYNAMICLIGHTMAP_OFF) )
+            #define _GLOSSYENV 1
+            #include "UnityCG.cginc"
+            #include "Lighting.cginc"
+            #include "UnityPBSLighting.cginc"
+            #include "UnityStandardBRDF.cginc"
+            #pragma fragmentoption ARB_precision_hint_fastest
+            #pragma multi_compile_shadowcaster
+            #pragma multi_compile LIGHTMAP_OFF LIGHTMAP_ON
+            #pragma multi_compile DIRLIGHTMAP_OFF DIRLIGHTMAP_COMBINED DIRLIGHTMAP_SEPARATE
+            #pragma multi_compile DYNAMICLIGHTMAP_OFF DYNAMICLIGHTMAP_ON
+            #pragma multi_compile_fog
+            #pragma only_renderers d3d9 d3d11 glcore gles 
+            #pragma target 3.0
+            uniform float _u;
+            uniform float _v;
+            uniform sampler2D _node_6685; uniform float4 _node_6685_ST;
+            uniform sampler2D _node_372; uniform float4 _node_372_ST;
+            uniform float _node_579;
+            struct VertexInput {
+                float4 vertex : POSITION;
+                float2 texcoord0 : TEXCOORD0;
+                float2 texcoord1 : TEXCOORD1;
+                float2 texcoord2 : TEXCOORD2;
+            };
+            struct VertexOutput {
+                V2F_SHADOW_CASTER;
+                float2 uv0 : TEXCOORD1;
+                float2 uv1 : TEXCOORD2;
+                float2 uv2 : TEXCOORD3;
+                float4 posWorld : TEXCOORD4;
+            };
+            VertexOutput vert (VertexInput v) {
+                VertexOutput o = (VertexOutput)0;
+                o.uv0 = v.texcoord0;
+                o.uv1 = v.texcoord1;
+                o.uv2 = v.texcoord2;
+                o.posWorld = mul(unity_ObjectToWorld, v.vertex);
+                o.pos = UnityObjectToClipPos( v.vertex );
+                TRANSFER_SHADOW_CASTER(o)
+                return o;
+            }
+            float4 frag(VertexOutput i) : COLOR {
+                float3 viewDirection = normalize(_WorldSpaceCameraPos.xyz - i.posWorld.xyz);
+                float4 _node_372_var = tex2D(_node_372,TRANSFORM_TEX(i.uv0, _node_372));
+                float4 node_3996 = _Time;
+                float2 node_8910 = ((node_3996.r*float2(_u,_v))+i.uv0);
+                float4 _node_6685_var = tex2D(_node_6685,TRANSFORM_TEX(node_8910, _node_6685));
+                clip((_node_372_var.a*floor(_node_6685_var.g * _node_579) / (_node_579 - 1)) - 0.5);
+                SHADOW_CASTER_FRAGMENT(i)
             }
             ENDCG
         }
@@ -350,9 +435,8 @@ Shader "Shader Forge/Test_Foot_Print" {
             #pragma only_renderers d3d9 d3d11 glcore gles 
             #pragma target 3.0
             uniform float4 _Color;
-            uniform sampler2D _MainTex; uniform float4 _MainTex_ST;
             uniform float _Metallic;
-            uniform float _Intensity;
+            uniform sampler2D _node_372; uniform float4 _node_372_ST;
             struct VertexInput {
                 float4 vertex : POSITION;
                 float2 texcoord0 : TEXCOORD0;
@@ -380,10 +464,10 @@ Shader "Shader Forge/Test_Foot_Print" {
                 UnityMetaInput o;
                 UNITY_INITIALIZE_OUTPUT( UnityMetaInput, o );
                 
-                o.Emission = 0;
+                o.Emission = _Color.rgb;
                 
-                float4 _MainTex_var = tex2D(_MainTex,TRANSFORM_TEX(i.uv0, _MainTex));
-                float3 diffColor = ((_MainTex_var.rgb*_Color.rgb)*_Intensity);
+                float4 _node_372_var = tex2D(_node_372,TRANSFORM_TEX(i.uv0, _node_372));
+                float3 diffColor = (_node_372_var.rgb*_Color.rgb);
                 float specularMonochrome;
                 float3 specColor;
                 diffColor = DiffuseAndSpecularFromMetallic( diffColor, _Metallic, specColor, specularMonochrome );
