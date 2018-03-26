@@ -13,7 +13,7 @@ public class INTERACTABLE : MonoBehaviour
 	/// <summary>
 	/// The interactable types
 	/// </summary>
-	public enum TYPE { NONE, BED, PARTY_NPC, PARTY_SPECIAL, PARTY_BALLOON, PARTY_STEREO, PARTY_PUNCH, PARTY_FOOD, PARTY_DOOR };
+	public enum TYPE { NONE, BED, PARTY_NPC, PARTY_SPECIAL, PARTY_BALLOON, PARTY_STEREO, PARTY_PUNCH, PARTY_FOOD, PARTY_DOOR, PARTY_GLOWSTICK };
 
 	#endregion
 
@@ -150,7 +150,8 @@ public class INTERACTABLE : MonoBehaviour
 		{ TYPE.PARTY_STEREO, "Stereo_Interaction" },
 		{ TYPE.PARTY_PUNCH, "Punch_Interaction" },
 		{ TYPE.PARTY_FOOD, "Food_Interaction" },
-		{ TYPE.PARTY_DOOR, "Door_Interaction" }
+		{ TYPE.PARTY_DOOR, "Door_Interaction" },
+		{ TYPE.PARTY_GLOWSTICK, "Party_Glowstick_Interaction" }
 	};
 
 	#endregion
@@ -223,7 +224,7 @@ public class INTERACTABLE : MonoBehaviour
 							}
 
 							//	Check to see if the input is pressed & the object is not currently being interacted with
-							if ( Input.GetKeyDown ( interactionKey ) && !_isBeingInteractedWith )
+							if ( Input.GetKey ( interactionKey ) && !_isBeingInteractedWith )
 							{
 								//	If the object can be interacted with
 								bool _i = false;
@@ -312,7 +313,7 @@ public class INTERACTABLE : MonoBehaviour
 						}
 
 						//	Check to see if the input is pressed & the object is not currently being interacted with
-						if ( Input.GetKeyDown ( interactionKey ) && !_isBeingInteractedWith )
+						if ( Input.GetKey ( interactionKey ) && !_isBeingInteractedWith )
 						{
 							//	If the object can be interacted with
 							bool _i = false;
@@ -429,7 +430,10 @@ public class INTERACTABLE : MonoBehaviour
 	/// <returns>The interaction.</returns>
 	private IEnumerator Bed_Interaction ()
 	{
-		//	Perform the interaction
+        //	Perform the interaction
+        var thing = GameObject.FindObjectOfType<PauseMenuManager>();
+        thing.enabled = false;
+        
 		GameObject.Find ( "LoadScreen" ).GetComponent <CanvasGroup> ().alpha = 1.0f;
 		AsyncOperation _load = UnityEngine.SceneManagement.SceneManager.LoadSceneAsync ( 2, UnityEngine.SceneManagement.LoadSceneMode.Single );
 
@@ -467,14 +471,50 @@ public class INTERACTABLE : MonoBehaviour
 	}
 
 	/// <summary>
+	/// Interaction with a glowstick at the party.
+	/// </summary>
+	/// <returns>The interaction.</returns>
+	private IEnumerator Party_Glowstick_Interaction ()
+	{
+		//	Perform the interaction
+		Material _temp = GameObject.Find ( "Footprints" ).GetComponent <FOOTPRINTS> ().material;
+
+		Debug.Log ( _temp.name );
+
+		while ( _temp.GetFloat ( "_Opacity" ) < 1f )
+		{
+			_temp.SetFloat ( "_Opacity", _temp.GetFloat ( "_Opacity" ) + Time.deltaTime );
+			yield return new WaitForSeconds ( Time.deltaTime );
+		}
+
+		yield return new WaitForSeconds ( 5f );
+
+		while ( _temp.GetFloat ( "_Opacity" ) > 0f )
+		{
+			_temp.SetFloat ( "_Opacity", _temp.GetFloat ( "_Opacity" ) - Time.deltaTime );
+			yield return new WaitForSeconds ( Time.deltaTime );
+		}
+
+		//	**************************
+		//	Animate!
+		//	**************************
+
+		_isBeingInteractedWith = false;
+	}
+
+	/// <summary>
 	/// Interaction with the special NPC at the party.
 	/// </summary>
 	/// <returns>The interaction.</returns>
 	private IEnumerator Party_Special_Interaction ()
 	{
-		//	Perform the interaction
+        //Perform the interaction
+        //ChangeInState.SetRoomState(END_PARTY_STATE.WIN);
+        GameManager.instance.data.endPartyState = END_PARTY_STATE.WIN;
+
 		PlayerNotoriety.ResetPlayerNoteriety ();
-		UnityEngine.SceneManagement.SceneManager.LoadScene ( 3 );
+        
+		UnityEngine.SceneManagement.SceneManager.LoadScene ( 1 );
 
 		//	**************************
 		//	Animate!
@@ -548,8 +588,9 @@ public class INTERACTABLE : MonoBehaviour
 		//	Animate!
 		//	**************************
 
-        //Modify notoriety field
-        PlayerNotoriety.IncreasePlayerNotoriety();
+		//Modify notoriety field
+		PlayerNotoriety.IncreasePlayerNotoriety();
+		PlayerNotoriety.IncreasePlayerNotoriety();
 		yield return new WaitForSeconds ( 2 );
 		_isBeingInteractedWith = false;
 	}
@@ -566,8 +607,8 @@ public class INTERACTABLE : MonoBehaviour
 		//	Animate!
 		//	**************************
 
-        //Modify notoriety field
-		PlayerNotoriety.DecreasePlayerNotoriety();
+		//Modify notoriety field
+		PlayerNotoriety.IncreasePlayerNotoriety();
 		yield return new WaitForSeconds ( 2 );
 		_isBeingInteractedWith = false;
 	}
@@ -578,9 +619,12 @@ public class INTERACTABLE : MonoBehaviour
 	/// <returns>The interaction.</returns>
 	private IEnumerator Door_Interaction ()
 	{
-		//	Perform the interaction
+        //	Perform the interaction
+        //ChangeInState.SetRoomState(END_PARTY_STATE.LOSE);
+        GameManager.instance.data.endPartyState = END_PARTY_STATE.LOSE;
+
 		PlayerNotoriety.ResetPlayerNoteriety ();
-		UnityEngine.SceneManagement.SceneManager.LoadScene ( 4 );
+		UnityEngine.SceneManagement.SceneManager.LoadScene ( 1 );
 
 		//	**************************
 		//	Animate!

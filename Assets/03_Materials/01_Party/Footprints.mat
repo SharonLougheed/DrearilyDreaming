@@ -56,11 +56,11 @@ Material:
         m_Offset: {x: 0, y: 0}
     - _node_372:
         m_Texture: {fileID: 2800000, guid: fba16bc62c1e4354f9b957c7a703b7a4, type: 3}
-        m_Scale: {x: 10, y: 10}
+        m_Scale: {x: 9, y: 9}
         m_Offset: {x: 0, y: 0}
     - _node_6685:
         m_Texture: {fileID: 2800000, guid: 4857e40821e4ffa4e83545100b8273f6, type: 3}
-        m_Scale: {x: 10, y: 10}
+        m_Scale: {x: 9, y: 9}
         m_Offset: {x: 0, y: 0}
     m_Floats:
     - _BumpScale: 1
@@ -73,6 +73,7 @@ Material:
     - _Metallic: 1
     - _Mode: 0
     - _OcclusionStrength: 1
+    - _Opacity: -0.0390277
     - _Parallax: 0.02
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
@@ -80,9 +81,10 @@ Material:
     - _UVSec: 0
     - _ZWrite: 1
     - _node_1019: 5
+    - _node_2246: 1
     - _node_579: 6
     - _u: 0.07
     - _v: 0.02
     m_Colors:
-    - _Color: {r: 0.7794118, g: 0, b: 0, a: 1}
+    - _Color: {r: 0.99999994, g: 0.99999994, b: 0.99999994, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}

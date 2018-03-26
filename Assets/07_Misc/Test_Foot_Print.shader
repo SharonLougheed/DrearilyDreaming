@@ -1,7 +1,7 @@
 // Shader created with Shader Forge v1.38 
 // Shader Forge (c) Neat Corporation / Joachim Holmer - http://www.acegikmo.com/shaderforge/
 // Note: Manually altering this data may prevent you from opening it in Shader Forge
-/*SF_DATA;ver:1.38;sub:START;pass:START;ps:flbk:,iptp:0,cusa:False,bamd:0,cgin:,lico:1,lgpr:1,limd:3,spmd:1,trmd:0,grmd:0,uamb:True,mssp:True,bkdf:True,hqlp:False,rprd:True,enco:False,rmgx:True,imps:True,rpth:0,vtps:0,hqsc:True,nrmq:1,nrsp:0,vomd:0,spxs:False,tesm:0,olmd:1,culm:0,bsrc:3,bdst:7,dpts:2,wrdp:False,dith:0,atcv:False,rfrpo:True,rfrpn:Refraction,coma:15,ufog:True,aust:True,igpj:True,qofs:0,qpre:3,rntp:2,fgom:False,fgoc:False,fgod:False,fgor:False,fgmd:0,fgcr:0,fgcg:0,fgcb:0,fgca:0,fgde:0.03,fgrn:0,fgrf:300,stcl:False,atwp:False,stva:128,stmr:255,stmw:255,stcp:6,stps:0,stfa:0,stfz:0,ofsf:0,ofsu:0,f2p0:False,fnsp:False,fnfb:False,fsmp:False;n:type:ShaderForge.SFN_Final,id:2865,x:32719,y:32712,varname:node_2865,prsc:2|diff-6546-OUT,spec-358-OUT,emission-6665-RGB,alpha-6665-A,clip-3760-OUT;n:type:ShaderForge.SFN_Color,id:6665,x:32193,y:32869,ptovrint:False,ptlb:Color,ptin:_Color,varname:_Color,prsc:2,glob:False,taghide:False,taghdr:False,tagprd:False,tagnsco:False,tagnrm:False,c1:1,c2:1,c3:1,c4:1;n:type:ShaderForge.SFN_Slider,id:358,x:32386,y:32758,ptovrint:False,ptlb:Metallic,ptin:_Metallic,varname:node_358,prsc:2,glob:False,taghide:False,taghdr:False,tagprd:False,tagnsco:False,tagnrm:False,min:0,cur:1,max:1;n:type:ShaderForge.SFN_TexCoord,id:8568,x:31511,y:33281,varname:node_8568,prsc:2,uv:0,uaff:False;n:type:ShaderForge.SFN_ValueProperty,id:2918,x:31501,y:33109,ptovrint:False,ptlb:u,ptin:_u,varname:node_2918,prsc:2,glob:False,taghide:False,taghdr:False,tagprd:False,tagnsco:False,tagnrm:False,v1:1;n:type:ShaderForge.SFN_ValueProperty,id:7530,x:31501,y:33195,ptovrint:False,ptlb:v,ptin:_v,varname:_u_copy,prsc:2,glob:False,taghide:False,taghdr:False,tagprd:False,tagnsco:False,tagnrm:False,v1:0.5;n:type:ShaderForge.SFN_Time,id:3996,x:31501,y:32931,varname:node_3996,prsc:2;n:type:ShaderForge.SFN_Multiply,id:3484,x:31717,y:32975,varname:node_3484,prsc:2|A-3996-TSL,B-6663-OUT;n:type:ShaderForge.SFN_Append,id:6663,x:31685,y:33137,varname:node_6663,prsc:2|A-2918-OUT,B-7530-OUT;n:type:ShaderForge.SFN_Add,id:8910,x:31922,y:33234,varname:node_8910,prsc:2|A-3484-OUT,B-8568-UVOUT;n:type:ShaderForge.SFN_Tex2d,id:6685,x:32107,y:33234,ptovrint:False,ptlb:node_6685,ptin:_node_6685,varname:node_6685,prsc:2,glob:False,taghide:False,taghdr:False,tagprd:False,tagnsco:False,tagnrm:False,tex:4857e40821e4ffa4e83545100b8273f6,ntxv:0,isnm:False|UVIN-8910-OUT;n:type:ShaderForge.SFN_Tex2d,id:372,x:31872,y:32810,ptovrint:False,ptlb:node_372,ptin:_node_372,varname:node_372,prsc:2,glob:False,taghide:False,taghdr:False,tagprd:False,tagnsco:False,tagnrm:False,ntxv:0,isnm:False;n:type:ShaderForge.SFN_Multiply,id:3760,x:32366,y:33103,varname:node_3760,prsc:2|A-372-A,B-5155-OUT;n:type:ShaderForge.SFN_Posterize,id:5155,x:32284,y:33351,varname:node_5155,prsc:2|IN-6685-G,STPS-579-OUT;n:type:ShaderForge.SFN_ValueProperty,id:579,x:32107,y:33419,ptovrint:False,ptlb:node_579,ptin:_node_579,varname:node_579,prsc:2,glob:False,taghide:False,taghdr:False,tagprd:False,tagnsco:False,tagnrm:False,v1:6;n:type:ShaderForge.SFN_Multiply,id:6546,x:32269,y:32620,varname:node_6546,prsc:2|A-372-RGB,B-6665-RGB;proporder:6665-358-2918-7530-6685-372-579;pass:END;sub:END;*/
+/*SF_DATA;ver:1.38;sub:START;pass:START;ps:flbk:,iptp:0,cusa:False,bamd:0,cgin:,lico:1,lgpr:1,limd:3,spmd:1,trmd:0,grmd:0,uamb:True,mssp:True,bkdf:True,hqlp:False,rprd:True,enco:False,rmgx:True,imps:True,rpth:0,vtps:0,hqsc:True,nrmq:1,nrsp:0,vomd:0,spxs:False,tesm:0,olmd:1,culm:0,bsrc:3,bdst:7,dpts:2,wrdp:False,dith:0,atcv:False,rfrpo:True,rfrpn:Refraction,coma:15,ufog:True,aust:True,igpj:True,qofs:0,qpre:3,rntp:2,fgom:False,fgoc:False,fgod:False,fgor:False,fgmd:0,fgcr:0,fgcg:0,fgcb:0,fgca:0,fgde:0.03,fgrn:0,fgrf:300,stcl:False,atwp:False,stva:128,stmr:255,stmw:255,stcp:6,stps:0,stfa:0,stfz:0,ofsf:0,ofsu:0,f2p0:False,fnsp:False,fnfb:False,fsmp:False;n:type:ShaderForge.SFN_Final,id:2865,x:32719,y:32712,varname:node_2865,prsc:2|diff-6546-OUT,spec-358-OUT,emission-6665-RGB,alpha-2246-OUT,clip-3760-OUT;n:type:ShaderForge.SFN_Color,id:6665,x:32193,y:32869,ptovrint:False,ptlb:Color,ptin:_Color,varname:_Color,prsc:2,glob:False,taghide:False,taghdr:False,tagprd:False,tagnsco:False,tagnrm:False,c1:1,c2:1,c3:1,c4:1;n:type:ShaderForge.SFN_Slider,id:358,x:32386,y:32758,ptovrint:False,ptlb:Metallic,ptin:_Metallic,varname:node_358,prsc:2,glob:False,taghide:False,taghdr:False,tagprd:False,tagnsco:False,tagnrm:False,min:0,cur:1,max:1;n:type:ShaderForge.SFN_TexCoord,id:8568,x:31511,y:33281,varname:node_8568,prsc:2,uv:0,uaff:False;n:type:ShaderForge.SFN_ValueProperty,id:2918,x:31501,y:33109,ptovrint:False,ptlb:u,ptin:_u,varname:node_2918,prsc:2,glob:False,taghide:False,taghdr:False,tagprd:False,tagnsco:False,tagnrm:False,v1:1;n:type:ShaderForge.SFN_ValueProperty,id:7530,x:31501,y:33195,ptovrint:False,ptlb:v,ptin:_v,varname:_u_copy,prsc:2,glob:False,taghide:False,taghdr:False,tagprd:False,tagnsco:False,tagnrm:False,v1:0.5;n:type:ShaderForge.SFN_Time,id:3996,x:31501,y:32931,varname:node_3996,prsc:2;n:type:ShaderForge.SFN_Multiply,id:3484,x:31717,y:32975,varname:node_3484,prsc:2|A-3996-TSL,B-6663-OUT;n:type:ShaderForge.SFN_Append,id:6663,x:31685,y:33137,varname:node_6663,prsc:2|A-2918-OUT,B-7530-OUT;n:type:ShaderForge.SFN_Add,id:8910,x:31922,y:33234,varname:node_8910,prsc:2|A-3484-OUT,B-8568-UVOUT;n:type:ShaderForge.SFN_Tex2d,id:6685,x:32107,y:33234,ptovrint:False,ptlb:node_6685,ptin:_node_6685,varname:node_6685,prsc:2,glob:False,taghide:False,taghdr:False,tagprd:False,tagnsco:False,tagnrm:False,tex:4857e40821e4ffa4e83545100b8273f6,ntxv:0,isnm:False|UVIN-8910-OUT;n:type:ShaderForge.SFN_Tex2d,id:372,x:31872,y:32810,ptovrint:False,ptlb:node_372,ptin:_node_372,varname:node_372,prsc:2,glob:False,taghide:False,taghdr:False,tagprd:False,tagnsco:False,tagnrm:False,ntxv:0,isnm:False;n:type:ShaderForge.SFN_Multiply,id:3760,x:32366,y:33103,varname:node_3760,prsc:2|A-372-A,B-5155-OUT;n:type:ShaderForge.SFN_Posterize,id:5155,x:32284,y:33351,varname:node_5155,prsc:2|IN-6685-G,STPS-579-OUT;n:type:ShaderForge.SFN_ValueProperty,id:579,x:32107,y:33419,ptovrint:False,ptlb:node_579,ptin:_node_579,varname:node_579,prsc:2,glob:False,taghide:False,taghdr:False,tagprd:False,tagnsco:False,tagnrm:False,v1:6;n:type:ShaderForge.SFN_Multiply,id:6546,x:32269,y:32620,varname:node_6546,prsc:2|A-372-RGB,B-6665-RGB;n:type:ShaderForge.SFN_Slider,id:2246,x:32273,y:33029,ptovrint:False,ptlb:Opacity,ptin:_Opacity,varname:node_2246,prsc:2,glob:False,taghide:False,taghdr:False,tagprd:False,tagnsco:False,tagnrm:False,min:0,cur:1,max:1;proporder:6665-358-2918-7530-6685-372-579-2246;pass:END;sub:END;*/
 
 Shader "Shader Forge/Test_Foot_Print" {
     Properties {
@@ -12,6 +12,7 @@ Shader "Shader Forge/Test_Foot_Print" {
         _node_6685 ("node_6685", 2D) = "white" {}
         _node_372 ("node_372", 2D) = "white" {}
         _node_579 ("node_579", Float ) = 6
+        _Opacity ("Opacity", Range(0, 1)) = 1
         [HideInInspector]_Cutoff ("Alpha cutoff", Range(0,1)) = 0.5
     }
     SubShader {
@@ -52,6 +53,7 @@ Shader "Shader Forge/Test_Foot_Print" {
             uniform sampler2D _node_6685; uniform float4 _node_6685_ST;
             uniform sampler2D _node_372; uniform float4 _node_372_ST;
             uniform float _node_579;
+            uniform float _Opacity;
             struct VertexInput {
                 float4 vertex : POSITION;
                 float3 normal : NORMAL;
@@ -207,7 +209,7 @@ Shader "Shader Forge/Test_Foot_Print" {
                 float3 emissive = _Color.rgb;
 /// Final Color:
                 float3 finalColor = diffuse + specular + emissive;
-                fixed4 finalRGBA = fixed4(finalColor,_Color.a);
+                fixed4 finalRGBA = fixed4(finalColor,_Opacity);
                 UNITY_APPLY_FOG(i.fogCoord, finalRGBA);
                 return finalRGBA;
             }
@@ -246,6 +248,7 @@ Shader "Shader Forge/Test_Foot_Print" {
             uniform sampler2D _node_6685; uniform float4 _node_6685_ST;
             uniform sampler2D _node_372; uniform float4 _node_372_ST;
             uniform float _node_579;
+            uniform float _Opacity;
             struct VertexInput {
                 float4 vertex : POSITION;
                 float3 normal : NORMAL;
@@ -337,7 +340,7 @@ Shader "Shader Forge/Test_Foot_Print" {
                 float3 diffuse = directDiffuse * diffuseColor;
 /// Final Color:
                 float3 finalColor = diffuse + specular;
-                fixed4 finalRGBA = fixed4(finalColor * _Color.a,0);
+                fixed4 finalRGBA = fixed4(finalColor * _Opacity,0);
                 UNITY_APPLY_FOG(i.fogCoord, finalRGBA);
                 return finalRGBA;
             }

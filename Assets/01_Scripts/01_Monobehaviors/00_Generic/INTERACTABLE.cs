@@ -13,7 +13,7 @@ public class INTERACTABLE : MonoBehaviour
 	/// <summary>
 	/// The interactable types
 	/// </summary>
-	public enum TYPE { NONE, BED, PARTY_NPC, PARTY_SPECIAL, PARTY_BALLOON, PARTY_STEREO, PARTY_PUNCH, PARTY_FOOD, PARTY_DOOR };
+	public enum TYPE { NONE, BED, PARTY_NPC, PARTY_SPECIAL, PARTY_BALLOON, PARTY_STEREO, PARTY_PUNCH, PARTY_FOOD, PARTY_DOOR, PARTY_GLOWSTICK };
 
 	#endregion
 
@@ -150,7 +150,8 @@ public class INTERACTABLE : MonoBehaviour
 		{ TYPE.PARTY_STEREO, "Stereo_Interaction" },
 		{ TYPE.PARTY_PUNCH, "Punch_Interaction" },
 		{ TYPE.PARTY_FOOD, "Food_Interaction" },
-		{ TYPE.PARTY_DOOR, "Door_Interaction" }
+		{ TYPE.PARTY_DOOR, "Door_Interaction" },
+		{ TYPE.PARTY_GLOWSTICK, "Party_Glowstick_Interaction" }
 	};
 
 	#endregion
@@ -466,6 +467,38 @@ public class INTERACTABLE : MonoBehaviour
 		//	**************************
 
 		yield return null;
+		_isBeingInteractedWith = false;
+	}
+
+	/// <summary>
+	/// Interaction with a glowstick at the party.
+	/// </summary>
+	/// <returns>The interaction.</returns>
+	private IEnumerator Party_Glowstick_Interaction ()
+	{
+		//	Perform the interaction
+		Material _temp = GameObject.Find ( "Footprints" ).GetComponent <FOOTPRINTS> ().material;
+
+		Debug.Log ( _temp.name );
+
+		while ( _temp.GetFloat ( "_Opacity" ) < 1f )
+		{
+			_temp.SetFloat ( "_Opacity", _temp.GetFloat ( "_Opacity" ) + Time.deltaTime );
+			yield return new WaitForSeconds ( Time.deltaTime );
+		}
+
+		yield return new WaitForSeconds ( 5f );
+
+		while ( _temp.GetFloat ( "_Opacity" ) > 0f )
+		{
+			_temp.SetFloat ( "_Opacity", _temp.GetFloat ( "_Opacity" ) - Time.deltaTime );
+			yield return new WaitForSeconds ( Time.deltaTime );
+		}
+
+		//	**************************
+		//	Animate!
+		//	**************************
+
 		_isBeingInteractedWith = false;
 	}
 
