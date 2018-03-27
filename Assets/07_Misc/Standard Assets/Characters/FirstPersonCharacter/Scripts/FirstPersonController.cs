@@ -28,6 +28,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
         [SerializeField] private AudioClip[] m_FootstepSounds;    // an array of footstep sounds that will be randomly selected from.
         [SerializeField] private AudioClip m_JumpSound;           // the sound played when character leaves the ground.
         [SerializeField] private AudioClip m_LandSound;           // the sound played when character touches back on ground.
+        [SerializeField] private AudioSource m_MusicAudioSource, m_CrowdAudioSource;
 
         private Camera m_Camera;
         private bool m_Jump;
@@ -55,7 +56,8 @@ namespace UnityStandardAssets.Characters.FirstPerson
             m_NextStep = m_StepCycle/2f;
             m_Jumping = false;
             m_AudioSource = GetComponent<AudioSource>();
-			m_MouseLook.Init(transform , m_Camera.transform);
+
+            m_MouseLook.Init(transform , m_Camera.transform);
         }
 
 
@@ -84,7 +86,8 @@ namespace UnityStandardAssets.Characters.FirstPerson
             m_PreviouslyGrounded = m_CharacterController.isGrounded;
 
             Time.timeScale = Mathf.Clamp((m_Target.position - transform.position).magnitude / 30.0f, 0.33f, 1f);
-            m_AudioSource.pitch = Mathf.Clamp((m_Target.position - transform.position).magnitude / 30.0f, -2.0f, 1f);
+            m_MusicAudioSource.pitch = Mathf.Clamp((m_Target.position - transform.position).magnitude / 15.0f, -2.0f, 1f); //Slows down music near Joe
+            m_CrowdAudioSource.volume = Mathf.Clamp((m_Target.position - transform.position).magnitude / 60.0f, 0.0f, .08f); //Quiets crowd near Joe
             //if((m_Target.position - transform.position).magnitude / 30.0f < 30f)
             //{
             //    m_Camera.fieldOfView = Mathf.Lerp(m_Camera.fieldOfView,90f,Time.deltaTime);//Mathf.Clamp( (m_Target.position - transform.position).magnitude / 30.0f , 0.55f, 1.2f );

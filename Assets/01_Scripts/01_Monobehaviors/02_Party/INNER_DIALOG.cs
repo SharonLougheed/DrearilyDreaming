@@ -84,7 +84,7 @@ public class INNER_DIALOG : MonoBehaviour
 
 	private IEnumerator Wake_Up()
 	{
-		_innerThoughts.text = "Something's wrong!";
+		_innerThoughts.text = "No... they hate me... I can't... no more please...";
 		while ( _thoughtBubble.alpha < 1f )
 		{
 			_blackScreen.color = new Color ( 0, 0, 0, _blackScreen.color.a + Time.deltaTime ); 
