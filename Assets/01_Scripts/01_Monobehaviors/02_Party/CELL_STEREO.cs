@@ -65,7 +65,7 @@ public class CELL_STEREO : MonoBehaviour
         //    PlayerNotoriety.DecreasePlayerNotoriety();
         //}
     }
-
+    /*
     /// <summary>
     /// Translate by the specified _direction.
     /// </summary>
@@ -74,7 +74,7 @@ public class CELL_STEREO : MonoBehaviour
 	{
 		transform.position += _direction;
 	}
-
+    */
 	#endregion
 
 	#region --------------------	Private Fields

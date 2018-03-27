@@ -514,7 +514,7 @@ public class INTERACTABLE : MonoBehaviour
 
 		PlayerNotoriety.ResetPlayerNoteriety ();
         
-		UnityEngine.SceneManagement.SceneManager.LoadScene ( 1 );
+		UnityEngine.SceneManagement.SceneManager.LoadScene ( 3 );
 
 		//	**************************
 		//	Animate!
@@ -624,7 +624,7 @@ public class INTERACTABLE : MonoBehaviour
         GameManager.instance.data.endPartyState = END_PARTY_STATE.LOSE;
 
 		PlayerNotoriety.ResetPlayerNoteriety ();
-		UnityEngine.SceneManagement.SceneManager.LoadScene ( 1 );
+		UnityEngine.SceneManagement.SceneManager.LoadScene ( 4 );
 
 		//	**************************
 		//	Animate!

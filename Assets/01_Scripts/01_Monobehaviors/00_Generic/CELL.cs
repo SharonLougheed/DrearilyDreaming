@@ -250,11 +250,13 @@ public class CELL : MonoBehaviour
 
 		//	Show translation complete
 		_hasCompletedTranslation = true;
+        //Stop stereo from being teleported away from Joe
+        /*
 		if ( _cellUpdates == 8 )
 		{
 			CELL_STEREO.instance.Translate ( _modifiedDirection );
 		}
-
+        */
 		//	Return null
 		yield return null;
 	}
