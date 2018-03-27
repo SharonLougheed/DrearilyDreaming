@@ -84,6 +84,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
             m_PreviouslyGrounded = m_CharacterController.isGrounded;
 
             Time.timeScale = Mathf.Clamp((m_Target.position - transform.position).magnitude / 30.0f, 0.33f, 1f);
+            m_AudioSource.pitch = Mathf.Clamp((m_Target.position - transform.position).magnitude / 30.0f, -2.0f, 1f);
             //if((m_Target.position - transform.position).magnitude / 30.0f < 30f)
             //{
             //    m_Camera.fieldOfView = Mathf.Lerp(m_Camera.fieldOfView,90f,Time.deltaTime);//Mathf.Clamp( (m_Target.position - transform.position).magnitude / 30.0f , 0.55f, 1.2f );
