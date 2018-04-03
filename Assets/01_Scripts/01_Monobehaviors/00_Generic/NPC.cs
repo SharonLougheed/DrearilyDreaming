@@ -89,6 +89,12 @@ public class NPC : CELL_ENTITY
 		if ( _targetPointOfInterest != null ) // && _agent.isOnNavMesh == true)  //would this help?
 		{
 			_agent.SetDestination ( _targetPointOfInterest.transform.position );
+
+			//	Set the idle bool to true
+			if ( _anim.runtimeAnimatorController != null )
+			{
+				_anim.SetFloat ( "Walking_Speed", 1f );
+			}
 		}
 		_hasRegisteredWithPointOfInterest = false;
 	}
@@ -142,6 +148,11 @@ public class NPC : CELL_ENTITY
 	#region --------------------	Private Fields
 
 	/// <summary>
+	/// The animation.
+	/// </summary>
+	private Animator _anim;
+
+	/// <summary>
 	/// The target point of interest.
 	/// </summary>
 	private CELL_ENTITY _targetPointOfInterest;
@@ -177,7 +188,7 @@ public class NPC : CELL_ENTITY
 	{
 		_agent = GetComponent <NavMeshAgent> ();
 
-
+		_anim = GetComponent <Animator> ();
 	}
 
 	/// <summary>
@@ -257,6 +268,12 @@ public class NPC : CELL_ENTITY
 
 			//	Set idling to true to force look at focal point
 			_isIdling = true;
+
+			//	Set the idle bool to true
+			if ( _anim.runtimeAnimatorController != null )
+			{
+				_anim.SetFloat ( "Walking_Speed", 0f );
+			}
 		}
 
 		//	Wait for a random amount of time within bounds.  Then, change the target point of interest
