@@ -2333,13 +2333,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 1538796763597212}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 120cfdbb0ec534a44a298bbf3ed491ac, type: 3}
+  m_Script: {fileID: 11500000, guid: 2dd23c9b6e2a04c49a0071fd5651bf6f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnChance: 1
+  spawnChance: 0.5
   isPointOfInterest: 0
-  minimumIdleTime: 1
-  maximumIdleTime: 10
+  minimumIdleTime: 10
+  maximumIdleTime: 20
   canInteractWithObjects: 0
 --- !u!114 &114462394624336830
 MonoBehaviour:
