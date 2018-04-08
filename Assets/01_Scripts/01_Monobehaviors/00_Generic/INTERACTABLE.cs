@@ -477,21 +477,27 @@ public class INTERACTABLE : MonoBehaviour
 	private IEnumerator Party_Glowstick_Interaction ()
 	{
 		//	Perform the interaction
+		FOOTPRINTS_OUT.visible = true;
+
 		Material _temp = GameObject.Find ( "Footprints" ).GetComponent <FOOTPRINTS> ().material;
 
 		Debug.Log ( _temp.name );
 
-		while ( _temp.GetFloat ( "_Opacity" ) < 1f )
+		while ( _temp.GetFloat ( "_Opacity" ) < 0.5f )
 		{
-			_temp.SetFloat ( "_Opacity", _temp.GetFloat ( "_Opacity" ) + Time.deltaTime );
+			_temp.SetFloat ( "_Opacity", Mathf.Clamp ( _temp.GetFloat ( "_Opacity" ) + Time.deltaTime, 0f, 0.5f ) );
 			yield return new WaitForSeconds ( Time.deltaTime );
 		}
 
-		yield return new WaitForSeconds ( 5f );
+		yield return new WaitForSeconds ( 2f );
+
+		FOOTPRINTS_OUT.visible = false;
+
+		yield return new WaitForSeconds ( 3f );
 
 		while ( _temp.GetFloat ( "_Opacity" ) > 0f )
 		{
-			_temp.SetFloat ( "_Opacity", _temp.GetFloat ( "_Opacity" ) - Time.deltaTime );
+			_temp.SetFloat ( "_Opacity", Mathf.Clamp ( _temp.GetFloat ( "_Opacity" ) - Time.deltaTime, 0f, 0.5f ) );
 			yield return new WaitForSeconds ( Time.deltaTime );
 		}
 
