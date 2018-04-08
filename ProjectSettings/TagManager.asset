@@ -11,6 +11,7 @@ TagManager:
   - UI_Interaction_Prompt
   - Point_Of_Interest
   - Retical
+  - Body Part
   layers:
   - Default
   - TransparentFX
