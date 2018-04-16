@@ -163,6 +163,11 @@ public class CUSTOM_THIRD_PERSON_CONTROLLER : MonoBehaviour
 	/// </summary>
 	private Vector3 _movementDirection = Vector3.zero;
 
+	/// <summary>
+	/// The animator.
+	/// </summary>
+	private  Animator animator;
+
 	#endregion
 
 	#region --------------------	Private Methods
@@ -189,6 +194,9 @@ public class CUSTOM_THIRD_PERSON_CONTROLLER : MonoBehaviour
 
 		//	Grab the character controller
 		_char = GetComponent <CharacterController> ();
+
+		//	Grab the animator
+		this.animator = this.GetComponent<Animator>();
 	}
 
 	/// <summary>
@@ -227,6 +235,10 @@ public class CUSTOM_THIRD_PERSON_CONTROLLER : MonoBehaviour
 
 		//	Perform movement and collect collision information
 		_collisionFlags = _char.Move ( _movementDirection * Time.fixedDeltaTime );
+
+		//	Set animator values for the blendtree
+		animator.SetFloat("walk", Input.GetAxis("Vertical"));
+		animator.SetFloat("turn", Input.GetAxis("Horizontal"));
 	}
 
 	/// <summary>
