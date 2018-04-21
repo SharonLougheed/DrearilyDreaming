@@ -258,7 +258,7 @@ public class NPC : CELL_ENTITY
 		//	If the npc has a target desitination
 		if ( _targetPointOfInterest != null )
 		{
-			yield return new WaitUntil ( () => _agent.velocity.magnitude < 0.2f);
+			yield return new WaitUntil ( () => _agent.velocity.magnitude < 0.3f);
 
 			//	If the NPC is trying to move by others or is walking slowly, have them stop instead
 			_agent.SetDestination ( transform.position );
