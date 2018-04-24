@@ -440,6 +440,7 @@ GameObject:
   - component: {fileID: 224625751060439180}
   - component: {fileID: 222363581060748160}
   - component: {fileID: 114122895143303644}
+  - component: {fileID: 114550589405925342}
   m_Layer: 5
   m_Name: GoodEndings
   m_TagString: Untagged
@@ -612,6 +613,7 @@ GameObject:
   - component: {fileID: 224945120734972212}
   - component: {fileID: 222172528972267052}
   - component: {fileID: 114142836712770472}
+  - component: {fileID: 114364728478175666}
   m_Layer: 5
   m_Name: BadEndings
   m_TagString: Untagged
@@ -1455,7 +1457,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1863432319574692}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 330aa125c7298644fbc17a42fc8af39c, type: 3}
   m_Name: 
@@ -1634,6 +1636,23 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114364728478175666
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1837557378279192}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 74e4896671abb8b408b87d5d14e4aa5b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  storyBoards:
+  - {fileID: 1880913887691356}
+  - {fileID: 1539816032451898}
+  - {fileID: 1967715594721904}
+  - {fileID: 1330604554370278}
+  - {fileID: 1919450986220820}
 --- !u!114 &114366632203689516
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1971,6 +1990,22 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114550589405925342
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1646010755985450}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 74e4896671abb8b408b87d5d14e4aa5b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  storyBoards:
+  - {fileID: 1258665023382592}
+  - {fileID: 1641960465057398}
+  - {fileID: 1970903682321658}
+  - {fileID: 1982225821781414}
 --- !u!114 &114560533510465506
 MonoBehaviour:
   m_ObjectHideFlags: 1
