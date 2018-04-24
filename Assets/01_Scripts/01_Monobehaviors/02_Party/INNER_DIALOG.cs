@@ -18,11 +18,11 @@ public class INNER_DIALOG : MonoBehaviour
 	[ SerializeField ] private AudioSource _stereo;
 	[ SerializeField ] private AudioSource _crowd;
 	private List <string> _thoughts = new List<string> {
-		"I wonder where that music is coming from.",
-		"Is Joe nearby?",
-		"I wish I could find someone to talk to.",
-		"I wonder if there's someone I know here.",
-		"I bet Joe is jamming to this music."
+        "I wish I could find someone to talk to.",
+        "I think Joe might be here somewhere.",
+        "So lonely, yet surrounded by people...",
+        "If only I had a friend at this party...",
+        "I wonder if there's someone I know here."
 	};
 
 	#endregion
