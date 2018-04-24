@@ -2,19 +2,22 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ChangeInState : MonoBehaviour {
+public class ChangeInState : MonoBehaviour
+{
 
     public GameObject objectToTransform;
     public Transform winState;
     public Transform loseState;
-    
+
     [SerializeField] private END_PARTY_STATE objectState;
 
-    private void Awake() {
+    private void Awake()
+    {
         objectState = GameManager.instance.data.endPartyState;
     }
     // Use this for initialization
-    private void Start () {
+    private void Start()
+    {
         switch (objectState)
         {
             case END_PARTY_STATE.WIN:
