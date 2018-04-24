@@ -431,7 +431,7 @@ public class INTERACTABLE : MonoBehaviour
 	private IEnumerator Bed_Interaction ()
 	{
         //	Perform the interaction
-        var thing = GameObject.FindObjectOfType<PauseMenuManager>();
+        var thing = GameObject.FindObjectOfType<PauseMenuManager>();    //disable ability to pause the game
         thing.enabled = false;
         
 		GameObject.Find ( "LoadScreen" ).GetComponent <CanvasGroup> ().alpha = 1.0f;

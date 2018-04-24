@@ -24,7 +24,7 @@ public class StoryBoardManager : MonoBehaviour {
                 goodEnding.SetActive(true);
                 break;
             case END_PARTY_STATE.LOSE:
-                goodEnding.SetActive(true);
+                badEnding.SetActive(true);
                 break;
         }
 	}
