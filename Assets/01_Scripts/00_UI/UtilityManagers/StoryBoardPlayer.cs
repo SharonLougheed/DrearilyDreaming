@@ -5,12 +5,14 @@ using UnityEngine.UI;
 
 public class StoryBoardPlayer : MonoBehaviour {
 
+    public GameObject pauseMenuManager;
     public float storyboardViewTime;
     public List<GameObject> storyBoards = new List<GameObject>();
 
     private int currentBoard;
 
     private void Awake() {
+        pauseMenuManager.GetComponent<PauseMenuManager>().enabled = false;
         currentBoard = 0;
         foreach (GameObject o in storyBoards)
         {
@@ -35,6 +37,7 @@ public class StoryBoardPlayer : MonoBehaviour {
         {
             CancelInvoke();
             gameObject.SetActive(false);
+            pauseMenuManager.GetComponent<PauseMenuManager>().enabled = true;
         }
     }
 }

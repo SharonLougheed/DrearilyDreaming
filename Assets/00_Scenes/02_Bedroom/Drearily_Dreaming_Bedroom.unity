@@ -4701,16 +4701,6 @@ Prefab:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
       objectReference: {fileID: 258165242}
-    - target: {fileID: 114550589405925342, guid: 90d86ca23a191b344adc47563a5aa6a9,
-        type: 2}
-      propertyPath: storyboardViewTime
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 114364728478175666, guid: 90d86ca23a191b344adc47563a5aa6a9,
-        type: 2}
-      propertyPath: storyboardViewTime
-      value: 4
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 90d86ca23a191b344adc47563a5aa6a9, type: 2}
   m_IsPrefabParent: 0

@@ -1563,7 +1563,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d137fe425b9e5b34f92cf25749e51aaf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  storyboardViewTime: 2
+  pauseMenuManager: {fileID: 1421096029211924}
+  storyboardViewTime: 4
   storyBoards:
   - {fileID: 1880913887691356}
   - {fileID: 1539816032451898}
@@ -1918,7 +1919,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d137fe425b9e5b34f92cf25749e51aaf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  storyboardViewTime: 2
+  pauseMenuManager: {fileID: 1421096029211924}
+  storyboardViewTime: 4
   storyBoards:
   - {fileID: 1258665023382592}
   - {fileID: 1641960465057398}
